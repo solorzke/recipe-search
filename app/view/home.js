@@ -9,7 +9,7 @@ export default class Home extends Component {
 		return (
 			<View style={styles.mainView}>
 				<Status color={'#000'} barStyle={'light-content'} />
-				<HeadBar name={'Home'} />
+				<HeadBar name={'Home'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<Header name={'Start Cooking'} date={'Jan 01, 2020'} />
 				<View style={styles.buttonView}>
 					<TouchableOpacity style={styles.button}>

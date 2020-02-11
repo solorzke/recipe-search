@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useIsDrawerOpen } from '@react-navigation/drawer';
 
 const HeadBar = (props) => {
 	return (
 		<View style={styles.bar}>
-			<TouchableOpacity>
-				<Icon name="menu" size={35} color="red" />
+			<TouchableOpacity onPress={props.onPress}>
+				<Icon name="menu" size={35} color="#fff" />
 			</TouchableOpacity>
-			<Text style={{ fontSize: 20 }}>{props.name}</Text>
+			<Text style={styles.title}>{props.name}</Text>
 		</View>
 	);
 };
@@ -29,6 +30,11 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		paddingLeft: 15,
 		backgroundColor: '#1976d2'
+	},
+	title: {
+		color: '#fff',
+		fontSize: 20,
+		marginLeft: 20
 	}
 });
 export default HeadBar;
