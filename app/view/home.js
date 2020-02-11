@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
 import Header from '../components/header';
 import HeadBar from '../components/head';
+import Status from '../components/statusbar';
 
 export default class Home extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
+				<Status color={'#000'} barStyle={'light-content'} />
 				<HeadBar name={'Home'} />
 				<Header name={'Start Cooking'} date={'Jan 01, 2020'} />
 				<View style={styles.buttonView}>
