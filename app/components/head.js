@@ -17,17 +17,18 @@ const styles = StyleSheet.create({
 	bar: {
 		width: '100%',
 		height: '10%',
-		shadowColor: 'red',
+		shadowColor: '#000000',
 		shadowOffset: {
 			width: 0,
-			height: 3
+			height: 0.5
 		},
-		shadowOpacity: 1,
-		shadowRadius: 4.65,
-		elevation: 1,
+		shadowRadius: 5,
+		shadowOpacity: 1.0,
+		elevation: 5,
 		alignItems: 'center',
 		flexDirection: 'row',
-		paddingLeft: 15
+		paddingLeft: 15,
+		backgroundColor: '#1976d2'
 	}
 });
 export default HeadBar;
