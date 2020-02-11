@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar } fro
 import Header from '../components/header';
 import HeadBar from '../components/head';
 import Status from '../components/statusbar';
+import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 
 export default class Home extends Component {
 	render() {
@@ -12,9 +13,17 @@ export default class Home extends Component {
 				<HeadBar name={'Home'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<Header name={'Start Cooking'} date={'Jan 01, 2020'} />
 				<View style={styles.buttonView}>
-					<TouchableOpacity style={styles.button}>
-						<Text>Start</Text>
-					</TouchableOpacity>
+					<AwesomeButtonRick
+						backgroundColor={'orange'}
+						borderRadius={400}
+						height={200}
+						width={200}
+						style={styles.button}
+						type="primary"
+						textSize={30}
+					>
+						Start
+					</AwesomeButtonRick>
 				</View>
 			</View>
 		);
@@ -35,10 +44,10 @@ const styles = StyleSheet.create({
 
 	button: {
 		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: 'gold',
-		height: 300,
-		width: 300, //The Width must be the same as the height
-		borderRadius: 400
+		alignItems: 'center'
+		// backgroundColor: 'gold',
+		// height: 300,
+		// width: 300, //The Width must be the same as the height
+		// borderRadius: 400
 	}
 });
