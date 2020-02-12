@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useIsDrawerOpen } from '@react-navigation/drawer';
 
 const HeadBar = (props) => {
 	return (
