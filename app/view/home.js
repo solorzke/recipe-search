@@ -21,6 +21,7 @@ export default class Home extends Component {
 						style={styles.button}
 						type="primary"
 						textSize={30}
+						onPress={() => this.props.navigation.navigate('Search')}
 					>
 						Start
 					</AwesomeButtonRick>
