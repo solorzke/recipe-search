@@ -20,9 +20,13 @@ export default class Search extends Component {
 
 	/* Add new data to the state every time the 'add' button is pressed from the action bar */
 	addInputBox = () => {
-		this.setState({
-			data: [ ...this.state.data, 'null' ]
-		});
+		if (this.state.data.length <= 10) {
+			this.setState({
+				data: [ ...this.state.data, 'null' ]
+			});
+		} else {
+			alert('Max limit reached!');
+		}
 	};
 
 	/* Remove an input box by swiping */
