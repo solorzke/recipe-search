@@ -27,6 +27,8 @@ export default class Search extends Component {
 
 	/* Remove an input box by swiping */
 	removeInputBox = (position) => {
+		console.warn(position);
+
 		const filtered = this.state.data.filter((item, key) => {
 			return position != key;
 		});
@@ -35,14 +37,14 @@ export default class Search extends Component {
 	};
 
 	render() {
-		const rightButtons = [
-			<TouchableOpacity style={styles.delete}>
-				<Text style={{ color: '#fff', fontSize: 15, paddingLeft: 10 }}>Delete</Text>
-			</TouchableOpacity>
-		];
-
 		/* Add a new text input every time a new element is added to the state */
 		let boxes = this.state.data.map((data, index) => {
+			/* Add Right Swipe buttons for Swipeable View to Delete */
+			const rightButtons = [
+				<TouchableOpacity key={index} style={styles.delete} onPress={() => this.removeInputBox(index)}>
+					<Text style={{ color: '#fff', fontSize: 15, paddingLeft: 10 }}>Delete</Text>
+				</TouchableOpacity>
+			];
 			return (
 				<Swipeable rightButtons={rightButtons}>
 					<View style={styles.swipableView}>
