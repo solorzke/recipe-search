@@ -40,6 +40,25 @@ export default class Search extends Component {
 		this.setState({ data: filtered });
 	};
 
+	/* Check if at least one ingredient is filled in */
+	isItEmpty = () => {
+		return this.state.data.length > 0;
+	};
+
+	/* Return ingredients that aren't listed as 'null' */
+	getList = () => {
+		return this.state.data.filter((ingredient) => ingredient !== 'null');
+	};
+
+	/* Authenticate list before confirming and submitting list to search */
+	confirm = () => {
+		if (this.isItEmpty() && this.getList.length > 0) {
+			this.props.navigation.navigate('Results');
+		} else {
+			alert('Please fill in at least one ingredient');
+		}
+	};
+
 	render() {
 		/* Add a new text input every time a new element is added to the state */
 		let boxes = this.state.data.map((data, index) => {
@@ -56,7 +75,8 @@ export default class Search extends Component {
 							key={index}
 							placeholder={'Ingredient'}
 							style={styles.input}
-							onChangeText={(text) => this.setState({ text })}
+							onChangeText={(text) =>
+								this.setState({ data: [ ...this.state.data, (data[index] = text.toLowerCase) ] })}
 						/>
 					</View>
 				</Swipeable>
@@ -75,7 +95,7 @@ export default class Search extends Component {
 						style={styles.confirm}
 						type="primary"
 						textSize={20}
-						onPress={() => this.props.navigation.navigate('Results')}
+						onPress={() => this.confirm()}
 					>
 						Confirm
 					</AwesomeButtonRick>
@@ -83,7 +103,8 @@ export default class Search extends Component {
 						<TextInput
 							placeholder={'Ingredient'}
 							style={styles.input}
-							onChangeText={(text) => this.setState({ text })}
+							onChangeText={(text) =>
+								this.setState({ data: [ ...this.state.data, (data[0] = text.toLowerCase) ] })}
 						/>
 					</View>
 					{boxes}
