@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
-import Header from '../components/header';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import HeadBar from '../components/head';
 import Status from '../components/statusbar';
-import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
+import Card from '../components/card';
+import Background from '../assets/images/card.png';
+import Background2 from '../assets/images/card2.png';
+import Background3 from '../assets/images/3255.jpg';
 
 export default class Home extends Component {
 	render() {
@@ -11,21 +13,26 @@ export default class Home extends Component {
 			<View style={styles.mainView}>
 				<Status color={'#000'} barStyle={'light-content'} />
 				<HeadBar name={'Home'} onPress={() => this.props.navigation.toggleDrawer()} />
-				<Header name={'Start Cooking'} date={'Jan 01, 2020'} />
-				<View style={styles.buttonView}>
-					<AwesomeButtonRick
-						backgroundColor={'orange'}
-						borderRadius={400}
-						height={200}
-						width={200}
-						style={styles.button}
-						type="primary"
-						textSize={30}
+				<ScrollView style={styles.buttonView}>
+					<Card
 						onPress={() => this.props.navigation.navigate('Search')}
-					>
-						Start
-					</AwesomeButtonRick>
-				</View>
+						title={'Start Finding Recipes'}
+						subtitle={'Fill in available ingredients to generate recipes'}
+						background={Background}
+					/>
+					<Card
+						onPress={() => this.props.navigation.navigate('Search')}
+						title={'Discover How It Works'}
+						subtitle={'Learn about how we generate your recipes in the app'}
+						background={Background2}
+					/>
+					<Card
+						onPress={() => this.props.navigation.navigate('Search')}
+						title={'Frequently Asked Questions'}
+						subtitle={'Have questions? Check out our FAQ section'}
+						background={Background3}
+					/>
+				</ScrollView>
 			</View>
 		);
 	}
@@ -39,16 +46,11 @@ const styles = StyleSheet.create({
 
 	buttonView: {
 		flex: 2,
-		justifyContent: 'center',
-		alignItems: 'center'
+		marginHorizontal: 10
 	},
 
 	button: {
 		justifyContent: 'center',
 		alignItems: 'center'
-		// backgroundColor: 'gold',
-		// height: 300,
-		// width: 300, //The Width must be the same as the height
-		// borderRadius: 400
 	}
 });
