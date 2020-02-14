@@ -12,9 +12,9 @@ export default class AboutScreen extends Component {
 				<HeadBar name={'About Us'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<ScrollView style={styles.container}>
 					<View style={styles.headerView}>
-						<Icon name="pets" size={70} color="#000" />
+						<Icon name="pets" size={100} color="#000" />
 					</View>
-					<View style={styles.container}>
+					<View style={{ flex: 1 }}>
 						<Text style={styles.title}>What Is Recipe Search?</Text>
 						<Text style={styles.paragraph}>
 							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
@@ -46,8 +46,7 @@ export default class AboutScreen extends Component {
 const styles = StyleSheet.create({
 	mainView: {
 		flex: 1,
-		width: '100%',
-		backgroundColor: '#DDD'
+		width: '100%'
 	},
 
 	headerView: {
@@ -55,22 +54,25 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		width: '100%',
-		flex: 2
-	},
-
-	container: {
+		height: 300,
 		flex: 1
 	},
 
+	container: {
+		paddingHorizontal: 10
+	},
+
 	paragraph: {
-		paddingVertical: 5,
-		color: '#fff',
-		fontSize: 14
+		paddingVertical: 10,
+		color: '#000',
+		fontSize: 17
 	},
 
 	title: {
 		fontSize: 25,
+		paddingVertical: 10,
 		color: '#f58426',
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		alignSelf: 'center'
 	}
 });
