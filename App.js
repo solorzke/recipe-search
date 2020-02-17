@@ -6,6 +6,7 @@ import Home from './app/view/home';
 import SearchScreen from './app/view/search';
 import SettingsScreen from './app/view/settings';
 import AboutScreen from './app/view/about';
+import ResultsScreen from './app/view/results';
 
 const Drawer = createDrawerNavigator();
 
@@ -22,6 +23,15 @@ const HomeStack = () => {
 				})}
 				name="Search"
 				component={SearchScreen}
+			/>
+			<Stack.Screen
+				options={({ navigation, route }) => ({
+					headerShown: true,
+					headerStyle: { backgroundColor: '#1976d2' },
+					headerTintColor: '#fff'
+				})}
+				name="Results"
+				component={ResultsScreen}
 			/>
 		</Stack.Navigator>
 	);
