@@ -1,5 +1,3 @@
-import { call } from 'react-native-reanimated';
-
 /* 
 API Class that can be reused to test or request data from the API in service.
 API: 'edamam'
