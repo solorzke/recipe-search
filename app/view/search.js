@@ -3,9 +3,10 @@ import { View, Text, StyleSheet, SafeAreaView, TextInput, ScrollView, TouchableO
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import Swipeable from 'react-native-swipeable-row';
+import API from '../api/index';
 
 export default class Search extends Component {
-	state = { data: [] };
+	state = { data: [ 'null' ] };
 
 	/* Once the component is loaded, add the 'add' button to the action bar */
 	componentDidMount() {
@@ -52,8 +53,9 @@ export default class Search extends Component {
 
 	/* Authenticate list before confirming and submitting list to search */
 	confirm = () => {
-		if (this.isItEmpty() && this.getList.length > 0) {
-			this.props.navigation.navigate('Results');
+		if (this.isItEmpty() && this.getList().length > 0) {
+			alert('it works');
+			// this.props.navigation.navigate('Results');
 		} else {
 			alert('Please fill in at least one ingredient');
 		}
@@ -61,7 +63,7 @@ export default class Search extends Component {
 
 	render() {
 		/* Add a new text input every time a new element is added to the state */
-		let boxes = this.state.data.map((data, index) => {
+		let boxes = this.state.data.map((item, index) => {
 			/* Add Right Swipe buttons for Swipeable View to Delete */
 			const rightButtons = [
 				<TouchableOpacity key={index} style={styles.delete} onPress={() => this.removeInputBox(index)}>
@@ -103,8 +105,13 @@ export default class Search extends Component {
 						<TextInput
 							placeholder={'Ingredient'}
 							style={styles.input}
-							onChangeText={(text) =>
-								this.setState({ data: [ ...this.state.data, (data[0] = text.toLowerCase) ] })}
+							onChangeText={(text) => {
+								const prevState = this.state.data.slice();
+								prevState[0] = text.toLowerCase();
+								this.setState({
+									data: prevState
+								});
+							}}
 						/>
 					</View>
 					{boxes}
