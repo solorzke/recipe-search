@@ -8,6 +8,7 @@ const ListItem = (props) => {
 				<Image source={props.img} style={styles.img} />
 			</View>
 			<View style={styles.textView}>
+				<Text style={styles.calories}>Cal: {props.calories}</Text>
 				<Text style={styles.title}>{props.title}</Text>
 				<Text style={styles.subtitle}>{props.subtitle}</Text>
 			</View>
@@ -48,6 +49,10 @@ const styles = StyleSheet.create({
 
 	subtitle: {
 		fontSize: 17
+	},
+	calories: {
+		textAlign: 'right',
+		paddingRight: 10
 	}
 });
 

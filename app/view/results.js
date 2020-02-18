@@ -8,7 +8,12 @@ export default class Results extends Component {
 		return (
 			<View style={styles.mainView}>
 				<ScrollView>
-					<ListItem title={'Hello'} subtitle={'there'} img={Img} />
+					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
+					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
+					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
+					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
+					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
+					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
 				</ScrollView>
 			</View>
 		);
