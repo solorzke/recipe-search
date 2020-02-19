@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
-import Swipeable from 'react-native-swipeable-row';
 import API from '../api/index';
+import InputBox from '../components/inputbox';
 
 export default class Search extends Component {
 	state = { data: [ 'null' ] };
@@ -61,30 +61,15 @@ export default class Search extends Component {
 		}
 	};
 
-	render() {
-		/* Add a new text input every time a new element is added to the state */
-		let boxes = this.state.data.map((item, index) => {
-			/* Add Right Swipe buttons for Swipeable View to Delete */
-			const rightButtons = [
-				<TouchableOpacity key={index} style={styles.delete} onPress={() => this.removeInputBox(index)}>
-					<Text style={{ color: '#fff', fontSize: 15, paddingLeft: 10 }}>Delete</Text>
-				</TouchableOpacity>
-			];
-			return (
-				<Swipeable rightButtons={rightButtons}>
-					<View style={styles.swipableView}>
-						<TextInput
-							key={index}
-							placeholder={'Ingredient'}
-							style={styles.input}
-							onChangeText={(text) =>
-								this.setState({ data: [ ...this.state.data, (data[index] = text.toLowerCase) ] })}
-						/>
-					</View>
-				</Swipeable>
-			);
+	typing = (text) => {
+		const prevState = this.state.data.slice();
+		prevState[0] = text.toLowerCase();
+		this.setState({
+			data: prevState
 		});
+	};
 
+	render() {
 		return (
 			<SafeAreaView style={styles.mainView}>
 				<ScrollView style={styles.area}>
@@ -97,24 +82,13 @@ export default class Search extends Component {
 						style={styles.confirm}
 						type="primary"
 						textSize={20}
-						onPress={() => this.confirm()}
+						onPress={() => alert(this.state.data)}
 					>
 						Confirm
 					</AwesomeButtonRick>
-					<View style={styles.swipableView}>
-						<TextInput
-							placeholder={'Ingredient'}
-							style={styles.input}
-							onChangeText={(text) => {
-								const prevState = this.state.data.slice();
-								prevState[0] = text.toLowerCase();
-								this.setState({
-									data: prevState
-								});
-							}}
-						/>
+					<View style={styles.listView}>
+						<InputBox items={this.state.data} onChangeText={this.typing} />
 					</View>
-					{boxes}
 				</ScrollView>
 			</SafeAreaView>
 		);
@@ -130,6 +104,10 @@ const styles = StyleSheet.create({
 	area: {
 		flex: 2,
 		paddingLeft: 10
+	},
+
+	listView: {
+		flex: 1
 	},
 
 	title: {
@@ -149,18 +127,6 @@ const styles = StyleSheet.create({
 
 	confirm: {
 		alignSelf: 'center'
-	},
-
-	swipableView: {
-		borderColor: '#000',
-		borderRadius: 20,
-		borderWidth: 1,
-		height: 100,
-		backgroundColor: '#DDD',
-		marginVertical: 20,
-		marginHorizontal: 20,
-		paddingHorizontal: 50,
-		justifyContent: 'center'
 	},
 
 	delete: {
