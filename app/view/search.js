@@ -72,12 +72,12 @@ export default class Search extends Component {
 
 	/* Return ingredients that aren't listed as 'null' */
 	getList = () => {
-		return this.state.data.filter((ingredient) => ingredient !== 'null');
+		return this.state.data.filter((ingredient) => ingredient !== '');
 	};
 
 	/* Authenticate list before confirming and submitting list to search */
 	confirm = () => {
-		if (this.isItEmpty() && this.getList().length > 0) {
+		if (this.getList().length > 0) {
 			alert('it works');
 			// this.props.navigation.navigate('Results');
 		} else {
@@ -109,19 +109,22 @@ export default class Search extends Component {
 		return (
 			<SafeAreaView style={styles.mainView}>
 				<ScrollView style={styles.area}>
-					<Text style={styles.title}>Fill In Your Ingredients</Text>
-					<AwesomeButtonRick
-						backgroundColor={'orange'}
-						borderRadius={100}
-						height={50}
-						width={300}
-						style={styles.confirm}
-						type="primary"
-						textSize={20}
-						onPress={() => alert(this.state.data)}
-					>
-						Confirm
-					</AwesomeButtonRick>
+					<View style={styles.header}>
+						<Text style={styles.title}>Fill In Your Ingredients</Text>
+						<AwesomeButtonRick
+							backgroundColor={'orange'}
+							borderRadius={100}
+							height={50}
+							width={300}
+							style={styles.confirm}
+							type="primary"
+							textSize={20}
+							onPress={() => this.confirm()}
+						>
+							Confirm
+						</AwesomeButtonRick>
+					</View>
+
 					<View style={styles.listView}>
 						{this.state.inputA && (
 							<InputBox
@@ -206,13 +209,19 @@ const styles = StyleSheet.create({
 		width: '100%'
 	},
 
+	header: {
+		backgroundColor: '#FFBF00',
+		borderBottomColor: '#000',
+		paddingVertical: '10%',
+		borderBottomWidth: 1
+	},
+
 	area: {
-		flex: 2,
-		paddingLeft: 10
+		flex: 1
 	},
 
 	listView: {
-		flex: 1
+		paddingLeft: 10
 	},
 
 	title: {
