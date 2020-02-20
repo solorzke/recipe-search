@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import ListItem from '../components/listitem';
-import Img from '../assets/images/card.png';
 
 export default class Results extends Component {
 	render() {
@@ -9,16 +8,21 @@ export default class Results extends Component {
 			return this.props.navigation.goBack();
 		});
 
+		const results = payload.map((recipe, index) => {
+			return (
+				<ListItem
+					title={recipe['label']}
+					subtitle={recipe['totalTime']}
+					img={recipe['image']}
+					calories={recipe['calories']}
+					onPress={() => this.props.navigation.navigate('Recipe', { data: recipe })}
+				/>
+			);
+		});
+
 		return (
 			<View style={styles.mainView}>
-				<ScrollView>
-					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
-					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
-					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
-					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
-					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
-					<ListItem title={'Hello'} subtitle={'there'} img={Img} calories={123} />
-				</ScrollView>
+				<ScrollView>{results}</ScrollView>
 			</View>
 		);
 	}
