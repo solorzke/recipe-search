@@ -5,6 +5,10 @@ import Img from '../assets/images/card.png';
 
 export default class Results extends Component {
 	render() {
+		const payload = this.props.navigation.getParam('data', () => {
+			return this.props.navigation.goBack();
+		});
+
 		return (
 			<View style={styles.mainView}>
 				<ScrollView>

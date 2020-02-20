@@ -77,8 +77,14 @@ export default class Search extends Component {
 
 	/* Authenticate list before confirming and submitting list to search */
 	confirm = () => {
-		if (this.getList().length > 0) {
+		const items = this.getList();
+		if (items.length > 0) {
 			alert('it works');
+			const http = new API([ 'chicken', 'pork' ]);
+			http.requestHTTP((payload) => {
+				console.warn(payload);
+				this.props.navigation.navigate('Results', { data: payload });
+			});
 			// this.props.navigation.navigate('Results');
 		} else {
 			alert('Please fill in at least one ingredient');
