@@ -5,7 +5,7 @@ const ListItem = (props) => {
 	return (
 		<TouchableOpacity style={styles.mainView} onPress={props.onPress}>
 			<View style={styles.imgView}>
-				<Image source={props.img} style={styles.img} />
+				<Image source={{ uri: props.img }} style={styles.img} />
 			</View>
 			<View style={styles.textView}>
 				<Text style={styles.calories}>Cal: {props.calories}</Text>
