@@ -6,7 +6,20 @@ import API from '../api/index';
 import InputBox from '../components/inputbox';
 
 export default class Search extends Component {
-	state = { data: [ 'null' ] };
+	state = {
+		data: [ '', '', '', '', '', '', '', '', '', '' ],
+		input: '',
+		inputA: true,
+		inputB: false,
+		inputC: false,
+		inputD: false,
+		inputE: false,
+		inputF: false,
+		inputG: false,
+		inputH: false,
+		inputI: false,
+		inputJ: false
+	};
 
 	/* Once the component is loaded, add the 'add' button to the action bar */
 	componentDidMount() {
@@ -21,24 +34,35 @@ export default class Search extends Component {
 
 	/* Add new data to the state every time the 'add' button is pressed from the action bar */
 	addInputBox = () => {
-		if (this.state.data.length <= 10) {
-			this.setState({
-				data: [ ...this.state.data, 'null' ]
-			});
-		} else {
-			alert('Max limit reached!');
+		let count = 1;
+
+		for (let view in this.state) {
+			if (view !== 'data' && view !== 'input') {
+				if (this.state[view] === false) {
+					this.setState({
+						[view]: true
+					});
+					return true;
+				} else if (count === 10) {
+					alert('Max Limit Reached');
+					return false;
+				} else {
+					count += 1;
+					console.warn('Counter: ' + count);
+				}
+			}
 		}
 	};
 
 	/* Remove an input box by swiping */
-	removeInputBox = (position) => {
-		console.warn(position);
+	removeInputBox = (position, inputType) => {
+		const prevState = this.state.data.slice();
+		prevState[position] = '';
 
-		const filtered = this.state.data.filter((item, key) => {
-			return position != key;
+		this.setState({
+			[inputType]: false,
+			data: prevState
 		});
-
-		this.setState({ data: filtered });
 	};
 
 	/* Check if at least one ingredient is filled in */
@@ -61,11 +85,23 @@ export default class Search extends Component {
 		}
 	};
 
+	/* As the user is typing, update the state about its input */
 	typing = (text) => {
-		const prevState = this.state.data.slice();
-		prevState[0] = text.toLowerCase();
+		console.warn(text);
 		this.setState({
-			data: prevState
+			input: text
+		});
+	};
+
+	/* Update the value of the input box to the state */
+	updateValue = (index) => {
+		alert('done ' + index);
+		const prevState = this.state.data.slice();
+		const input = this.state.input;
+		prevState[index] = input.toLowerCase();
+		this.setState({
+			data: prevState,
+			input: ''
 		});
 	};
 
@@ -87,7 +123,76 @@ export default class Search extends Component {
 						Confirm
 					</AwesomeButtonRick>
 					<View style={styles.listView}>
-						<InputBox items={this.state.data} onChangeText={this.typing} />
+						{this.state.inputA && (
+							<InputBox
+								onChangeText={(text) => this.typing(text)}
+								delete={() => this.removeInputBox(0, 'inputA')}
+								onEndEditing={() => this.updateValue(0)}
+							/>
+						)}
+						{this.state.inputB && (
+							<InputBox
+								onChangeText={(text) => this.typing(text)}
+								delete={() => this.removeInputBox(1, 'inputB')}
+								onEndEditing={() => this.updateValue(1)}
+							/>
+						)}
+						{this.state.inputC && (
+							<InputBox
+								onChangeText={(text) => this.typing(text)}
+								delete={() => this.removeInputBox(0, 'inputC')}
+								onEndEditing={() => this.updateValue(0)}
+							/>
+						)}
+						{this.state.inputD && (
+							<InputBox
+								onChangeText={(text) => this.typing(text)}
+								delete={() => this.removeInputBox(0, 'inputD')}
+								onEndEditing={() => this.updateValue(0)}
+							/>
+						)}
+						{this.state.inputE && (
+							<InputBox
+								onChangeText={(text) => this.typing(text)}
+								delete={() => this.removeInputBox(0, 'inputE')}
+								onEndEditing={() => this.updateValue(0)}
+							/>
+						)}
+						{this.state.inputF && (
+							<InputBox
+								onChangeText={(text) => this.typing(text)}
+								delete={() => this.removeInputBox(0, 'inputF')}
+								onEndEditing={() => this.updateValue(0)}
+							/>
+						)}
+						{this.state.inputG && (
+							<InputBox
+								onChangeText={(text) => this.typing(text)}
+								delete={() => this.removeInputBox(0, 'inputG')}
+								onEndEditing={() => this.updateValue(0)}
+							/>
+						)}
+						{this.state.inputH && (
+							<InputBox
+								onChangeText={(text) => this.typing(text)}
+								delete={() => this.removeInputBox(0, 'inputH')}
+								onEndEditing={() => this.updateValue(0)}
+							/>
+						)}
+						{this.state.inputI && (
+							<InputBox
+								onChangeText={(text) => this.typing(text)}
+								delete={() => this.removeInputBox(0, 'inputI')}
+								onEndEditing={() => this.updateValue(0)}
+							/>
+						)}
+						{this.state.inputJ && (
+							<InputBox
+								onChangeText={(text) => this.typing(text)}
+								delete={() => this.removeInputBox(0, 'inputJ')}
+								onEndEditing={() => this.updateValue(0)}
+							/>
+						)}
 					</View>
 				</ScrollView>
 			</SafeAreaView>

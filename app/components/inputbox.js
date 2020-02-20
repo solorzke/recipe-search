@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -6,25 +6,27 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 Props: 
 items: [] of items
 onChangeText: pass function to update state of the text being entered in
-
+delete: pass function to erase component
 */
+
 const InputBox = (props) => {
-	return props.items.map((item, id) => (
-		<View style={styles.areaView} key={id}>
-			<TouchableOpacity style={styles.cancelBtn}>
+	return (
+		<View style={styles.areaView}>
+			<TouchableOpacity style={styles.cancelBtn} onPress={props.delete}>
 				<Icon name="cancel" size={30} color="#000" />
 			</TouchableOpacity>
 			<View style={styles.input}>
 				<TextInput
 					style={styles.text}
-					placeholder={'IngredientIngredientIngredientIngredient'}
+					placeholder={'Ingredient'}
 					onChangeText={props.onChangeText}
 					maxLength={40}
 					autoCorrect={true}
+					onEndEditing={props.onEndEditing}
 				/>
 			</View>
 		</View>
-	));
+	);
 };
 
 const styles = StyleSheet.create({
