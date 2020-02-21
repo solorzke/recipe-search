@@ -13,7 +13,7 @@ const InputBox = (props) => {
 	return (
 		<View style={styles.areaView}>
 			<TouchableOpacity style={styles.cancelBtn} onPress={props.delete}>
-				<Icon name="cancel" size={30} color="#000" />
+				<Icon name="cancel" size={30} color="#E63462" />
 			</TouchableOpacity>
 			<View style={styles.input}>
 				<TextInput
@@ -36,7 +36,12 @@ const styles = StyleSheet.create({
 		marginVertical: 10,
 		justifyContent: 'center',
 		borderRadius: 100 / 2,
-		backgroundColor: '#DDD'
+		backgroundColor: '#DDD',
+		borderColor: 'gray',
+		borderBottomWidth: 5,
+		borderLeftWidth: 2.5,
+		borderRightWidth: 5,
+		borderTopWidth: 1
 		// alignItems: 'center'
 	},
 
@@ -54,7 +59,6 @@ const styles = StyleSheet.create({
 	},
 
 	input: {
-		backgroundColor: 'orange',
 		marginHorizontal: '10%'
 	},
 
