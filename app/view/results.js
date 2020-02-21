@@ -4,18 +4,16 @@ import ListItem from '../components/listitem';
 
 export default class Results extends Component {
 	render() {
-		const payload = this.props.navigation.getParam('data', () => {
-			return this.props.navigation.goBack();
-		});
-
-		const results = payload.map((recipe, index) => {
+		const { data } = this.props.route.params;
+		const results = data.map((recipe, index) => {
 			return (
 				<ListItem
+					id={index}
 					title={recipe['label']}
 					subtitle={recipe['totalTime']}
 					img={recipe['image']}
-					calories={recipe['calories']}
-					onPress={() => this.props.navigation.navigate('Recipe', { data: recipe })}
+					calories={Math.ceil(recipe['calories'])}
+					onPress={() => this.props.navigation.navigate('Recipe', { food: recipe })}
 				/>
 			);
 		});
