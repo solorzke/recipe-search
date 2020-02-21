@@ -4,11 +4,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import API from '../api/index';
 import InputBox from '../components/inputbox';
+import Loader from '../components/loader';
 
 export default class Search extends Component {
 	state = {
 		data: [ '', '', '', '', '', '', '', '', '', '' ],
 		input: '',
+		loader: false,
+		button: true,
+		title: true,
 		inputA: true,
 		inputB: false,
 		inputC: false,
@@ -37,7 +41,7 @@ export default class Search extends Component {
 		let count = 1;
 
 		for (let view in this.state) {
-			if (view !== 'data' && view !== 'input') {
+			if (view !== 'data' && view !== 'input' && view !== 'loader' && view !== 'button' && view !== 'title') {
 				if (this.state[view] === false) {
 					this.setState({
 						[view]: true
@@ -48,7 +52,6 @@ export default class Search extends Component {
 					return false;
 				} else {
 					count += 1;
-					console.warn('Counter: ' + count);
 				}
 			}
 		}
@@ -79,10 +82,18 @@ export default class Search extends Component {
 	confirm = () => {
 		const items = this.getList();
 		if (items.length > 0) {
-			alert('it works');
-			const http = new API([ 'chicken', 'pork' ]);
+			this.setState({
+				title: false,
+				button: false,
+				loader: true
+			});
+			const http = new API(items);
 			http.requestHTTP((payload) => {
-				console.warn(payload);
+				this.setState({
+					title: true,
+					button: true,
+					loader: false
+				});
 				this.props.navigation.navigate('Results', { data: payload });
 			});
 			// this.props.navigation.navigate('Results');
@@ -93,7 +104,6 @@ export default class Search extends Component {
 
 	/* As the user is typing, update the state about its input */
 	typing = (text) => {
-		console.warn(text);
 		this.setState({
 			input: text
 		});
@@ -101,7 +111,6 @@ export default class Search extends Component {
 
 	/* Update the value of the input box to the state */
 	updateValue = (index) => {
-		alert('done ' + index);
 		const prevState = this.state.data.slice();
 		const input = this.state.input;
 		prevState[index] = input.toLowerCase();
@@ -116,21 +125,23 @@ export default class Search extends Component {
 			<SafeAreaView style={styles.mainView}>
 				<ScrollView style={styles.area}>
 					<View style={styles.header}>
-						<Text style={styles.title}>Fill In Your Ingredients</Text>
-						<AwesomeButtonRick
-							backgroundColor={'orange'}
-							borderRadius={100}
-							height={50}
-							width={300}
-							style={styles.confirm}
-							type="primary"
-							textSize={20}
-							onPress={() => this.confirm()}
-						>
-							Confirm
-						</AwesomeButtonRick>
+						{this.state.title && <Text style={styles.title}>Fill In Your Ingredients</Text>}
+						{this.state.button && (
+							<AwesomeButtonRick
+								backgroundColor={'orange'}
+								borderRadius={100}
+								height={50}
+								width={300}
+								style={styles.confirm}
+								type="primary"
+								textSize={20}
+								onPress={() => this.confirm()}
+							>
+								Confirm
+							</AwesomeButtonRick>
+						)}
+						{this.state.loader && <Loader text={'Find the best recipes...'} color={'#E63462'} />}
 					</View>
-
 					<View style={styles.listView}>
 						{this.state.inputA && (
 							<InputBox
@@ -216,7 +227,7 @@ const styles = StyleSheet.create({
 	},
 
 	header: {
-		backgroundColor: '#FFBF00',
+		backgroundColor: '#ecceaf',
 		borderBottomColor: '#000',
 		paddingVertical: '10%',
 		borderBottomWidth: 1
