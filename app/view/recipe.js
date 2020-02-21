@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 
 export default class Recipe extends Component {
 	render() {
+		const { recipe } = this.props.route.params;
 		return (
-			<View>
-				<Text>Hello</Text>
-			</View>
+			<SafeAreaView style={styles.mainView}>
+				<ScrollView>
+					<Text>Hello</Text>
+				</ScrollView>
+			</SafeAreaView>
 		);
 	}
 }
