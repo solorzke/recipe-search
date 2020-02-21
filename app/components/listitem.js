@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 const ListItem = (props) => {
 	return (
-		<TouchableOpacity style={styles.mainView} onPress={props.onPress}>
+		<TouchableOpacity style={styles.mainView} onPress={props.onPress} key={props.id}>
 			<View style={styles.imgView}>
 				<Image source={{ uri: props.img }} style={styles.img} />
 			</View>
@@ -38,7 +38,9 @@ const styles = StyleSheet.create({
 	img: {
 		width: 100,
 		height: 100,
-		borderRadius: 200
+		borderRadius: 200,
+		borderWidth: 3,
+		borderColor: '#000'
 	},
 
 	title: {
