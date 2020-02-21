@@ -7,6 +7,7 @@ import SearchScreen from './app/view/search';
 import SettingsScreen from './app/view/settings';
 import AboutScreen from './app/view/about';
 import ResultsScreen from './app/view/results';
+import RecipeScreen from './app/view/recipe';
 
 const Drawer = createDrawerNavigator();
 
@@ -32,6 +33,15 @@ const HomeStack = () => {
 				})}
 				name="Results"
 				component={ResultsScreen}
+			/>
+			<Stack.Screen
+				options={({ navigation, route }) => ({
+					headerShown: true,
+					headerStyle: { backgroundColor: '#1976d2' },
+					headerTintColor: '#fff'
+				})}
+				name="Recipe"
+				component={RecipeScreen}
 			/>
 		</Stack.Navigator>
 	);
