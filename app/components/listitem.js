@@ -46,11 +46,13 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 20,
 		color: '#1976d2',
-		paddingBottom: 10
+		paddingBottom: 10,
+		textTransform: 'capitalize'
 	},
 
 	subtitle: {
-		fontSize: 17
+		fontSize: 13,
+		color: '#E63462'
 	},
 	calories: {
 		textAlign: 'right',
