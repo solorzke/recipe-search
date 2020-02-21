@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#DDD',
 		borderColor: 'gray',
 		borderBottomWidth: 5,
-		borderLeftWidth: 2.5,
+		borderLeftWidth: 5,
 		borderRightWidth: 5,
 		borderTopWidth: 1
 		// alignItems: 'center'
