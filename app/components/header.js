@@ -7,6 +7,7 @@ const Header = (props) => {
 		<View style={styles.mainView}>
 			<View style={styles.titleView}>
 				<Text style={styles.title}>{props.label}</Text>
+				<Text style={{ color: '#1976d2' }}>By: {props.source}</Text>
 			</View>
 			<View style={styles.shareView}>
 				<TouchableOpacity>
