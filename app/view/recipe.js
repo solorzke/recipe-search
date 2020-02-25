@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import Header from '../components/header';
+import IngredientsList from '../components/list';
 
 export default class Recipe extends Component {
 	render() {
-		const { recipe } = this.props.route.params;
+		const { food } = this.props.route.params;
 		return (
 			<SafeAreaView style={styles.mainView}>
 				<ScrollView>
-					<Text>Hello</Text>
+					<Header bookmark={'star-outline'} label={food['label']} source={food['source']} />
+					<IngredientsList
+						img={food['image']}
+						ingredients={food['ingredientLines']}
+						source={food['source']}
+					/>
 				</ScrollView>
 			</SafeAreaView>
 		);
