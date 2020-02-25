@@ -15,7 +15,7 @@ export default class List extends Component {
 	render() {
 		let items = this.props.ingredients.map((item, index) => {
 			return (
-				<View style={{ flexDirection: 'row', paddingVertical: 10 }}>
+				<View style={{ flexDirection: 'row', paddingVertical: 5 }}>
 					<Icon name="square-small" size={25} color={'gray'} />
 					<Text style={{ alignSelf: 'center', paddingRight: 10 }}>{item}</Text>
 				</View>
