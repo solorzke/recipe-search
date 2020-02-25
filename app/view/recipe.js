@@ -4,12 +4,43 @@ import Header from '../components/header';
 import IngredientsList from '../components/list';
 
 export default class Recipe extends Component {
+	state = {
+		bookmark: false,
+		bookmark_name: 'star-outline',
+		bookmark_color: 'gray'
+	};
+
+	/* Toggle the boolean value for the pressed bookmark icon  */
+	toggleBookmark = () => {
+		if (this.state.bookmark) {
+			this.setState({
+				bookmark: false,
+				bookmark_name: 'star-outline',
+				bookmark_color: 'gray'
+			});
+		} else {
+			this.setState({
+				bookmark: true,
+				bookmark_name: 'star',
+				bookmark_color: '#d4af37'
+			});
+		}
+	};
+
 	render() {
 		const { food } = this.props.route.params;
 		return (
 			<SafeAreaView style={styles.mainView}>
 				<ScrollView>
-					<Header bookmark={'star-outline'} label={food['label']} source={food['source']} />
+					<Header
+						label={food['label']}
+						source={food['source']}
+						bookmarkOptions={[
+							() => this.toggleBookmark(),
+							this.state.bookmark_name,
+							this.state.bookmark_color
+						]}
+					/>
 					<IngredientsList
 						img={food['image']}
 						ingredients={food['ingredientLines']}
