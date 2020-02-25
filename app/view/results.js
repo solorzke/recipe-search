@@ -14,7 +14,6 @@ export default class Results extends Component {
 	render() {
 		const { data } = this.props.route.params;
 		const results = data.map((recipe, index) => {
-			console.warn(recipe['healthLabels']);
 			const labels =
 				recipe['healthLabels'].length !== 0 ? recipe['healthLabels'].join(', ') : 'Delicious & Nutritional';
 			return (
