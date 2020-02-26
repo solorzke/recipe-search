@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, SafeAreaView } from 'react-native';
-import Header from '../components/header';
-import IngredientsList from '../components/list';
+import Header from '../components/recipe/header';
+import IngredientsList from '../components/recipe/ingredientslist';
+import LabelsList from '../components/recipe/labelslist';
 
 export default class Recipe extends Component {
 	state = {
@@ -45,6 +46,11 @@ export default class Recipe extends Component {
 						img={food['image']}
 						ingredients={food['ingredientLines']}
 						source={food['source']}
+					/>
+					<LabelsList
+						dietItems={food['dietLabels']}
+						healthItems={food['healthLabels']}
+						cautionItems={food['cautions']}
 					/>
 				</ScrollView>
 			</SafeAreaView>
