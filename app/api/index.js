@@ -48,7 +48,8 @@ export default class API {
 									ingredientLines: this.returnIngredientsList(payload[item]['extendedIngredients']),
 									totalTime: payload[item]['readyInMinutes'],
 									summary: payload[item]['summary'],
-									instructions: this.returnInstructions(payload[item]['analyzedInstructions'])
+									instructions: this.returnInstructions(payload[item]['analyzedInstructions']),
+									ww: this.returnWeightWatchersRating(jsonContent[item])
 								});
 							}
 							if (typeof callback === 'function') {
@@ -116,6 +117,11 @@ export default class API {
 		} else {
 			return data;
 		}
+	};
+
+	/* Return the weight watchers rating */
+	returnWeightWatchersRating = (payload) => {
+		return payload['weightWatcherSmartPoints'] != null ? payload['weightWatcherSmartPoints'] : 0;
 	};
 
 	/* Return the params for the api request url */
