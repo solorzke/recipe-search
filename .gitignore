@@ -21,6 +21,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 /app/api/token.js
+/app/assets/data/
 
 # Android/IntelliJ
 #
