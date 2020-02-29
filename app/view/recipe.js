@@ -30,6 +30,7 @@ export default class Recipe extends Component {
 
 	render() {
 		const { food } = this.props.route.params;
+		console.warn(food);
 		return (
 			<SafeAreaView style={styles.mainView}>
 				<ScrollView>
