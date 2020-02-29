@@ -22,7 +22,7 @@ export default class Results extends Component {
 					title={this.sliceString(recipe['label'], 50)}
 					subtitle={this.sliceString(labels, 60)}
 					img={recipe['image']}
-					calories={Math.ceil(recipe['calories'])}
+					rating={recipe['ww']}
 					onPress={() => this.props.navigation.navigate('Recipe', { food: recipe })}
 				/>
 			);

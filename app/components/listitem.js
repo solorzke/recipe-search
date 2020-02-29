@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import WeightWatchersLogo from '../assets/images/ww.png';
 
 const ListItem = (props) => {
 	return (
@@ -8,7 +9,10 @@ const ListItem = (props) => {
 				<Image source={{ uri: props.img }} style={styles.img} />
 			</View>
 			<View style={styles.textView}>
-				<Text style={styles.calories}>Cal: {props.calories}</Text>
+				<View style={{ flexDirection: 'row', alignSelf: 'flex-end', paddingRight: 10 }}>
+					<Image style={{ height: 25, width: 25 }} source={WeightWatchersLogo} />
+					<Text style={{ alignSelf: 'center' }}>Points: {props.rating}</Text>
+				</View>
 				<Text style={styles.title}>{props.title}</Text>
 				<Text style={styles.subtitle}>{props.subtitle}</Text>
 			</View>
@@ -52,7 +56,9 @@ const styles = StyleSheet.create({
 
 	subtitle: {
 		fontSize: 13,
-		color: '#E63462'
+		color: '#E63462',
+		paddingBottom: 5,
+		textTransform: 'capitalize'
 	},
 	calories: {
 		textAlign: 'right',
