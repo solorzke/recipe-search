@@ -3,6 +3,7 @@ import { StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import Header from '../components/recipe/header';
 import IngredientsList from '../components/recipe/ingredientslist';
 import LabelsList from '../components/recipe/labelslist';
+import TabBar from '../components/recipe/tabbar';
 
 export default class Recipe extends Component {
 	state = {
@@ -30,10 +31,13 @@ export default class Recipe extends Component {
 
 	render() {
 		const { food } = this.props.route.params;
-		console.warn(food);
 		return (
 			<SafeAreaView style={styles.mainView}>
 				<ScrollView>
+					<TabBar
+						onRecipePress={() => alert('Recipe tab pressed')}
+						onDescPressed={() => alert('Desc tab pressed')}
+					/>
 					<Header
 						label={food['label']}
 						source={food['source']}
