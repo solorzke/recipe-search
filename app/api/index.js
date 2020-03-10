@@ -49,7 +49,7 @@ export default class API {
 									totalTime: payload[item]['readyInMinutes'],
 									summary: payload[item]['summary'],
 									instructions: this.returnInstructions(payload[item]['analyzedInstructions']),
-									ww: this.returnWeightWatchersRating(jsonContent[item])
+									ww: this.returnWeightWatchersRating(payload[item])
 								});
 							}
 							if (typeof callback === 'function') {
@@ -142,5 +142,53 @@ export default class API {
 	/* Use the 'Find the Recipe by ID' interface from Spoonacular's API */
 	returnRecipeInfoURL = () => {
 		return 'https://api.spoonacular.com/recipes/informationBulk?';
+	};
+
+	/************** Development Testing methods here ******************/
+
+	/* For testing purposes, send a http request to a development server */
+	async _DEV_requestHTTP(callback) {
+		try {
+			let requestString =
+				this._DEV_returnRecipeInfoURL() + this.returnIngredients() + '&' + this._DEV_returnAuth();
+			await fetch(requestString)
+				.then((response) => {
+					return response.json();
+				})
+				.then((payload) => {
+					let data = [];
+					for (let item of payload) {
+						data.push({
+							label: item['title'],
+							image: item['image'],
+							source: item['sourceName'],
+							url: item['sourceUrl'],
+							dietLabels: item['diets'],
+							healthLabels: this.returnHealthLabels(item),
+							ingredientLines: this.returnIngredientsList(item['extendedIngredients']),
+							totalTime: item['readyInMinutes'],
+							summary: item['summary'],
+							instructions: this.returnInstructions(item['analyzedInstructions']),
+							ww: this.returnWeightWatchersRating(item)
+						});
+					}
+					if (typeof callback === 'function') {
+						callback(payload);
+					}
+				});
+		} catch (error) {
+			console.log(error);
+			alert('Request timed out. Try Again.');
+		}
+	}
+
+	/* Use the 'Find the Recipe by ID' interface from Spoonacular's API */
+	_DEV_returnRecipeInfoURL = () => {
+		return 'https://web.njit.edu/~kas58/json/index.php?';
+	};
+
+	/* Return the api key required to use the API */
+	_DEV_returnAuth = () => {
+		return 'apiKey=development';
 	};
 }
