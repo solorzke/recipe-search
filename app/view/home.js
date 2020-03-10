@@ -11,7 +11,7 @@ export default class Home extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
-				<Status color={'#000'} barStyle={'light-content'} />
+				<Status color={'#1976d2'} barStyle={'light-content'} />
 				<HeadBar name={'Home'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<ScrollView style={styles.buttonView}>
 					<Card
