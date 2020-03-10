@@ -7,7 +7,7 @@ export default class Settings extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
-				<Status color={'#000'} barStyle={'light-content'} />
+				<Status barStyle={'light-content'} />
 				<HeadBar name={'Settings'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<ScrollView style={styles.container}>
 					<TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Privacy')}>

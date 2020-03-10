@@ -8,7 +8,7 @@ export default class AboutScreen extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
-				<Status color={'#000'} barStyle={'light-content'} />
+				<Status barStyle={'light-content'} />
 				<HeadBar name={'About Us'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<ScrollView style={styles.container}>
 					<View style={styles.headerView}>

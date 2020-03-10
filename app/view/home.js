@@ -6,12 +6,13 @@ import Card from '../components/card';
 import Background from '../assets/images/card.png';
 import Background2 from '../assets/images/card2.png';
 import Background3 from '../assets/images/3255.jpg';
+import API from '../api/developer';
 
 export default class Home extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
-				<Status color={'#1976d2'} barStyle={'light-content'} />
+				<Status barStyle={'light-content'} />
 				<HeadBar name={'Home'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<ScrollView style={styles.buttonView}>
 					<Card
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
 
 	buttonView: {
 		flex: 2,
-		marginHorizontal: 10
+		paddingHorizontal: 10
 	},
 
 	button: {
