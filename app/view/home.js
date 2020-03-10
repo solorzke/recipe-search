@@ -6,7 +6,6 @@ import Card from '../components/card';
 import Background from '../assets/images/card.png';
 import Background2 from '../assets/images/card2.png';
 import Background3 from '../assets/images/3255.jpg';
-import API from '../api/developer';
 
 export default class Home extends Component {
 	render() {

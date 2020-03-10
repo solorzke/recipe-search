@@ -1,4 +1,7 @@
 /* 
+Disclaimer: This is the developer API class that is used only for testing.
+For production purposes, use the real API class in 'index.js'.
+
 API Class that can be reused to test or request data from the API in service.
 API: 'spoonacular'
 HTTP Request Package: 'fetch' 
@@ -7,6 +10,7 @@ Required: 'API KEY' and <ingredients>
 1. request: search recipe id's by ingredients
 2. request: search recipe info by recipe id's
 */
+
 export default class API {
 	/* Demand an array of ingredient items at the moment of instantiation */
 	constructor(items) {
@@ -17,51 +21,50 @@ export default class API {
 		this.items = items;
 	}
 
-	/* Send a HTTP request to the API and handle the response JSON data.  */
+	/* For testing purposes, send a http request to a development server */
 	async requestHTTP(callback) {
 		try {
-			let requestString = this.returnIngredientsURL() + this.returnIngredients() + '&' + this.returnAuth();
+			let requestString = this.returnRecipeInfoURL() + this.returnIngredients() + '&' + this.returnAuth();
 			await fetch(requestString)
 				.then((response) => {
 					return response.json();
 				})
 				.then((payload) => {
-					let ids = [];
+					let data = [];
 					for (let item of payload) {
-						ids.push(item['id']);
-					}
-					const requestString = this.returnRecipeInfoURL() + this.returnAuth() + '&ids=' + ids.join();
-					fetch(requestString)
-						.then((response) => {
-							return response.json();
-						})
-						.then((payload) => {
-							let data = [];
-							for (let item of payload) {
-								data.push({
-									label: payload[item]['title'],
-									image: payload[item]['image'],
-									source: payload[item]['sourceName'],
-									url: payload[item]['sourceUrl'],
-									dietLabels: payload[item]['diets'],
-									healthLabels: this.returnHealthLabels(payload[item]),
-									ingredientLines: this.returnIngredientsList(payload[item]['extendedIngredients']),
-									totalTime: payload[item]['readyInMinutes'],
-									summary: payload[item]['summary'],
-									instructions: this.returnInstructions(payload[item]['analyzedInstructions']),
-									ww: this.returnWeightWatchersRating(payload[item])
-								});
-							}
-							if (typeof callback === 'function') {
-								callback(data);
-							}
+						data.push({
+							label: item['title'],
+							image: item['image'],
+							source: item['sourceName'],
+							url: item['sourceUrl'],
+							dietLabels: item['diets'],
+							healthLabels: this.returnHealthLabels(item),
+							ingredientLines: this.returnIngredientsList(item['extendedIngredients']),
+							totalTime: item['readyInMinutes'],
+							summary: item['summary'],
+							instructions: this.returnInstructions(item['analyzedInstructions']),
+							ww: this.returnWeightWatchersRating(item)
 						});
+					}
+					if (typeof callback === 'function') {
+						callback(payload);
+					}
 				});
 		} catch (error) {
 			console.log(error);
 			alert('Request timed out. Try Again.');
 		}
 	}
+
+	/* Use the 'Find the Recipe by ID' interface from Spoonacular's API */
+	returnRecipeInfoURL = () => {
+		return 'https://web.njit.edu/~kas58/json/index.php?';
+	};
+
+	/* Return the api key required to use the API */
+	returnAuth = () => {
+		return 'apiKey=development';
+	};
 
 	/* Parse the ingredient list array and return its relevant data */
 	returnIngredientsList = (payload) => {
@@ -127,20 +130,5 @@ export default class API {
 	/* Return the params for the api request url */
 	returnIngredients = () => {
 		return 'ingredients=' + this.items.join();
-	};
-
-	/* Return the api key required to use the API */
-	returnAuth = () => {
-		return 'apiKey=' + this.getAPIKey();
-	};
-
-	/* Use the 'Find the Recipe by Ingredients' interface from Spoonacular's API */
-	returnIngredientsURL = () => {
-		return 'https://api.spoonacular.com/recipes/findByIngredients?';
-	};
-
-	/* Use the 'Find the Recipe by ID' interface from Spoonacular's API */
-	returnRecipeInfoURL = () => {
-		return 'https://api.spoonacular.com/recipes/informationBulk?';
 	};
 }
