@@ -47,7 +47,7 @@ export default class API {
 						});
 					}
 					if (typeof callback === 'function') {
-						callback(payload);
+						callback(data);
 					}
 				});
 		} catch (error) {

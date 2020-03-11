@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
-import API from '../api/index';
+import API from '../api/developer';
 import InputBox from '../components/inputbox';
 import Loader from '../components/loader';
 
