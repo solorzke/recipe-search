@@ -10,8 +10,8 @@ const ListItem = (props) => {
 			</View>
 			<View style={styles.textView}>
 				<View style={{ flexDirection: 'row', alignSelf: 'flex-end', paddingRight: 10 }}>
-					<Image style={{ height: 25, width: 25 }} source={WeightWatchersLogo} />
-					<Text style={{ alignSelf: 'center' }}>Points: {props.rating}</Text>
+					<Image style={{ height: 20, width: 20 }} source={WeightWatchersLogo} />
+					<Text style={{ alignSelf: 'center', fontSize: 12 }}>Smart Pts: {props.rating}</Text>
 				</View>
 				<Text style={styles.title}>{props.title}</Text>
 				<Text style={styles.subtitle}>{props.subtitle}</Text>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 		width: 100,
 		height: 100,
 		borderRadius: 200,
-		borderWidth: 3,
+		borderWidth: 0.8,
 		borderColor: '#000'
 	},
 
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 	},
 
 	subtitle: {
-		fontSize: 13,
+		fontSize: 11,
 		color: '#E63462',
 		paddingBottom: 5,
 		textTransform: 'capitalize'
