@@ -4,6 +4,7 @@ import Header from '../components/recipe/header';
 import IngredientsList from '../components/recipe/ingredientslist';
 import LabelsList from '../components/recipe/labelslist';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Recipe extends Component {
 	state = {
@@ -70,9 +71,31 @@ export default class Recipe extends Component {
 		};
 
 		return (
-			<Tab.Navigator>
-				<Tab.Screen name="Instructions" component={InstructionsScreen} />
-				<Tab.Screen name="Information" component={RecipeInfo} />
+			<Tab.Navigator initialRouteName="Instructions" tabBarOptions={{ showIcon: true }}>
+				<Tab.Screen
+					options={{
+						tabBarLabel: 'Instructions',
+						tabBarIcon: ({ focused, color }) => {
+							const colors = focused ? '#E0115F' : color;
+							return <Icon name="ios-restaurant" color={colors} size={25} />;
+						},
+						tabBarAccessibilityLabel: 'Instructions'
+					}}
+					name="Instructions"
+					component={InstructionsScreen}
+				/>
+				<Tab.Screen
+					name="Information"
+					component={RecipeInfo}
+					options={{
+						tabBarLabel: 'Summary',
+						tabBarIcon: ({ focused, color }) => {
+							const colors = focused ? '#E0115F' : color;
+							return <Icon name="md-list-box" color={colors} size={25} />;
+						},
+						tabBarAccessibilityLabel: 'Summary'
+					}}
+				/>
 			</Tab.Navigator>
 		);
 	}
