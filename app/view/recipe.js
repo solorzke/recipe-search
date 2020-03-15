@@ -71,10 +71,21 @@ export default class Recipe extends Component {
 		};
 
 		return (
-			<Tab.Navigator initialRouteName="Instructions" tabBarOptions={{ showIcon: true }}>
+			<Tab.Navigator
+				initialRouteName="Instructions"
+				tabBarOptions={{
+					showIcon: true,
+					indicatorStyle: {
+						backgroundColor: '#E0115F'
+					}
+				}}
+			>
 				<Tab.Screen
 					options={{
-						tabBarLabel: 'Instructions',
+						tabBarLabel: ({ focused, color }) => {
+							const textcolor = focused ? '#E0115F' : color;
+							return <Text style={{ color: textcolor }}>STEPS</Text>;
+						},
 						tabBarIcon: ({ focused, color }) => {
 							const colors = focused ? '#E0115F' : color;
 							return <Icon name="ios-restaurant" color={colors} size={25} />;
@@ -88,7 +99,10 @@ export default class Recipe extends Component {
 					name="Information"
 					component={RecipeInfo}
 					options={{
-						tabBarLabel: 'Summary',
+						tabBarLabel: ({ focused, color }) => {
+							const textcolor = focused ? '#E0115F' : color;
+							return <Text style={{ color: textcolor }}>SUMMARY</Text>;
+						},
 						tabBarIcon: ({ focused, color }) => {
 							const colors = focused ? '#E0115F' : color;
 							return <Icon name="md-list-box" color={colors} size={25} />;
