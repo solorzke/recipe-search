@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
 export default class List extends Component {
 	produceItems = (items) => {
@@ -22,7 +23,7 @@ export default class List extends Component {
 		let items = this.props.ingredients.map((item, index) => {
 			return (
 				<View style={{ flexDirection: 'row', paddingVertical: 5 }}>
-					<Icon name="square-small" size={25} color={'gray'} />
+					<FontAwesomeIcon name="cookie" size={10} color={'brown'} style={{ paddingRight: 5 }} />
 					<Text style={{ alignSelf: 'center', paddingRight: 30 }}>{item}</Text>
 				</View>
 			);
