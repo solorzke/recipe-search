@@ -18,6 +18,7 @@ export default class Labels extends Component {
 				<ScrollView horizontal={true} style={styles.boxView}>
 					<View style={styles.box}>
 						<FlatList
+							keyExtractor={(item, index) => 'key' + index}
 							data={this.props.dietItems}
 							renderItem={({ item }) => (
 								<Text
@@ -36,6 +37,7 @@ export default class Labels extends Component {
 					</View>
 					<View style={styles.box}>
 						<FlatList
+							keyExtractor={(item, index) => 'key' + index}
 							data={this.props.healthItems}
 							renderItem={({ item }) => (
 								<Text
@@ -56,6 +58,7 @@ export default class Labels extends Component {
 					</View>
 					<View style={styles.box}>
 						<FlatList
+							keyExtractor={(item, index) => 'key' + index}
 							data={this.props.cautionItems}
 							renderItem={({ item }) => (
 								<Text
