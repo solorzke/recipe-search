@@ -52,11 +52,6 @@ export default class Recipe extends Component {
 							ingredients={food['ingredientLines']}
 							source={food['source']}
 						/>
-						<LabelsList
-							dietItems={food['dietLabels']}
-							healthItems={food['healthLabels']}
-							cautionItems={food['cautions']}
-						/>
 					</ScrollView>
 				</SafeAreaView>
 			);
@@ -65,7 +60,11 @@ export default class Recipe extends Component {
 		const RecipeInfo = () => {
 			return (
 				<View>
-					<Text>Hello</Text>
+					<LabelsList
+						dietItems={food['dietLabels']}
+						healthItems={food['healthLabels']}
+						cautionItems={food['cautions']}
+					/>
 				</View>
 			);
 		};
