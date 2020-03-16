@@ -3,6 +3,7 @@ import { StyleSheet, ScrollView, SafeAreaView, View, Text } from 'react-native';
 import Header from '../components/recipe/header';
 import IngredientsList from '../components/recipe/ingredientslist';
 import LabelsList from '../components/recipe/labelslist';
+import Steps from '../components/recipe/steps';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -34,6 +35,7 @@ export default class Recipe extends Component {
 		const { food } = this.props.route.params;
 		const Tab = createMaterialTopTabNavigator();
 
+		/* Tab View Screen showcasing the recipe ingredients and instructions */
 		const InstructionsScreen = () => {
 			return (
 				<SafeAreaView style={styles.mainView}>
@@ -52,20 +54,24 @@ export default class Recipe extends Component {
 							ingredients={food['ingredientLines']}
 							source={food['source']}
 						/>
+						<Steps steps={food['instructions']} />
 					</ScrollView>
 				</SafeAreaView>
 			);
 		};
 
-		const RecipeInfo = () => {
+		/* Tab View Screen for information about the recipe */
+		const SummaryInfo = () => {
 			return (
-				<View>
-					<LabelsList
-						dietItems={food['dietLabels']}
-						healthItems={food['healthLabels']}
-						cautionItems={food['cautions']}
-					/>
-				</View>
+				<SafeAreaView style={styles.mainView}>
+					<ScrollView>
+						<LabelsList
+							dietItems={food['dietLabels']}
+							healthItems={food['healthLabels']}
+							cautionItems={food['cautions']}
+						/>
+					</ScrollView>
+				</SafeAreaView>
 			);
 		};
 
@@ -96,7 +102,7 @@ export default class Recipe extends Component {
 				/>
 				<Tab.Screen
 					name="Information"
-					component={RecipeInfo}
+					component={SummaryInfo}
 					options={{
 						tabBarLabel: ({ focused, color }) => {
 							const textcolor = focused ? '#E0115F' : color;
