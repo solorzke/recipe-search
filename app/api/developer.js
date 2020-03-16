@@ -35,7 +35,7 @@ export default class API {
 						data.push({
 							label: item['title'],
 							image: item['image'],
-							source: item['sourceName'],
+							source: this.returnSourceName(item['sourceName']),
 							url: item['sourceUrl'],
 							dietLabels: item['diets'],
 							healthLabels: this.returnHealthLabels(item),
@@ -120,6 +120,11 @@ export default class API {
 		} else {
 			return data;
 		}
+	};
+
+	/* Return a default source name if not found */
+	returnSourceName = (payload) => {
+		return payload != null ? payload : 'Spoonacular';
 	};
 
 	/* Return the weight watchers rating */

@@ -41,7 +41,7 @@ export default class API {
 								data.push({
 									label: payload[item]['title'],
 									image: payload[item]['image'],
-									source: payload[item]['sourceName'],
+									source: this.returnSourceName(payload[item]['sourceName']),
 									url: payload[item]['sourceUrl'],
 									dietLabels: payload[item]['diets'],
 									healthLabels: this.returnHealthLabels(payload[item]),
@@ -87,6 +87,11 @@ export default class API {
 		payload['sustainable'] == true ? data.push('sustainable') : null;
 		data.push('weight watcher smart points: ' + payload['weightWatcherSmartPoints']);
 		return data;
+	};
+
+	/* Return a default source name if not found */
+	returnSourceName = (payload) => {
+		return payload != null ? payload : 'Spoonacular';
 	};
 
 	/* Parse the instructions list array and return its relevant data */
