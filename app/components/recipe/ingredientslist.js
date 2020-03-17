@@ -7,7 +7,7 @@ import { PinchGestureHandler, State } from 'react-native-gesture-handler';
 
 export default class List extends Component {
 	state = {
-		modal: true
+		modal: false
 	};
 
 	/* Dynamically create Views for each Ingredient Item */
