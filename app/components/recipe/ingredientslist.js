@@ -108,7 +108,7 @@ export default class List extends Component {
 							>
 								<Animated.Image source={{ uri: this.props.img }} style={styles.modalImg} />
 							</PinchGestureHandler>
-							<Text style={{ color: '#fff', fontSize: 20 }}>{this.props.source}</Text>
+							<Text style={{ color: '#fff', fontSize: 20 }}>{this.props.label}</Text>
 							<TouchableOpacity onPress={() => this.toggleModal()} style={styles.modalClose}>
 								<Icon name={'close-circle'} size={60} color={'#E0115F'} />
 							</TouchableOpacity>

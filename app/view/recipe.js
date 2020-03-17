@@ -59,6 +59,7 @@ export default class Recipe extends Component {
 							ingredients={food['ingredientLines']}
 							source={food['source']}
 							url={food['url']}
+							label={food['label']}
 						/>
 						<Steps steps={food['instructions']} source={food['source']} url={food['url']} />
 					</ScrollView>
