@@ -54,7 +54,7 @@ export default class Recipe extends Component {
 							ingredients={food['ingredientLines']}
 							source={food['source']}
 						/>
-						<Steps steps={food['instructions']} />
+						<Steps steps={food['instructions']} source={food['source']} />
 					</ScrollView>
 				</SafeAreaView>
 			);
