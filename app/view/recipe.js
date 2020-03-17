@@ -11,7 +11,8 @@ export default class Recipe extends Component {
 	state = {
 		bookmark: false,
 		bookmark_name: 'star-outline',
-		bookmark_color: 'gray'
+		bookmark_color: 'gray',
+		save_text: 'Save'
 	};
 
 	/* Toggle the boolean value for the pressed bookmark icon  */
@@ -20,13 +21,15 @@ export default class Recipe extends Component {
 			this.setState({
 				bookmark: false,
 				bookmark_name: 'star-outline',
-				bookmark_color: 'gray'
+				bookmark_color: 'gray',
+				save_text: 'Save'
 			});
 		} else {
 			this.setState({
 				bookmark: true,
 				bookmark_name: 'star',
-				bookmark_color: '#d4af37'
+				bookmark_color: '#d4af37',
+				save_text: 'Saved'
 			});
 		}
 	};
@@ -47,7 +50,8 @@ export default class Recipe extends Component {
 							bookmarkOptions={[
 								() => this.toggleBookmark(),
 								this.state.bookmark_name,
-								this.state.bookmark_color
+								this.state.bookmark_color,
+								this.state.save_text
 							]}
 						/>
 						<IngredientsList

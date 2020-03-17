@@ -14,7 +14,7 @@ const Header = (props) => {
 			<View style={styles.shareView}>
 				<TouchableOpacity onPress={props.bookmarkOptions[0]}>
 					<Icon name={props.bookmarkOptions[1]} size={35} color={props.bookmarkOptions[2]} />
-					<Text style={styles.mediaText}>Save</Text>
+					<Text style={styles.mediaText}>{props.bookmarkOptions[3]}</Text>
 				</TouchableOpacity>
 				<TouchableOpacity>
 					<Icon name={'share'} size={35} color="gray" />
