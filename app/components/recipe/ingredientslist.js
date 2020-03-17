@@ -22,8 +22,13 @@ export default class List extends Component {
 	render() {
 		let items = this.props.ingredients.map((item, index) => {
 			return (
-				<View style={{ flexDirection: 'row', paddingVertical: 5, alignItems: 'center' }}>
-					<FontAwesomeIcon name="cookie" size={10} color={'brown'} style={{ paddingRight: 5 }} />
+				<View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+					<FontAwesomeIcon
+						name="cookie"
+						size={10}
+						color={'brown'}
+						style={{ paddingRight: 5, paddingTop: 3 }}
+					/>
 					<Text style={{ alignSelf: 'center', paddingRight: 30 }}>{item}</Text>
 				</View>
 			);
