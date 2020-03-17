@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
@@ -39,7 +39,9 @@ export default class List extends Component {
 				<View style={styles.listView}>
 					<View style={styles.imgView}>
 						<Image source={{ uri: this.props.img }} style={styles.img} />
-						<Text style={styles.source}>{this.props.source}</Text>
+						<Text onPress={() => Linking.openURL(this.props.url)} style={styles.source}>
+							{this.props.source}
+						</Text>
 					</View>
 					<View style={styles.ingredientsList}>{items}</View>
 				</View>

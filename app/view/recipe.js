@@ -43,6 +43,7 @@ export default class Recipe extends Component {
 						<Header
 							label={food['label']}
 							source={food['source']}
+							url={food['url']}
 							bookmarkOptions={[
 								() => this.toggleBookmark(),
 								this.state.bookmark_name,
@@ -53,8 +54,9 @@ export default class Recipe extends Component {
 							img={food['image']}
 							ingredients={food['ingredientLines']}
 							source={food['source']}
+							url={food['url']}
 						/>
-						<Steps steps={food['instructions']} source={food['source']} />
+						<Steps steps={food['instructions']} source={food['source']} url={food['url']} />
 					</ScrollView>
 				</SafeAreaView>
 			);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Linking } from 'react-native';
 import StepNumber from '../stepimg';
 
 export default class Steps extends Component {
@@ -32,7 +32,10 @@ export default class Steps extends Component {
 					<View style={styles.instructionBlock}>
 						<StepNumber number={1} />
 						<Text style={styles.instructionText}>
-							For more information, check out {this.props.source}'s recipe page.
+							For more information, check out{' '}
+							<Text style={{ color: '#1976d2' }} onPress={() => Linking.openURL(this.props.url)}>
+								{this.props.source}
+							</Text>'s recipe page.
 						</Text>
 					</View>
 				</View>

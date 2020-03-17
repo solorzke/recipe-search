@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Header = (props) => {
@@ -7,7 +7,9 @@ const Header = (props) => {
 		<View style={styles.mainView}>
 			<View style={styles.titleView}>
 				<Text style={styles.title}>{props.label}</Text>
-				<Text style={{ color: '#1976d2' }}>By: {props.source}</Text>
+				<Text style={{ color: '#1976d2' }} onPress={() => Linking.openURL(props.url)}>
+					By: {props.source}
+				</Text>
 			</View>
 			<View style={styles.shareView}>
 				<TouchableOpacity onPress={props.bookmarkOptions[0]}>
