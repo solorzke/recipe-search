@@ -6,24 +6,38 @@ export default class Steps extends Component {
 	/* Return a new view that describes every step from the recipe */
 	renderSteps = (steps) => {
 		let data = [];
-		for (let step of steps) {
-			const name = this.retrieveInstructionName(step);
-			const instructions = this.retrieveInstructions(step);
-			data.push(
+		if (steps[0] !== false) {
+			for (let step of steps) {
+				const name = this.retrieveInstructionName(step);
+				const instructions = this.retrieveInstructions(step);
+				data.push(
+					<View>
+						<Text style={styles.instructionTitle}>{name}</Text>
+						{instructions.map((item, index) => {
+							return (
+								<View style={styles.instructionBlock}>
+									<StepNumber number={index + 1} />
+									<Text style={styles.instructionText}>{item}</Text>
+								</View>
+							);
+						})}
+					</View>
+				);
+			}
+			return data;
+		} else {
+			return (
 				<View>
-					<Text style={styles.instructionTitle}>{name}</Text>
-					{instructions.map((item, index) => {
-						return (
-							<View style={styles.instructionBlock}>
-								<StepNumber number={index + 1} />
-								<Text style={styles.instructionText}>{item}</Text>
-							</View>
-						);
-					})}
+					<Text style={styles.instructionTitle}>Instruction:</Text>
+					<View style={styles.instructionBlock}>
+						<StepNumber number={1} />
+						<Text style={styles.instructionText}>
+							For more information, check out {this.props.source}'s recipe page.
+						</Text>
+					</View>
 				</View>
 			);
 		}
-		return data;
 	};
 
 	/* Retrieve the instruction name without modifying the existing array */
@@ -45,7 +59,7 @@ export default class Steps extends Component {
 			}
 			return data;
 		} else {
-			return [ 'For more information, check the source page.' ];
+			return [ 'For more information, check the source.' ];
 		}
 	};
 
