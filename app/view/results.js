@@ -18,7 +18,7 @@ export default class Results extends Component {
 				recipe['healthLabels'].length !== 0 ? recipe['healthLabels'].join(', ') : 'Delicious & Nutritional';
 			return (
 				<ListItem
-					id={index}
+					id={'key' + index}
 					title={this.sliceString(recipe['label'], 50)}
 					subtitle={this.sliceString(labels, 60)}
 					img={recipe['image']}
