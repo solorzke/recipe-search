@@ -88,7 +88,6 @@ export default class API {
 		payload['glutenFree'] == true ? data.push('gluten free') : null;
 		payload['dairyFree'] == true ? data.push('dairy free') : null;
 		payload['sustainable'] == true ? data.push('sustainable') : null;
-		data.push('weight watcher smart points: ' + payload['weightWatcherSmartPoints']);
 		return data;
 	};
 
