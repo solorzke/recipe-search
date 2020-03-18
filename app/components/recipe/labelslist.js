@@ -3,83 +3,39 @@ import { View, Text, StyleSheet, ScrollView, Dimensions, FlatList } from 'react-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Labels extends Component {
-	produceLabels = (items) => {
-		return items.map((item, index) => (
-			<View>
-				<Text>{item}</Text>
-			</View>
-		));
+	/* Render Labels */
+	renderLabels = (items) => {
+		let views = [];
+		console.log(items.length);
+		if (items.length !== 0) {
+			for (item of items) {
+				views.push(<Text style={styles.labelText}>{item}</Text>);
+			}
+		} else {
+			return (
+				<Text style={styles.labelText} key={'key' + Math.floor(Math.random() * 100)}>
+					None Available
+				</Text>
+			);
+		}
+		return views;
 	};
 
 	render() {
+		console.log(this.props.dietItems);
+		console.log(this.props.healthItems);
 		return (
 			<View style={styles.mainView}>
 				<Text style={styles.heading}>Health Labels</Text>
-				<ScrollView horizontal={true} style={styles.boxView}>
-					<View style={styles.box}>
-						<FlatList
-							keyExtractor={(item, index) => 'key' + index}
-							data={this.props.dietItems}
-							renderItem={({ item }) => (
-								<Text
-									style={{
-										padding: 10,
-										fontSize: 20
-									}}
-								>
-									{item}
-								</Text>
-							)}
-							numColumns={2}
-							horizontal={false}
-							ListHeaderComponent={<Text style={styles.label}>Diet</Text>}
-						/>
+				<View style={styles.labelsView}>
+					<View style={styles.healthColumn}>
+						<Text style={styles.labelTitle}>Health</Text>
+						{this.renderLabels(this.props.healthItems)}
 					</View>
-					<View style={styles.box}>
-						<FlatList
-							keyExtractor={(item, index) => 'key' + index}
-							data={this.props.healthItems}
-							renderItem={({ item }) => (
-								<Text
-									style={{
-										paddingVertical: 10,
-										paddingHorizontal: 20,
-										fontSize: 20,
-										textAlign: 'left'
-									}}
-								>
-									{item}
-								</Text>
-							)}
-							numColumns={2}
-							horizontal={false}
-							ListHeaderComponent={<Text style={styles.label}>Health</Text>}
-						/>
+					<View style={styles.dietColumn}>
+						<Text style={styles.labelTitle}>Diet</Text>
+						{this.renderLabels(this.props.dietItems)}
 					</View>
-					<View style={styles.box}>
-						<FlatList
-							keyExtractor={(item, index) => 'key' + index}
-							data={this.props.cautionItems}
-							renderItem={({ item }) => (
-								<Text
-									style={{
-										padding: 10,
-										fontSize: 20
-									}}
-								>
-									{item}
-								</Text>
-							)}
-							numColumns={2}
-							horizontal={false}
-							ListHeaderComponent={<Text style={styles.label}>Cautions</Text>}
-						/>
-					</View>
-				</ScrollView>
-				<View style={styles.horizontalEllipsis}>
-					<Icon name="brightness-1" size={8} color="black" />
-					<Icon name="brightness-1" size={8} color="black" />
-					<Icon name="brightness-1" size={8} color="black" />
 				</View>
 			</View>
 		);
@@ -94,40 +50,44 @@ const styles = StyleSheet.create({
 	heading: {
 		fontSize: 25,
 		fontWeight: 'bold',
-		color: 'red',
-		paddingHorizontal: 10
+		color: '#E0115F',
+		paddingHorizontal: 10,
+		paddingTop: 10
 	},
 
-	boxView: {
-		height: 200,
-		width: '100%',
-		backgroundColor: 'gray'
+	healthColumn: {
+		flex: 1,
+		alignItems: 'center',
+		borderRightWidth: 1
 	},
 
-	box: {
-		width: Dimensions.get('window').width - 20,
-		borderWidth: 1,
-		borderColor: '#000',
-		backgroundColor: '#E8E8E8',
-		margin: 10,
+	dietColumn: {
+		flex: 1,
+		alignItems: 'center'
+	},
+
+	labelsView: {
+		flexDirection: 'row',
+		backgroundColor: '#fff',
+		marginHorizontal: 5,
+		marginTop: 10,
+		shadowColor: 'gray',
+		shadowOpacity: 2,
+		shadowOffset: {
+			height: 3,
+			width: 3
+		},
+		elevation: 2,
 		borderRadius: 10
 	},
 
-	label: {
-		textAlign: 'center',
-		fontSize: 25,
-		color: '#000',
-		textDecorationLine: 'underline'
-	},
-
-	horizontalEllipsis: {
-		alignItems: 'center',
-		flexDirection: 'row',
-		justifyContent: 'center'
+	labelTitle: {
+		fontSize: 15,
+		fontWeight: 'bold'
 	},
 
 	labelText: {
-		width: '100%',
-		textAlign: 'center'
+		paddingVertical: 5,
+		textTransform: 'capitalize'
 	}
 });

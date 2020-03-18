@@ -72,11 +72,7 @@ export default class Recipe extends Component {
 			return (
 				<SafeAreaView style={styles.mainView}>
 					<ScrollView>
-						<LabelsList
-							dietItems={food['dietLabels']}
-							healthItems={food['healthLabels']}
-							cautionItems={food['cautions']}
-						/>
+						<LabelsList dietItems={food['dietLabels']} healthItems={food['healthLabels']} />
 					</ScrollView>
 				</SafeAreaView>
 			);
