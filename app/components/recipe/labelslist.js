@@ -44,9 +44,9 @@ export default class Labels extends Component {
 
 const styles = StyleSheet.create({
 	mainView: {
-		width: '100%'
+		borderBottomWidth: 1,
+		borderBottomColor: '#ddd'
 	},
-
 	heading: {
 		fontSize: 25,
 		fontWeight: 'bold',
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		backgroundColor: '#fff',
 		marginHorizontal: 5,
-		marginTop: 10,
+		marginVertical: 20,
 		shadowColor: 'gray',
 		shadowOpacity: 2,
 		shadowOffset: {

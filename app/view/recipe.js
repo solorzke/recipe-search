@@ -4,6 +4,7 @@ import Header from '../components/recipe/header';
 import IngredientsList from '../components/recipe/ingredientslist';
 import LabelsList from '../components/recipe/labelslist';
 import Steps from '../components/recipe/steps';
+import SummarySection from '../components/recipe/summary';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -73,6 +74,7 @@ export default class Recipe extends Component {
 				<SafeAreaView style={styles.mainView}>
 					<ScrollView>
 						<LabelsList dietItems={food['dietLabels']} healthItems={food['healthLabels']} />
+						<SummarySection summary={food['summary']} />
 					</ScrollView>
 				</SafeAreaView>
 			);
