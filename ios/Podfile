@@ -39,6 +39,10 @@ target 'recipe_search' do
 
   pod 'react-native-spinkit', :path => '../node_modules/react-native-spinkit'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
+  pod 'ReactNativeART', :path => '../node_modules/@react-native-community/art'
+
   target 'recipe_searchTests' do
     inherit! :search_paths
     # Pods for testing
