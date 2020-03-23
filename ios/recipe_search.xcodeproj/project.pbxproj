@@ -15,6 +15,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* recipe_searchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* recipe_searchTests.m */; };
 		5A132441A2CE29757E8A13B0 /* libPods-recipe_search.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4163E48FEE2A320B9F6D7569 /* libPods-recipe_search.a */; };
+		79E3FF3F24294B4F00F27C2F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E3FF3E24294B4F00F27C2F /* File.swift */; };
 		91A08780CC6746E6B39F1AFA /* libPods-recipe_searchTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9994C49C0630C23558A800 /* libPods-recipe_searchTests.a */; };
 		BCE6911BA541B384E3679AE3 /* libPods-recipe_search-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF141B2885C65571A0AFACB6 /* libPods-recipe_search-tvOSTests.a */; };
 		C5FAC3D9DDF730E4E8C99162 /* libPods-recipe_search-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD413EB211D9BB63BCEB1AB5 /* libPods-recipe_search-tvOS.a */; };
@@ -64,6 +65,8 @@
 		54E2F3C1D87AC62623054A72 /* Pods-recipe_search-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-recipe_search-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-recipe_search-tvOS/Pods-recipe_search-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		5EBF9FAAFCCA20D989C89230 /* Pods-recipe_search-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-recipe_search-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-recipe_search-tvOSTests/Pods-recipe_search-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		6025BF8F8D9044449DA6B2E5 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		79E3FF3D24294B4E00F27C2F /* recipe_search-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "recipe_search-Bridging-Header.h"; sourceTree = "<group>"; };
+		79E3FF3E24294B4F00F27C2F /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		85BA08201D6E48A5B852C3CD /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		9A1B1920044050225C584866 /* Pods-recipe_search.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-recipe_search.debug.xcconfig"; path = "Target Support Files/Pods-recipe_search/Pods-recipe_search.debug.xcconfig"; sourceTree = "<group>"; };
 		9AF47240950F4F19ADE9F436 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				79E3FF3E24294B4F00F27C2F /* File.swift */,
 				13B07FAE1A68108700A75B9A /* recipe_search */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* recipe_searchTests */,
@@ -180,6 +184,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E39BE76F23960230D0EA03B8 /* Pods */,
 				E9827842E6884C8BB1C27E14 /* Resources */,
+				79E3FF3D24294B4E00F27C2F /* recipe_search-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -332,6 +337,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = JM6CNXUX3J;
+						LastSwiftMigration = 1130;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -610,6 +616,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				79E3FF3F24294B4F00F27C2F /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D6FCC8183431A0DA129B578E /* Pods-recipe_searchTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = JM6CNXUX3J;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -687,6 +695,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0AEEAB692E2A22D1E1B0A591 /* Pods-recipe_searchTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = JM6CNXUX3J;
@@ -709,6 +718,7 @@
 			baseConfigurationReference = 9A1B1920044050225C584866 /* Pods-recipe_search.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = JM6CNXUX3J;
@@ -721,6 +731,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = recipe_search;
+				SWIFT_OBJC_BRIDGING_HEADER = "recipe_search-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -730,6 +743,7 @@
 			baseConfigurationReference = 22DCACBE9E2EA7D0A760F21A /* Pods-recipe_search.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JM6CNXUX3J;
 				INFOPLIST_FILE = recipe_search/Info.plist;
@@ -741,6 +755,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = recipe_search;
+				SWIFT_OBJC_BRIDGING_HEADER = "recipe_search-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
