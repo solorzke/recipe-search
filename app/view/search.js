@@ -140,7 +140,7 @@ export default class Search extends Component {
 								Confirm
 							</AwesomeButtonRick>
 						)}
-						{this.state.loader && <Loader text={'Find the best recipes...'} color={'#E63462'} />}
+						{this.state.loader && <Loader text={'Find the best recipes...'} />}
 					</View>
 					<View style={styles.listView}>
 						{this.state.inputA && (
