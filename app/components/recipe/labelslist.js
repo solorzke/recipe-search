@@ -7,10 +7,91 @@ export default class Labels extends Component {
 	/* Render Labels */
 	renderLabels = (items) => {
 		let views = [];
-		console.log(items.length);
 		if (items.length !== 0) {
 			for (item of items) {
 				views.push(<Text style={styles.labelText}>{item}</Text>);
+			}
+		} else {
+			return (
+				<Text style={styles.labelText} key={'key' + Math.floor(Math.random() * 100)}>
+					None Available
+				</Text>
+			);
+		}
+		return views;
+	};
+
+	/* Render Description */
+	renderDescription = (items) => {
+		let views = [];
+		if (items.length !== 0) {
+			for (item of items) {
+				switch (item) {
+					case 'vegetarian':
+						views.push(
+							<Text style={styles.labelText}>
+								It does not include any meat, poultry, or seafood. It is a meal plan made up of foods
+								that come mostly from plants.
+							</Text>
+						);
+						break;
+					case 'vegan':
+						views.push(
+							<Text style={styles.labelText}>
+								Is devoid of all animal products, including meat, eggs and dairy.
+							</Text>
+						);
+						break;
+					case 'gluten free':
+						views.push(
+							<Text style={styles.labelText}>
+								Involves excluding foods that contain the protein gluten, including wheat, rye and
+								barley.
+							</Text>
+						);
+						break;
+					case 'dairy free':
+						views.push(
+							<Text style={styles.labelText}>
+								Avoid all or most foods containing milk, milk proteins like casein and whey and/or milk
+								sugar/lactose.
+							</Text>
+						);
+						break;
+					case 'very healthy':
+						views.push(
+							<Text style={styles.labelText}>
+								Eating a variety of foods that give you the nutrients you need to maintain your health,
+								feel good, and have energy. These nutrients include protein, carbohydrates, fat, water,
+								vitamins, and minerals.
+							</Text>
+						);
+						break;
+					case 'cheap':
+						views.push(
+							<Text style={styles.labelText}>
+								Foods whose ingredients are found to be cheap or low in price at markets and stores.
+							</Text>
+						);
+						break;
+					case 'very popular':
+						views.push(
+							<Text style={styles.labelText}>
+								Dish that has been frequently requested/viewed by many users to consume.
+							</Text>
+						);
+						break;
+					case 'sustainable':
+						views.push(
+							<Text style={styles.labelText}>
+								Provides a healthy balance to strengthen or support your body and mind.
+							</Text>
+						);
+						break;
+					default:
+						views.push(<Text style={styles.labelText}>No information available.</Text>);
+						break;
+				}
 			}
 		} else {
 			return (
@@ -46,7 +127,7 @@ export default class Labels extends Component {
 						</View>
 						<View style={styles.dietColumn}>
 							<Text style={styles.labelTitle}>Diet</Text>
-							{this.renderLabels(this.props.dietItems)}
+							{this.renderDescription(this.props.healthItems)}
 						</View>
 					</View>
 				</View>
@@ -107,7 +188,8 @@ const styles = StyleSheet.create({
 	},
 
 	labelText: {
-		paddingVertical: 5,
-		textTransform: 'capitalize'
+		padding: 5,
+		textTransform: 'capitalize',
+		flex: 1
 	}
 });
