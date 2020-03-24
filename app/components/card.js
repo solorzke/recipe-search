@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import LottieView from 'lottie-react-native';
 
 const Card = (props) => {
 	return (
 		<View style={styles.mainView}>
 			<TouchableOpacity style={styles.container} onPress={props.onPress}>
-				<Image source={props.background} style={styles.background} />
+				<View style={props.background}>
+					<LottieView source={props.animation} progress={0.5} autoPlay={true} style={styles.anim} />
+				</View>
 				<Text style={styles.title}>{props.title}</Text>
 				<Text style={styles.subtitle}>{props.subtitle}</Text>
 			</TouchableOpacity>
@@ -19,6 +22,11 @@ const styles = StyleSheet.create({
 		width: '100%'
 	},
 
+	anim: {
+		width: 150,
+		height: 150
+	},
+
 	container: {
 		justifyContent: 'center',
 		flexDirection: 'column',
@@ -30,8 +38,8 @@ const styles = StyleSheet.create({
 		marginVertical: 10,
 		shadowColor: '#000',
 		shadowOffset: {
-			width: 0,
-			height: 1
+			height: 3,
+			width: 3
 		},
 		shadowOpacity: 0.2,
 		shadowRadius: 1.41,
@@ -52,13 +60,6 @@ const styles = StyleSheet.create({
 		color: '#f58426',
 		marginVertical: 10,
 		marginHorizontal: 10
-	},
-
-	background: {
-		width: '100%',
-		height: 200,
-		borderTopLeftRadius: 10,
-		borderTopRightRadius: 10
 	}
 });
 
