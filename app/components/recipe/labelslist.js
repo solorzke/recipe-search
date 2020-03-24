@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Dimensions, FlatList } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, Text, StyleSheet } from 'react-native';
+import LottieView from 'lottie-react-native';
+import Heart from '../../assets/animations/heart.json';
 
 export default class Labels extends Component {
 	/* Render Labels */
@@ -22,19 +23,31 @@ export default class Labels extends Component {
 	};
 
 	render() {
-		console.log(this.props.dietItems);
-		console.log(this.props.healthItems);
 		return (
 			<View style={styles.mainView}>
 				<Text style={styles.heading}>Health Labels</Text>
 				<View style={styles.labelsView}>
-					<View style={styles.healthColumn}>
-						<Text style={styles.labelTitle}>Health</Text>
-						{this.renderLabels(this.props.healthItems)}
+					<View
+						style={{
+							backgroundColor: '#CC0B59',
+							borderTopLeftRadius: 10,
+							borderTopRightRadius: 10,
+							borderBottomColor: '#000',
+							borderBottomWidth: 1,
+							paddingVertical: 10
+						}}
+					>
+						<LottieView source={Heart} progress={0.5} autoPlay={true} style={styles.anim} />
 					</View>
-					<View style={styles.dietColumn}>
-						<Text style={styles.labelTitle}>Diet</Text>
-						{this.renderLabels(this.props.dietItems)}
+					<View style={{ flexDirection: 'row' }}>
+						<View style={styles.healthColumn}>
+							<Text style={styles.labelTitle}>Health</Text>
+							{this.renderLabels(this.props.healthItems)}
+						</View>
+						<View style={styles.dietColumn}>
+							<Text style={styles.labelTitle}>Diet</Text>
+							{this.renderLabels(this.props.dietItems)}
+						</View>
 					</View>
 				</View>
 			</View>
@@ -47,6 +60,13 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		borderBottomColor: '#ddd'
 	},
+
+	anim: {
+		width: 75,
+		height: 75,
+		alignSelf: 'center'
+	},
+
 	heading: {
 		fontSize: 25,
 		fontWeight: 'bold',
@@ -67,7 +87,7 @@ const styles = StyleSheet.create({
 	},
 
 	labelsView: {
-		flexDirection: 'row',
+		flexDirection: 'column',
 		backgroundColor: '#fff',
 		marginHorizontal: 5,
 		marginVertical: 20,
