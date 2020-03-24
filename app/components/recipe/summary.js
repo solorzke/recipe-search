@@ -39,10 +39,11 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#E0115F',
 		paddingHorizontal: 10,
-		paddingTop: 10
+		paddingVertical: 10
 	},
 
 	summaryView: {
-		paddingHorizontal: 10
+		paddingHorizontal: 10,
+		paddingBottom: 10
 	}
 });
