@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, Linking, Modal, Animated } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, Linking, Modal, Animated, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { PinchGestureHandler, State } from 'react-native-gesture-handler';
 
 export default class List extends Component {
