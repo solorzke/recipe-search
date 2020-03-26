@@ -53,7 +53,8 @@ export default class API {
 									prepTime: payload[item]['preparationMinutes'],
 									cookTime: payload[item]['cookingMinutes'],
 									likes: payload[item]['aggregateLikes'],
-									servings: payload[item]['servings']
+									servings: payload[item]['servings'],
+									id: payload[item]['id']
 								});
 							}
 							if (typeof callback === 'function') {

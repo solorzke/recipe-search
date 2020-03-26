@@ -56,6 +56,15 @@ const SettingStack = () => {
 	);
 };
 
+const BookmarkStack = () => {
+	const Stack = createStackNavigator();
+	return (
+		<Stack.Navigator>
+			<Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+		</Stack.Navigator>
+	);
+};
+
 const App = () => {
 	return (
 		<NavigationContainer>
@@ -68,6 +77,7 @@ const App = () => {
 				<Drawer.Screen name="Home" component={HomeStack} />
 				<Drawer.Screen name="Settings" component={SettingStack} />
 				<Drawer.Screen name="About Us" component={AboutScreen} />
+				<Drawer.Screen name="Bookmarks" component={BookmarkStack} />
 			</Drawer.Navigator>
 		</NavigationContainer>
 	);

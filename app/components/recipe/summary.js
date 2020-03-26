@@ -16,7 +16,6 @@ const tagStyles = {
 
 export default class SummarySection extends Component {
 	render() {
-		console.log(this.props.summary);
 		return (
 			<View style={styles.mainView}>
 				<Text style={styles.heading}>Summary</Text>

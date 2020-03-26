@@ -9,6 +9,7 @@ import WeightWatchersSection from '../components/recipe/weightwatchers';
 import DetailSection from '../components/recipe/details';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Recipe extends Component {
 	state = {
@@ -19,13 +20,16 @@ export default class Recipe extends Component {
 	};
 
 	/* Toggle the boolean value for the pressed bookmark icon  */
-	toggleBookmark = () => {
+	toggleBookmark = (recipe) => {
 		if (this.state.bookmark) {
 			this.setState({
 				bookmark: false,
 				bookmark_name: 'star-outline',
 				bookmark_color: 'gray',
 				save_text: 'Save'
+			});
+			this.cacheRecipe(recipe, false, (bool) => {
+				bool ? console.log('Removed Cache recipe...') : console.log('Unable to clear Cache recipe');
 			});
 		} else {
 			this.setState({
@@ -34,6 +38,43 @@ export default class Recipe extends Component {
 				bookmark_color: '#d4af37',
 				save_text: 'Saved'
 			});
+			this.cacheRecipe(recipe, true, (bool) => {
+				bool ? console.log('Removed Cache recipe...') : console.log('Unable to clear Cache recipe');
+			});
+		}
+	};
+
+	/* Bookmark the recipe by cache using Async Storage or dont */
+	cacheRecipe = async (recipe, bool, callback) => {
+		if (bool) {
+			try {
+				const id = recipe['id'] !== undefined ? recipe['id'] : recipe['title'];
+				const stringified_recipe = JSON.stringify(recipe);
+				await AsyncStorage.setItem(id, stringified_recipe);
+				if (typeof callback === 'function') {
+					callback(true);
+				}
+			} catch (error) {
+				alert('Unable to cache recipe. Error msg: ' + error);
+				if (typeof callback === 'function') {
+					callback(false);
+				}
+				throw new ErrorEvent(error);
+			}
+		} else {
+			try {
+				const id = recipe['id'] !== undefined ? recipe['id'] : recipe['title'];
+				await AsyncStorage.removeItem(id);
+				if (typeof callback === 'function') {
+					callback(true);
+				}
+			} catch (error) {
+				alert('Unable to remove cached recipe. Error msg: ' + error);
+				if (typeof callback === 'function') {
+					callback(false);
+				}
+				throw new ErrorEvent(error);
+			}
 		}
 	};
 
@@ -51,7 +92,7 @@ export default class Recipe extends Component {
 							source={food['source']}
 							url={food['url']}
 							bookmarkOptions={[
-								() => this.toggleBookmark(),
+								() => this.toggleBookmark(food),
 								this.state.bookmark_name,
 								this.state.bookmark_color,
 								this.state.save_text

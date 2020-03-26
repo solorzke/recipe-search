@@ -47,7 +47,8 @@ export default class API {
 							prepTime: item['preparationMinutes'],
 							cookTime: item['cookingMinutes'],
 							likes: item['aggregateLikes'],
-							servings: item['servings']
+							servings: item['servings'],
+							id: item['id']
 						});
 					}
 					if (typeof callback === 'function') {
