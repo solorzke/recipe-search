@@ -5,6 +5,21 @@ import FontListoIcon from 'react-native-vector-icons/Fontisto';
 import MaterialDesignIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Details extends Component {
+	/* Check if there are cooking times available */
+	returnTime = (time) => {
+		return time === undefined ? 'Information not available' : time + ' minutes';
+	};
+
+	/* Check if there are Likes available */
+	returnLikes = (likes) => {
+		return likes === undefined ? 'Information not available' : likes;
+	};
+
+	/* Check if there are Servings available */
+	returnServings = (servings) => {
+		return servings === undefined ? 'Information not available' : servings;
+	};
+
 	render() {
 		return (
 			<View style={styles.mainView}>
@@ -13,25 +28,25 @@ export default class Details extends Component {
 					<Text style={{ fontWeight: 'bold' }}>
 						<Icon name={'clock'} color={'gray'} size={15} /> Prep Time:{' '}
 					</Text>
-					{this.props.prepTime} minutes
+					{this.returnTime(this.props.prepTime)}
 				</Text>
 				<Text style={styles.detail}>
 					<Text style={{ fontWeight: 'bold' }}>
 						<Icon name={'clock'} color={'gray'} size={15} /> Cook Time:{' '}
 					</Text>
-					{this.props.cookTime} minutes
+					{this.returnTime(this.props.cookTime)}
 				</Text>
 				<Text style={styles.detail}>
 					<Text style={{ fontWeight: 'bold' }}>
 						<FontListoIcon name={'like'} color={'#d4af37'} size={15} /> Likes:{' '}
 					</Text>
-					{this.props.likes}
+					{this.returnLikes(this.props.likes)}
 				</Text>
 				<Text style={styles.detail}>
 					<Text style={{ fontWeight: 'bold' }}>
 						<MaterialDesignIcon name={'silverware-variant'} color={'gray'} size={15} /> Servings:{' '}
 					</Text>
-					{this.props.prepTime}
+					{this.returnServings(this.props.servings)}
 				</Text>
 			</View>
 		);

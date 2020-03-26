@@ -78,7 +78,12 @@ export default class Recipe extends Component {
 						<LabelsList healthItems={food['healthLabels']} />
 						<SummarySection summary={food['summary']} />
 						<WeightWatchersSection points={food['ww']} />
-						<DetailSection prepTime={food['prepTime']} cookTime={food['cookTime']} likes={food['likes']} />
+						<DetailSection
+							prepTime={food['prepTime']}
+							cookTime={food['cookTime']}
+							likes={food['likes']}
+							servings={food['servings']}
+						/>
 					</ScrollView>
 				</SafeAreaView>
 			);
