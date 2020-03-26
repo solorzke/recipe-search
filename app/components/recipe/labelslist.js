@@ -126,7 +126,7 @@ export default class Labels extends Component {
 							{this.renderLabels(this.props.healthItems)}
 						</View>
 						<View style={styles.dietColumn}>
-							<Text style={styles.labelTitle}>Diet</Text>
+							<Text style={styles.labelTitle}>Description</Text>
 							{this.renderDescription(this.props.healthItems)}
 						</View>
 					</View>
