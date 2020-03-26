@@ -6,6 +6,7 @@ import LabelsList from '../components/recipe/labelslist';
 import Steps from '../components/recipe/steps';
 import SummarySection from '../components/recipe/summary';
 import WeightWatchersSection from '../components/recipe/weightwatchers';
+import DetailSection from '../components/recipe/details';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -77,6 +78,7 @@ export default class Recipe extends Component {
 						<LabelsList healthItems={food['healthLabels']} />
 						<SummarySection summary={food['summary']} />
 						<WeightWatchersSection points={food['ww']} />
+						<DetailSection prepTime={food['prepTime']} cookTime={food['cookTime']} likes={food['likes']} />
 					</ScrollView>
 				</SafeAreaView>
 			);

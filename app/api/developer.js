@@ -43,7 +43,11 @@ export default class API {
 							totalTime: item['readyInMinutes'],
 							summary: item['summary'],
 							instructions: this.returnInstructions(item['analyzedInstructions']),
-							ww: this.returnWeightWatchersRating(item)
+							ww: this.returnWeightWatchersRating(item),
+							prepTime: item['preparationMinutes'],
+							cookTime: item['cookingMinutes'],
+							likes: item['aggregateLikes'],
+							servings: item['servings']
 						});
 					}
 					if (typeof callback === 'function') {

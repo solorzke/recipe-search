@@ -49,7 +49,11 @@ export default class API {
 									totalTime: payload[item]['readyInMinutes'],
 									summary: payload[item]['summary'],
 									instructions: this.returnInstructions(payload[item]['analyzedInstructions']),
-									ww: this.returnWeightWatchersRating(payload[item])
+									ww: this.returnWeightWatchersRating(payload[item]),
+									prepTime: payload[item]['preparationMinutes'],
+									cookTime: payload[item]['cookingMinutes'],
+									likes: payload[item]['aggregateLikes'],
+									servings: payload[item]['servings']
 								});
 							}
 							if (typeof callback === 'function') {
