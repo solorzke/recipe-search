@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, SafeAreaView, View, Text } from 'react-native';
+import { StyleSheet, ScrollView, SafeAreaView, Text } from 'react-native';
 import Header from '../components/recipe/header';
 import IngredientsList from '../components/recipe/ingredientslist';
 import LabelsList from '../components/recipe/labelslist';
@@ -17,6 +17,36 @@ export default class Recipe extends Component {
 		bookmark_name: 'star-outline',
 		bookmark_color: 'gray',
 		save_text: 'Save'
+	};
+
+	componentDidMount() {
+		const { food } = this.props.route.params;
+		this.cacheCheck(food['id'], food['title']);
+	}
+
+	/* Check if the recipe was cached before or not */
+	cacheCheck = async (id, title) => {
+		try {
+			const keys = await AsyncStorage.getAllKeys();
+			if (keys.includes(id.toString()) || keys.includes(title)) {
+				this.setState({
+					bookmark: true,
+					bookmark_name: 'star',
+					bookmark_color: '#d4af37',
+					save_text: 'Saved'
+				});
+			} else {
+				this.setState({
+					bookmark: false,
+					bookmark_name: 'star-outline',
+					bookmark_color: 'gray',
+					save_text: 'Save'
+				});
+			}
+		} catch (error) {
+			console.log('An error occured checking the cache: ' + error);
+			throw new ErrorEvent(error);
+		}
 	};
 
 	/* Toggle the boolean value for the pressed bookmark icon  */
@@ -50,7 +80,7 @@ export default class Recipe extends Component {
 			try {
 				const id = recipe['id'] !== undefined ? recipe['id'] : recipe['title'];
 				const stringified_recipe = JSON.stringify(recipe);
-				await AsyncStorage.setItem(id, stringified_recipe);
+				await AsyncStorage.setItem(id.toString(), stringified_recipe);
 				if (typeof callback === 'function') {
 					callback(true);
 				}
@@ -64,7 +94,7 @@ export default class Recipe extends Component {
 		} else {
 			try {
 				const id = recipe['id'] !== undefined ? recipe['id'] : recipe['title'];
-				await AsyncStorage.removeItem(id);
+				await AsyncStorage.removeItem(id.toString());
 				if (typeof callback === 'function') {
 					callback(true);
 				}
