@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import ListItem from '../components/listitem';
 
 export default class Results extends Component {
+	/* Shorten the title of the recipe by adding 3 dots  */
 	sliceString = (str, limit) => {
 		if (str.length > limit) {
 			return str.slice(0, limit - 1) + '...';

@@ -8,6 +8,7 @@ import SettingsScreen from './app/view/settings';
 import AboutScreen from './app/view/about';
 import ResultsScreen from './app/view/results';
 import RecipeScreen from './app/view/recipe';
+import BookmarkScreen from './app/view/bookmarks';
 
 const Drawer = createDrawerNavigator();
 
@@ -60,7 +61,16 @@ const BookmarkStack = () => {
 	const Stack = createStackNavigator();
 	return (
 		<Stack.Navigator>
-			<Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+			<Stack.Screen options={{ headerShown: false }} name="Bookmarks" component={BookmarkScreen} />
+			<Stack.Screen
+				options={({ navigation, route }) => ({
+					headerShown: true,
+					headerStyle: { backgroundColor: '#1976d2' },
+					headerTintColor: '#fff'
+				})}
+				name="Recipe"
+				component={RecipeScreen}
+			/>
 		</Stack.Navigator>
 	);
 };
