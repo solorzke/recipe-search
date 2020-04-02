@@ -7,28 +7,41 @@ import HeadBar from '../components/head';
 import Status from '../components/statusbar';
 import Loader from '../components/loader';
 
-export default class Results extends Component {
+export default class Bookmarks extends Component {
 	state = {
 		focused: this.props.navigation.isFocused(),
 		loading: true,
 		load: true,
 		empty: true,
-		size: 0
+		size: 0,
+		refresh: false
 	};
 
 	componentDidMount() {
-		this.checkCache((bool, length) => {
-			this.setState({ loading: false });
-			if (bool) {
-				this.parseJson((payload) => {
-					this.setState({
-						empty: false,
-						load: false,
-						data: payload,
-						size: length
+		this.sub = this.props.navigation.addListener('focus', () => {
+			console.log('Bookmark Screen is focused...');
+			this.checkCache((bool, length) => {
+				this.setState({ loading: false, refresh: true });
+				if (bool) {
+					this.parseJson((payload) => {
+						this.setState({
+							empty: false,
+							load: false,
+							data: payload,
+							size: length,
+							loading: false
+						});
 					});
-				});
-			}
+				}
+			});
+		});
+
+		this.unsub = this.props.navigation.addListener('blur', () => {
+			console.log('Bookmark is not focused...');
+			this.setState({
+				refresh: true,
+				loading: false
+			});
 		});
 	}
 
@@ -138,7 +151,7 @@ export default class Results extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
-				{this.returnView(this.state.load)}
+				{this.state.refresh && this.returnView(this.state.load)}
 				{this.state.loading && <Loader text={'Checking for Bookmarks'} />}
 			</View>
 		);
