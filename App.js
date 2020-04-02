@@ -93,17 +93,20 @@ const App = () => {
 				<Drawer.Screen
 					name="Settings"
 					component={SettingStack}
-					options={{ drawerIcon: (config) => <Icon size={20} name={'gears'} color={'#fff'} /> }}
+					options={{ drawerIcon: (config) => <Icon size={18} name={'gears'} color={'#fff'} /> }}
 				/>
 				<Drawer.Screen
 					name="About Us"
 					component={AboutScreen}
-					options={{ drawerIcon: (config) => <Icon size={20} name={'vcard'} color={'#fff'} /> }}
+					options={{ drawerIcon: (config) => <Icon size={20} name={'info-circle'} color={'#fff'} /> }}
 				/>
 				<Drawer.Screen
 					name="Bookmarks"
 					component={BookmarkStack}
-					options={{ drawerIcon: (config) => <Icon size={20} name={'bookmark'} color={'#fff'} /> }}
+					options={{
+						drawerIcon: (config) => <Icon size={20} name={'bookmark'} color={'#fff'} />,
+						unmountOnBlur: true
+					}}
 				/>
 			</Drawer.Navigator>
 		</NavigationContainer>

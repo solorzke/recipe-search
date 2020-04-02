@@ -9,24 +9,44 @@ import Loader from '../components/loader';
 
 export default class Results extends Component {
 	state = {
+		focused: this.props.navigation.isFocused(),
+		loading: true,
 		load: true,
-		empty: true
+		empty: true,
+		size: 0
 	};
 
 	componentDidMount() {
-		const bool = this.checkCache();
-		if (bool) {
-			this.parseJson((payload) => {
-				this.setState({
-					empty: false,
-					load: false,
-					data: payload
+		this.checkCache((bool, length) => {
+			this.setState({ loading: false });
+			if (bool) {
+				this.parseJson((payload) => {
+					this.setState({
+						empty: false,
+						load: false,
+						data: payload,
+						size: length
+					});
 				});
-			});
-		} else {
-			return null;
-		}
+			}
+		});
 	}
+
+	// componentDidUpdate() {
+	// 	this.checkCache((bool, length) => {
+	// 		if (length !== this.state.size) {
+	// 			console.warn('loop');
+	// 			this.parseJson((payload) => {
+	// 				this.setState({
+	// 					empty: false,
+	// 					load: false,
+	// 					data: payload,
+	// 					size: length
+	// 				});
+	// 			});
+	// 		}
+	// 	});
+	// }
 
 	/* Shorten the title of the recipe by adding 3 dots  */
 	sliceString = (str, limit) => {
@@ -38,10 +58,10 @@ export default class Results extends Component {
 	};
 
 	/* Check if there are any cache recipes available */
-	checkCache = async () => {
+	checkCache = async (callback) => {
 		try {
 			const keys = await AsyncStorage.getAllKeys();
-			return keys.length > 0;
+			callback(keys.length > 0, keys.length);
 		} catch (error) {
 			console.log('An error occurred reading the cache repository');
 			throw new ErrorEvent(error);
@@ -106,7 +126,7 @@ export default class Results extends Component {
 				<View style={styles.mainView}>
 					<Status barStyle={'light-content'} />
 					<HeadBar name={'Bookmarks'} onPress={() => this.props.navigation.toggleDrawer()} />
-					<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+					<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'column', flex: 1 }}>
 						<Icon name={'book-bookmark'} size={50} color={'grey'} />
 						<Text>No Bookmarks Available, yet.</Text>
 					</View>
@@ -118,8 +138,8 @@ export default class Results extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
-				{this.state.load && <Loader text={'Checking for Bookmarks'} />}
 				{this.returnView(this.state.load)}
+				{this.state.loading && <Loader text={'Checking for Bookmarks'} />}
 			</View>
 		);
 	}
