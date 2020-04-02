@@ -9,6 +9,7 @@ import AboutScreen from './app/view/about';
 import ResultsScreen from './app/view/results';
 import RecipeScreen from './app/view/recipe';
 import BookmarkScreen from './app/view/bookmarks';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();
 
@@ -84,10 +85,26 @@ const App = () => {
 				drawerContentOptions={{ activeTintColor: 'cyan', labelStyle: { color: '#fff' } }}
 				drawerStyle={{ backgroundColor: '#1976d2' }}
 			>
-				<Drawer.Screen name="Home" component={HomeStack} />
-				<Drawer.Screen name="Settings" component={SettingStack} />
-				<Drawer.Screen name="About Us" component={AboutScreen} />
-				<Drawer.Screen name="Bookmarks" component={BookmarkStack} />
+				<Drawer.Screen
+					name="Home"
+					component={HomeStack}
+					options={{ drawerIcon: (config) => <Icon size={20} name={'home'} color={'#fff'} /> }}
+				/>
+				<Drawer.Screen
+					name="Settings"
+					component={SettingStack}
+					options={{ drawerIcon: (config) => <Icon size={20} name={'gears'} color={'#fff'} /> }}
+				/>
+				<Drawer.Screen
+					name="About Us"
+					component={AboutScreen}
+					options={{ drawerIcon: (config) => <Icon size={20} name={'vcard'} color={'#fff'} /> }}
+				/>
+				<Drawer.Screen
+					name="Bookmarks"
+					component={BookmarkStack}
+					options={{ drawerIcon: (config) => <Icon size={20} name={'bookmark'} color={'#fff'} /> }}
+				/>
 			</Drawer.Navigator>
 		</NavigationContainer>
 	);
