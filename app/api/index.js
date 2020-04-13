@@ -17,6 +17,47 @@ export default class API {
 		this.items = items;
 	}
 
+	/* Send a HTTP request for a random recipe */
+	async requestRandomRecipe(callback) {
+		try {
+			let requestString =
+				this.returnRandomRecipeURL() + this.returnAuth() + '&' + this.returnRandomRecipeParams();
+			await fetch(requestString)
+				.then((payload) => {
+					return payload.json();
+				})
+				.then((payload) => {
+					let data = [];
+					for (let item of payload) {
+						data.push({
+							label: payload[item]['title'],
+							image: payload[item]['image'],
+							source: this.returnSourceName(payload[item]['sourceName']),
+							url: payload[item]['sourceUrl'],
+							dietLabels: payload[item]['diets'],
+							healthLabels: this.returnHealthLabels(payload[item]),
+							ingredientLines: this.returnIngredientsList(payload[item]['extendedIngredients']),
+							totalTime: payload[item]['readyInMinutes'],
+							summary: payload[item]['summary'],
+							instructions: this.returnInstructions(payload[item]['analyzedInstructions']),
+							ww: this.returnWeightWatchersRating(payload[item]),
+							prepTime: payload[item]['preparationMinutes'],
+							cookTime: payload[item]['cookingMinutes'],
+							likes: payload[item]['aggregateLikes'],
+							servings: payload[item]['servings'],
+							id: payload[item]['id']
+						});
+					}
+					if (typeof callback === 'function') {
+						callback(data);
+					}
+				});
+		} catch (error) {
+			console.log(error);
+			alert('Request timed out. Try Again.');
+		}
+	}
+
 	/* Send a HTTP request to the API and handle the response JSON data.  */
 	async requestHTTP(callback) {
 		try {
@@ -139,6 +180,24 @@ export default class API {
 		return 'ingredients=' + this.items.join();
 	};
 
+	/* Return arguments for random recipe API request */
+	returnRandomRecipeParams = () => {
+		const diets = [
+			'vegetarian',
+			'vegan',
+			'gluten free',
+			'dairy free',
+			'dessert',
+			'cheap',
+			'main course',
+			'side dish',
+			'appetizer',
+			'salad'
+		];
+		const tag = diets[Math.floor(Math.random() * diets.length)];
+		return 'limitLicense=true&tags=' + tag + '&number=1';
+	};
+
 	/* Return the api key required to use the API */
 	returnAuth = () => {
 		return 'apiKey=' + this.getAPIKey();
@@ -152,5 +211,10 @@ export default class API {
 	/* Use the 'Find the Recipe by ID' interface from Spoonacular's API */
 	returnRecipeInfoURL = () => {
 		return 'https://api.spoonacular.com/recipes/informationBulk?';
+	};
+
+	/* Use the 'Find A Random Recipe' interface from Spoonacular's API */
+	returnRandomRecipeURL = () => {
+		return 'https://api.spoonacular.com/recipes/random?';
 	};
 }

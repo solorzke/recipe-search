@@ -21,6 +21,47 @@ export default class API {
 		this.items = items;
 	}
 
+	/* Send a HTTP request for a random recipe */
+	async requestRandomRecipe(callback) {
+		try {
+			let requestString =
+				this.returnRandomRecipeURL() + this.returnAuth() + '&' + this.returnRandomRecipeParams();
+			await fetch(requestString)
+				.then((payload) => {
+					return payload.json();
+				})
+				.then((payload) => {
+					let data = [];
+					for (let item of payload) {
+						data.push({
+							label: item['title'],
+							image: item['image'],
+							source: this.returnSourceName(item['sourceName']),
+							url: item['sourceUrl'],
+							dietLabels: item['diets'],
+							healthLabels: this.returnHealthLabels(item),
+							ingredientLines: this.returnIngredientsList(item['extendedIngredients']),
+							totalTime: item['readyInMinutes'],
+							summary: item['summary'],
+							instructions: this.returnInstructions(item['analyzedInstructions']),
+							ww: this.returnWeightWatchersRating(item),
+							prepTime: item['preparationMinutes'],
+							cookTime: item['cookingMinutes'],
+							likes: item['aggregateLikes'],
+							servings: item['servings'],
+							id: item['id']
+						});
+					}
+					if (typeof callback === 'function') {
+						callback(data);
+					}
+				});
+		} catch (error) {
+			console.log(error);
+			alert('Request timed out. Try Again.');
+		}
+	}
+
 	/* For testing purposes, send a http request to a development server */
 	async requestHTTP(callback) {
 		try {
@@ -64,6 +105,24 @@ export default class API {
 	/* Use the 'Find the Recipe by ID' interface from Spoonacular's API */
 	returnRecipeInfoURL = () => {
 		return 'https://web.njit.edu/~kas58/json/index.php?';
+	};
+
+	/* Return arguments for random recipe API request */
+	returnRandomRecipeParams = () => {
+		const diets = [
+			'vegetarian',
+			'vegan',
+			'gluten free',
+			'dairy free',
+			'dessert',
+			'cheap',
+			'main course',
+			'side dish',
+			'appetizer',
+			'salad'
+		];
+		const tag = diets[Math.floor(Math.random() * diets.length)];
+		return 'limitLicense=true&tags=' + tag + '&number=1';
 	};
 
 	/* Return the api key required to use the API */
@@ -139,5 +198,10 @@ export default class API {
 	/* Return the params for the api request url */
 	returnIngredients = () => {
 		return 'ingredients=' + this.items.join();
+	};
+
+	/* Use the 'Find A Random Recipe' interface from Spoonacular's API */
+	returnRandomRecipeURL = () => {
+		return 'https://api.spoonacular.com/recipes/random?';
 	};
 }
