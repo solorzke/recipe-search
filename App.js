@@ -11,6 +11,7 @@ import RecipeScreen from './app/view/recipe';
 import BookmarkScreen from './app/view/bookmarks';
 import PrivacyPolicyScreen from './app/view/privacy';
 import TermsScreen from './app/view/terms';
+import VersionScreen from './app/view/version';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();
@@ -54,10 +55,11 @@ const HomeStack = () => {
 const SettingStack = () => {
 	const Stack = createStackNavigator();
 	return (
-		<Stack.Navigator headerMode="none">
-			<Stack.Screen name="Settings" component={SettingsScreen} />
+		<Stack.Navigator>
+			<Stack.Screen options={{ headerShown: false }} name="Settings" component={SettingsScreen} />
 			<Stack.Screen name="Privacy" component={PrivacyPolicyScreen} />
 			<Stack.Screen name="Terms" component={TermsScreen} />
+			<Stack.Screen name="Version" component={VersionScreen} />
 		</Stack.Navigator>
 	);
 };

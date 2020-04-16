@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Linking } from 'react-native';
-import HeadBar from '../components/head';
-import Status from '../components/statusbar';
 
 export default class TermsAndConditions extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
-				<Status barStyle={'light-content'} />
-				<HeadBar name={'Privacy Policy'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<ScrollView style={styles.container}>
 					<Text style={styles.paragraph}>
 						By downloading or using the app, these terms will automatically apply to you – you should make

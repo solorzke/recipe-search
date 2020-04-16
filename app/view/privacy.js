@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
-import HeadBar from '../components/head';
-import Status from '../components/statusbar';
 
 export default class PrivacyPolicy extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
-				<Status barStyle={'light-content'} />
-				<HeadBar name={'Privacy Policy'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<ScrollView style={styles.container}>
 					<Text style={styles.paragraph}>
 						Recipe Search built the Recipe Search app as a Free app. This SERVICE is provided by Recipe
