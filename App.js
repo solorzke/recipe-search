@@ -9,6 +9,7 @@ import AboutScreen from './app/view/about';
 import ResultsScreen from './app/view/results';
 import RecipeScreen from './app/view/recipe';
 import BookmarkScreen from './app/view/bookmarks';
+import PrivacyPolicyScreen from './app/view/privacy';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();
@@ -54,6 +55,7 @@ const SettingStack = () => {
 	return (
 		<Stack.Navigator headerMode="none">
 			<Stack.Screen name="Settings" component={SettingsScreen} />
+			<Stack.Screen name="Privacy" component={PrivacyPolicyScreen} />
 		</Stack.Navigator>
 	);
 };
