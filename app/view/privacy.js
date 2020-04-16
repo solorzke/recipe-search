@@ -29,7 +29,7 @@ export default class PrivacyPolicy extends Component {
 						The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions,
 						which is accessible at Recipe Search unless otherwise defined in this Privacy Policy.
 					</Text>
-					<Text style={styles.paragraph}>**Information Collection and Use**</Text>
+					<Text style={styles.title}>Information Collection and Use</Text>
 					<Text style={styles.paragraph}>
 						For a better experience, while using our Service, I may require you to provide us with certain
 						personally identifiable information. The information that I request will be retained on your
@@ -49,7 +49,7 @@ export default class PrivacyPolicy extends Component {
 							Google Play Services
 						</Text>
 					</Text>
-					<Text style={styles.paragraph}>**Log Data**</Text>
+					<Text style={styles.title}>Log Data</Text>
 					<Text style={styles.paragraph}>
 						I want to inform you that whenever you use my Service, in a case of an error in the app I
 						collect data and information (through third party products) on your phone called Log Data. This
@@ -57,7 +57,7 @@ export default class PrivacyPolicy extends Component {
 						name, operating system version, the configuration of the app when utilizing my Service, the time
 						and date of your use of the Service, and other statistics.
 					</Text>
-					<Text style={styles.paragraph}>**Cookies**</Text>
+					<Text style={styles.title}>Cookies</Text>
 					<Text style={styles.paragraph}>
 						Cookies are files with a small amount of data that are commonly used as anonymous unique
 						identifiers. These are sent to your browser from the websites that you visit and are stored on
@@ -70,7 +70,7 @@ export default class PrivacyPolicy extends Component {
 						device. If you choose to refuse our cookies, you may not be able to use some portions of this
 						Service.
 					</Text>
-					<Text style={styles.paragraph}>**Service Providers**</Text>
+					<Text style={styles.title}>Service Providers</Text>
 					<Text style={styles.paragraph}>
 						I may employ third-party companies and individuals due to the following reasons:
 					</Text>
@@ -95,7 +95,7 @@ export default class PrivacyPolicy extends Component {
 						Information. The reason is to perform the tasks assigned to them on our behalf. However, they
 						are obligated not to disclose or use the information for any other purpose.
 					</Text>
-					<Text style={styles.paragraph}>**Security**</Text>
+					<Text style={styles.title}>Security</Text>
 
 					<Text style={styles.paragraph}>
 						I value your trust in providing us your Personal Information, thus we are striving to use
@@ -103,7 +103,7 @@ export default class PrivacyPolicy extends Component {
 						the internet, or method of electronic storage is 100% secure and reliable, and I cannot
 						guarantee its absolute security.
 					</Text>
-					<Text style={styles.paragraph}>**Links to Other Sites**</Text>
+					<Text style={styles.title}>Links to Other Sites</Text>
 					<Text style={styles.paragraph}>
 						This Service may contain links to other sites. If you click on a third-party link, you will be
 						directed to that site. Note that these external sites are not operated by me. Therefore, I
@@ -111,7 +111,7 @@ export default class PrivacyPolicy extends Component {
 						assume no responsibility for the content, privacy policies, or practices of any third-party
 						sites or services.
 					</Text>
-					<Text style={styles.paragraph}>**Children’s Privacy**</Text>
+					<Text style={styles.title}>Children’s Privacy</Text>
 					<Text style={styles.paragraph}>
 						These Services do not address anyone under the age of 13. I do not knowingly collect personally
 						identifiable information from children under 13\. In the case I discover that a child under 13
@@ -119,14 +119,14 @@ export default class PrivacyPolicy extends Component {
 						are a parent or guardian and you are aware that your child has provided us with personal
 						information, please contact me so that I will be able to do necessary actions.
 					</Text>
-					<Text style={styles.paragraph}>**Changes to This Privacy Policy**</Text>
+					<Text style={styles.title}>Changes to This Privacy Policy</Text>
 					<Text style={styles.paragraph}>
 						I may update our Privacy Policy from time to time. Thus, you are advised to review this page
 						periodically for any changes. I will notify you of any changes by posting the new Privacy Policy
 						on this page.
 					</Text>
 					<Text style={styles.paragraph}>This policy is effective as of 2020-04-16</Text>
-					<Text style={styles.paragraph}>**Contact Us**</Text>
+					<Text style={styles.title}>Contact Us</Text>
 					<Text style={styles.paragraph}>
 						If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me
 						at{' '}
@@ -157,6 +157,12 @@ const styles = StyleSheet.create({
 
 	paragraph: {
 		textAlign: 'justify'
+	},
+
+	title: {
+		textAlign: 'justify',
+		fontWeight: 'bold',
+		fontSize: 20
 	},
 
 	ul: {
