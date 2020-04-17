@@ -7,7 +7,7 @@ export default class Version extends Component {
 		return (
 			<View style={styles.mainView}>
 				<View style={styles.container}>
-					<Icon name={'application'} size={100} color={'#A9A9A9'} />
+					<Icon name={'application'} size={150} color={'#A9A9A9'} />
 					<Text style={styles.paragraph}>Recipe Search</Text>
 					<Text style={styles.paragraph}>Version: 1.0.1</Text>
 					<Text style={styles.paragraph}>Last Update: 04/16/2020</Text>

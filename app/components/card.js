@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
+import DefaultPhoto from '../assets/images/photo.png';
 
 const Card = (props) => {
 	return (
@@ -16,7 +17,7 @@ const Card = (props) => {
 							style={styles.background}
 							resizeMode={'stretch'}
 							accessibilityLabel={'Random Recipe'}
-							defaultSource={('../assets/images/photo.png', '100%', 200)}
+							defaultSource={DefaultPhoto}
 						/>
 					)}
 				</View>

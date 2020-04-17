@@ -31,7 +31,6 @@ export default class Home extends Component {
 			this.setState({
 				payload: data
 			});
-			console.warn(this.state.payload[0]['label']);
 		});
 	}
 
