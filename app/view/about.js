@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, Dimensions, TouchableOpacity, Image, Platform } from 'react-native';
 import Share from 'react-native-share';
 import Heading from '../assets/images/3255.jpg';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import ContactIcon from 'react-native-vector-icons/Entypo';
 import HeadBar from '../components/head';
 import Status from '../components/statusbar';
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
 
 	paragraphView: {
 		marginHorizontal: 10,
-		marginTop: 30,
+		marginTop: 20,
 		padding: 10
 
 		// shadowColor: '#BEBEBE',
