@@ -57,9 +57,33 @@ const SettingStack = () => {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen options={{ headerShown: false }} name="Settings" component={SettingsScreen} />
-			<Stack.Screen name="Privacy" component={PrivacyPolicyScreen} />
-			<Stack.Screen name="Terms" component={TermsScreen} />
-			<Stack.Screen name="Version" component={VersionScreen} />
+			<Stack.Screen
+				name="Privacy"
+				component={PrivacyPolicyScreen}
+				options={({ navigation, route }) => ({
+					headerShown: true,
+					headerStyle: { backgroundColor: '#1976d2' },
+					headerTintColor: '#fff'
+				})}
+			/>
+			<Stack.Screen
+				name="Terms"
+				component={TermsScreen}
+				options={({ navigation, route }) => ({
+					headerShown: true,
+					headerStyle: { backgroundColor: '#1976d2' },
+					headerTintColor: '#fff'
+				})}
+			/>
+			<Stack.Screen
+				name="Version"
+				component={VersionScreen}
+				options={({ navigation, route }) => ({
+					headerShown: true,
+					headerStyle: { backgroundColor: '#1976d2' },
+					headerTintColor: '#fff'
+				})}
+			/>
 		</Stack.Navigator>
 	);
 };
