@@ -26,10 +26,6 @@ export default class Settings extends Component {
 						<Text style={styles.title}>Terms and Conditions</Text>
 						<Text style={styles.subtitle}>Review our agreement with use of this application</Text>
 					</TouchableOpacity>
-					<TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Contact')}>
-						<Text style={styles.title}>Contact Us</Text>
-						<Text style={styles.subtitle}>Contact our offices and social media accounts</Text>
-					</TouchableOpacity>
 				</ScrollView>
 			</View>
 		);
