@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 const Card = (props) => {
@@ -7,7 +7,18 @@ const Card = (props) => {
 		<View style={styles.mainView}>
 			<TouchableOpacity style={styles.container} onPress={props.onPress}>
 				<View style={props.background}>
-					<LottieView source={props.animation} progress={0.5} autoPlay={true} style={styles.anim} />
+					{props.animate && (
+						<LottieView source={props.animation} progress={0.5} autoPlay={true} style={styles.anim} />
+					)}
+					{!props.animate && (
+						<Image
+							source={{ uri: props.img }}
+							style={styles.background}
+							resizeMode={'stretch'}
+							accessibilityLabel={'Random Recipe'}
+							defaultSource={('../assets/images/photo.png', '100%', 200)}
+						/>
+					)}
 				</View>
 				<Text style={styles.title}>{props.title}</Text>
 				<Text style={styles.subtitle}>{props.subtitle}</Text>
@@ -25,6 +36,13 @@ const styles = StyleSheet.create({
 	anim: {
 		width: 150,
 		height: 150
+	},
+
+	background: {
+		width: '100%',
+		height: 200,
+		borderTopLeftRadius: 10,
+		borderTopRightRadius: 10
 	},
 
 	container: {
