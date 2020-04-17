@@ -24,15 +24,14 @@ export default class API {
 	/* Send a HTTP request for a random recipe */
 	async requestRandomRecipe(callback) {
 		try {
-			let requestString =
-				this.returnRandomRecipeURL() + this.returnAuth() + '&' + this.returnRandomRecipeParams();
+			let requestString = this.returnRandomRecipeURL() + this.returnAuthRandom();
 			await fetch(requestString)
 				.then((payload) => {
 					return payload.json();
 				})
 				.then((payload) => {
 					let data = [];
-					for (let item of payload) {
+					for (let item of payload['recipes']) {
 						data.push({
 							label: item['title'],
 							image: item['image'],
@@ -130,6 +129,10 @@ export default class API {
 		return 'apiKey=development';
 	};
 
+	returnAuthRandom = () => {
+		return 'apiKey=random';
+	};
+
 	/* Parse the ingredient list array and return its relevant data */
 	returnIngredientsList = (payload) => {
 		let data = [];
@@ -202,6 +205,6 @@ export default class API {
 
 	/* Use the 'Find A Random Recipe' interface from Spoonacular's API */
 	returnRandomRecipeURL = () => {
-		return 'https://api.spoonacular.com/recipes/random?';
+		return 'https://web.njit.edu/~kas58/json/index.php?';
 	};
 }
