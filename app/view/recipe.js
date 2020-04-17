@@ -10,6 +10,7 @@ import DetailSection from '../components/recipe/details';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
+import Share from 'react-native-share';
 
 export default class Recipe extends Component {
 	state = {
@@ -17,6 +18,18 @@ export default class Recipe extends Component {
 		bookmark_name: 'star-outline',
 		bookmark_color: 'gray',
 		save_text: 'Save'
+	};
+
+	/* Open the social media applications (if any) available on the user's phone to our social media page */
+	onShare = (recipe, source, url) => {
+		const shareOptions = {
+			title: 'From Recipe Search: ',
+			message: 'Check out this recipe I found called "' + recipe + '" from "' + source + '". \n Link: ' + url,
+			email: 'mailto:email@example.com',
+			failOnCancel: false
+			// url: url, //<--- change later when app is ready for distro in app/play stores
+		};
+		return Share.open(shareOptions);
 	};
 
 	componentDidMount() {
@@ -121,6 +134,7 @@ export default class Recipe extends Component {
 							label={food['label']}
 							source={food['source']}
 							url={food['url']}
+							onShare={() => this.onShare(food['label'], food['source'], food['url'])}
 							bookmarkOptions={[
 								() => this.toggleBookmark(food),
 								this.state.bookmark_name,
