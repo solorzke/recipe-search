@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import ListItem from '../components/listitem';
 
 export default class Results extends Component {
@@ -31,7 +31,12 @@ export default class Results extends Component {
 
 		return (
 			<View style={styles.mainView}>
-				<ScrollView>{results}</ScrollView>
+				<ScrollView>
+					<View style={{ borderBottomColor: 'gray', borderBottomWidth: 1 }}>
+						<Text style={styles.searchResults}>{results.length} search results found.</Text>
+					</View>
+					{results}
+				</ScrollView>
 			</View>
 		);
 	}
@@ -41,5 +46,12 @@ const styles = StyleSheet.create({
 	mainView: {
 		flex: 1,
 		width: '100%'
+	},
+
+	searchResults: {
+		color: 'gray',
+		fontSize: 13,
+		textAlign: 'left',
+		padding: 10
 	}
 });
