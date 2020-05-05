@@ -57,7 +57,7 @@ export default class Home extends Component {
 						img={this.state.payload[0]['image']}
 					/>
 					<Card
-						onPress={() => this.props.navigation.navigate('Search')}
+						onPress={() => this.props.navigation.navigate('FAQ')}
 						title={'Frequently Asked Questions'}
 						subtitle={'Have questions? Check out our FAQ section'}
 						background={this.returnStyle('#ffc74c')}

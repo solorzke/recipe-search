@@ -12,6 +12,7 @@ import BookmarkScreen from './app/view/bookmarks';
 import PrivacyPolicyScreen from './app/view/privacy';
 import TermsScreen from './app/view/terms';
 import VersionScreen from './app/view/version';
+import FAQScreen from './app/view/faq';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();
@@ -47,6 +48,15 @@ const HomeStack = () => {
 				})}
 				name="Recipe"
 				component={RecipeScreen}
+			/>
+			<Stack.Screen
+				options={({ navigation, route }) => ({
+					headerShown: true,
+					headerStyle: { backgroundColor: '#1976d2' },
+					headerTintColor: '#fff'
+				})}
+				name="FAQ"
+				component={FAQScreen}
 			/>
 		</Stack.Navigator>
 	);
