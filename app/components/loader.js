@@ -6,8 +6,8 @@ import Noodles from '../assets/animations/noodles.json';
 const Loader = (props) => {
 	return (
 		<View style={{ alignItems: 'center' }}>
-			<LottieView source={Noodles} progress={0.5} autoPlay={true} style={{ width: 110, height: 110 }} loop />
-			<Text style={{ fontSize: 18 }}>{props.text}</Text>
+			<LottieView source={Noodles} progress={0.5} autoPlay={true} style={{ width: 110, height: 150 }} loop />
+			<Text style={{ fontSize: 18, color: '#fff' }}>{props.text}</Text>
 		</View>
 	);
 };
