@@ -49,14 +49,6 @@ export default class Home extends Component {
 						animate={true}
 					/>
 					<Card
-						onPress={() => this.props.navigation.navigate('Beta')}
-						title={'Start Finding Recipes'}
-						subtitle={'Fill in available ingredients to generate recipes'}
-						background={this.returnStyle('#ff9a72')}
-						animation={Animation1}
-						animate={true}
-					/>
-					<Card
 						onPress={() => this.props.navigation.navigate('Recipe', { food: this.state.payload[0] })}
 						title={'Recipe Of The Day'}
 						subtitle={this.state.payload[0]['label']}

@@ -13,7 +13,6 @@ import PrivacyPolicyScreen from './app/view/privacy';
 import TermsScreen from './app/view/terms';
 import VersionScreen from './app/view/version';
 import FAQScreen from './app/view/faq';
-import Beta from './app/view/beta';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();
@@ -58,15 +57,6 @@ const HomeStack = () => {
 				})}
 				name="FAQ"
 				component={FAQScreen}
-			/>
-			<Stack.Screen
-				options={({ navigation, route }) => ({
-					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
-					headerTintColor: '#fff'
-				})}
-				name="Beta"
-				component={Beta}
 			/>
 		</Stack.Navigator>
 	);
