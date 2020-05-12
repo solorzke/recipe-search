@@ -16,13 +16,12 @@ export default class Results extends Component {
 	render() {
 		const { data } = this.props.route.params;
 		const results = data.map((recipe, index) => {
-			const labels =
-				recipe['healthLabels'].length !== 0 ? recipe['healthLabels'].join(', ') : 'Delicious & Nutritional';
+			const source = recipe['source'].length !== 0 ? 'Source: ' + recipe['source'] : 'Source: Spoonacular.com';
 			return (
 				<ListItem
 					id={'key' + index}
 					title={this.sliceString(recipe['label'], 50)}
-					subtitle={this.sliceString(labels, 60)}
+					subtitle={this.sliceString(source, 60)}
 					img={recipe['image']}
 					rating={recipe['ww']}
 					onPress={() => this.props.navigation.navigate('Recipe', { food: recipe })}
