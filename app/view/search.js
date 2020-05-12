@@ -11,6 +11,7 @@ import {
 	Modal
 } from 'react-native';
 import Loader from '../components/loader';
+import Footer from '../components/footer';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AddPhoto from '../assets/images/add.png';
 import API from '../api/developer';
@@ -23,15 +24,6 @@ Ingredient = ({ item, remove }) => {
 				<MaterialIcons name={'cancel'} size={30} color={'red'} />
 			</TouchableOpacity>
 			<Text style={styles.ingredientText}>{item}</Text>
-		</View>
-	);
-};
-
-/* Return Footer View for FlatList */
-Footer = () => {
-	return (
-		<View style={styles.footer}>
-			<Text style={{ color: 'grey' }}>Powered By Spoonacular.com</Text>
 		</View>
 	);
 };
@@ -76,7 +68,6 @@ export default class Search extends Component {
 		this.setState({
 			data: filtered_array
 		});
-		console.warn(filtered_array);
 	};
 
 	/* Check if at least one ingredient is filled in */
@@ -247,11 +238,6 @@ const styles = StyleSheet.create({
 		color: '#E8E8E8',
 		paddingHorizontal: 10,
 		fontSize: 13
-	},
-
-	footer: {
-		alignItems: 'center',
-		width: '100%'
 	},
 
 	modal: {

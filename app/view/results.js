@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import ListItem from '../components/listitem';
+import Footer from '../components/footer';
 
 export default class Results extends Component {
 	/* Shorten the title of the recipe by adding 3 dots  */
@@ -36,6 +37,9 @@ export default class Results extends Component {
 						<Text style={styles.searchResults}>{results.length} search results found.</Text>
 					</View>
 					{results}
+					<View style={{ paddingVertical: 20 }}>
+						<Footer />
+					</View>
 				</ScrollView>
 			</View>
 		);

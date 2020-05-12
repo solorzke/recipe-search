@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, ScrollView, SafeAreaView, Text, View } from 'react-native';
 import Header from '../components/recipe/header';
 import IngredientsList from '../components/recipe/ingredientslist';
 import LabelsList from '../components/recipe/labelslist';
@@ -11,6 +11,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Icon from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
 import Share from 'react-native-share';
+import Footer from '../components/footer';
 
 export default class Recipe extends Component {
 	state = {
@@ -150,6 +151,9 @@ export default class Recipe extends Component {
 							label={food['label']}
 						/>
 						<Steps steps={food['instructions']} source={food['source']} url={food['url']} />
+						<View style={{ paddingVertical: 10 }}>
+							<Footer />
+						</View>
 					</ScrollView>
 				</SafeAreaView>
 			);
@@ -169,6 +173,9 @@ export default class Recipe extends Component {
 							likes={food['likes']}
 							servings={food['servings']}
 						/>
+						<View style={{ paddingVertical: 10 }}>
+							<Footer />
+						</View>
 					</ScrollView>
 				</SafeAreaView>
 			);
