@@ -4,7 +4,7 @@ import HeadBar from '../components/head';
 import Status from '../components/statusbar';
 import Card from '../components/card';
 import Animation1 from '../assets/animations/food-carousel.json';
-import Animation2 from '../assets/animations/analytics.json';
+import Animation2 from '../assets/animations/random.json';
 import Animation3 from '../assets/animations/search-ask.json';
 import API from '../api/developer';
 const api = new API([ 99999 ]);
@@ -41,7 +41,7 @@ export default class Home extends Component {
 				<HeadBar name={'Home'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<ScrollView style={styles.buttonView}>
 					<Card
-						onPress={() => this.props.navigation.navigate('Search')}
+						onPress={() => this.props.navigation.navigate('Search By')}
 						title={'Start Finding Recipes'}
 						subtitle={'Fill in available ingredients to generate recipes'}
 						background={this.returnStyle('#ff9a72')}
@@ -53,8 +53,8 @@ export default class Home extends Component {
 						title={'Recipe Of The Day'}
 						subtitle={this.state.payload[0]['label']}
 						background={this.returnStyle('#4ec9ff')}
-						animate={false}
-						img={this.state.payload[0]['image']}
+						animate={true}
+						animation={Animation2}
 					/>
 					<Card
 						onPress={() => this.props.navigation.navigate('FAQ')}
