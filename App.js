@@ -13,6 +13,7 @@ import PrivacyPolicyScreen from './app/view/privacy';
 import TermsScreen from './app/view/terms';
 import VersionScreen from './app/view/version';
 import FAQScreen from './app/view/faq';
+import SpoonacularWebViewScreen from './app/view/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();
@@ -88,6 +89,15 @@ const SettingStack = () => {
 			<Stack.Screen
 				name="Version"
 				component={VersionScreen}
+				options={({ navigation, route }) => ({
+					headerShown: true,
+					headerStyle: { backgroundColor: '#1976d2' },
+					headerTintColor: '#fff'
+				})}
+			/>
+			<Stack.Screen
+				name="Spoonacular"
+				component={SpoonacularWebViewScreen}
 				options={({ navigation, route }) => ({
 					headerShown: true,
 					headerStyle: { backgroundColor: '#1976d2' },

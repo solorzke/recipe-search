@@ -31,7 +31,7 @@ export default class Settings extends Component {
 							<Text style={styles.subtitle}>Application Version, Last updated</Text>
 						</View>
 					</TouchableOpacity>
-					<TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('API')}>
+					<TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Spoonacular')}>
 						<Ionicons
 							name={Platform.OS === 'ios' ? 'ios-cloud' : 'md-cloud'}
 							size={25}
