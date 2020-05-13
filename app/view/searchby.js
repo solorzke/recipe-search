@@ -17,10 +17,7 @@ export default class SearchBy extends Component {
 							</Text>
 						</View>
 					</TouchableOpacity>
-					<TouchableOpacity
-						style={styles.item}
-						onPress={() => this.props.navigation.navigate('SearchByLabels')}
-					>
+					<TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Labels')}>
 						<Ionicons
 							name={Platform.OS === 'ios' ? 'ios-list-box' : 'md-list-box'}
 							size={25}

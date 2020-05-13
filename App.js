@@ -4,6 +4,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './app/view/home';
 import SearchScreen from './app/view/search';
+import SearchByScreen from './app/view/searchby';
+import SearchByLabels from './app/view/searchbylabel';
 import SettingsScreen from './app/view/settings';
 import AboutScreen from './app/view/about';
 import ResultsScreen from './app/view/results';
@@ -29,8 +31,26 @@ const HomeStack = () => {
 					headerStyle: { backgroundColor: '#1976d2' },
 					headerTintColor: '#fff'
 				})}
+				name="Search By"
+				component={SearchByScreen}
+			/>
+			<Stack.Screen
+				options={({ navigation, route }) => ({
+					headerShown: true,
+					headerStyle: { backgroundColor: '#1976d2' },
+					headerTintColor: '#fff'
+				})}
 				name="Search"
 				component={SearchScreen}
+			/>
+			<Stack.Screen
+				options={({ navigation, route }) => ({
+					headerShown: true,
+					headerStyle: { backgroundColor: '#1976d2' },
+					headerTintColor: '#fff'
+				})}
+				name="Labels"
+				component={SearchByLabels}
 			/>
 			<Stack.Screen
 				options={({ navigation, route }) => ({
