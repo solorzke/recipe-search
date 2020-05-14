@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView, FlatList, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity, Dimensions, TextInput } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 
 /* Return a Cusine View */
 Cuisines = ({ items, onPress, style, column }) => {
@@ -180,6 +181,99 @@ class CuisineView extends Component {
 	}
 }
 
+class DietsView extends Component {
+	constructor(props) {
+		super(props);
+		this.dietRef = React.createRef();
+		this.pickerRef = React.createRef();
+	}
+
+	state = {
+		selected: '',
+		picker: false
+	};
+
+	diets = [
+		{
+			label: 'Gluten Free',
+			value: 'gluten free'
+		},
+		{
+			label: 'Ketogenic',
+			value: 'ketogenic'
+		},
+		{
+			label: 'Vegetarian',
+			value: 'vegetarian'
+		},
+		{
+			label: 'Lacto-Vegetarian',
+			value: 'lacto-vegetarian'
+		},
+		{
+			label: 'Ovo-Vegetarian',
+			value: 'ovo-egetarian'
+		},
+		{
+			label: 'Vegan',
+			value: 'vegan'
+		},
+		{
+			label: 'Pescetarian',
+			value: 'pescetarian'
+		},
+		{
+			label: 'Paleo',
+			value: 'paleo'
+		},
+		{
+			label: 'Primal',
+			value: 'primal'
+		},
+		{
+			label: 'Whole30',
+			value: 'whole30'
+		}
+	];
+
+	/* Update the state to what was selected */
+	setSelectedValue = (value) => {
+		value != null
+			? value.length > 0 ? this.setState({ selected: value }) : this.setState({ selected: '' })
+			: this.setState({ selected: '' });
+	};
+
+	/* Return the selected diet label to the parent class */
+	returnDietLabel = () => {
+		this.props.activeDietLabel(this.state.selected);
+	};
+
+	render() {
+		return (
+			<View>
+				{this.returnDietLabel()}
+				<View style={styles.pickerView} onPress={() => this.pickerRef.current.togglePicker()}>
+					<View style={{ borderBottomColor: '#000', borderBottomWidth: 1, width: '100%' }}>
+						<Text
+							ref={this.dietRef}
+							style={styles.dietSelector}
+							onPress={() => this.pickerRef.current.togglePicker()}
+						>
+							{this.state.selected.length > 0 ? this.state.selected : 'Select a diet...'}
+						</Text>
+					</View>
+				</View>
+				<RNPickerSelect
+					placeholder={'Select a Diet...'}
+					ref={this.pickerRef}
+					onValueChange={(value) => this.setSelectedValue(value)}
+					items={this.diets}
+				/>
+			</View>
+		);
+	}
+}
+
 export default class SearchByLabel extends Component {
 	/* Once the component is loaded, add the 'add' button to the action bar */
 	componentDidMount() {
@@ -197,12 +291,18 @@ export default class SearchByLabel extends Component {
 		console.warn(labels);
 	};
 
+	/* Handle active Diet Label from DietView's state */
+	handleDietLabel = (label) => {
+		console.warn(label);
+	};
+
 	render() {
 		return (
 			<View style={styles.mainView}>
 				<Heading title={'Cuisine Types'} />
 				<CuisineView activeLabels={this.handleCuisineLabels} />
-				<Heading title={'Cuisine Types'} />
+				<Heading title={'Diets'} />
+				<DietsView activeDietLabel={this.handleDietLabel} />
 			</View>
 		);
 	}
@@ -247,5 +347,37 @@ const styles = StyleSheet.create({
 		height: Dimensions.get('window').height / 3,
 		flexDirection: 'row',
 		padding: 10
+	},
+
+	dietsView: {
+		width: '100%',
+		height: Dimensions.get('window').height / 3,
+		flexDirection: 'row',
+		padding: 10
+	},
+
+	pickerView: {
+		alignItems: 'flex-start',
+		justifyContent: 'center',
+		paddingHorizontal: 15,
+		height: Dimensions.get('window').height / 7
+	},
+
+	dietSelector: {
+		fontSize: 17,
+		color: '#000',
+		paddingBottom: 10,
+		width: '100%',
+		textTransform: 'capitalize'
+	},
+
+	dietText: {
+		paddingBottom: 10,
+		width: '100%'
+	},
+
+	picker: {
+		width: '100%',
+		height: 1
 	}
 });
