@@ -181,10 +181,9 @@ class CuisineView extends Component {
 	}
 }
 
-class DietsView extends Component {
+class PickerView extends Component {
 	constructor(props) {
 		super(props);
-		this.dietRef = React.createRef();
 		this.pickerRef = React.createRef();
 	}
 
@@ -192,6 +191,52 @@ class DietsView extends Component {
 		selected: '',
 		picker: false
 	};
+
+	/* Update the state to what was selected */
+	setSelectedValue = (value) => {
+		value != null
+			? value.length > 0 ? this.setState({ selected: value }) : this.setState({ selected: '' })
+			: this.setState({ selected: '' });
+	};
+
+	/* Return the selected diet label to the parent class */
+	returnLabel = () => {
+		this.props.activeLabel(this.state.selected);
+	};
+
+	render() {
+		return (
+			<View>
+				{this.returnLabel()}
+				<View style={styles.pickerView} onPress={() => this.pickerRef.current.togglePicker()}>
+					<View style={{ borderBottomColor: '#000', borderBottomWidth: 1, width: '100%' }}>
+						<Text style={styles.pickerSelector} onPress={() => this.pickerRef.current.togglePicker()}>
+							{this.state.selected.length > 0 ? this.state.selected : this.props.placeholder}
+						</Text>
+					</View>
+				</View>
+				<RNPickerSelect
+					placeholder={'Select a Diet...'}
+					ref={this.pickerRef}
+					onValueChange={(value) => this.setSelectedValue(value)}
+					items={this.props.items}
+				/>
+			</View>
+		);
+	}
+}
+
+export default class SearchByLabel extends Component {
+	/* Once the component is loaded, add the 'add' button to the action bar */
+	componentDidMount() {
+		this.props.navigation.setOptions({
+			headerRight: () => (
+				<TouchableOpacity style={{ marginRight: 10 }} onPress={() => alert('hello')}>
+					<Text style={{ color: '#fff', paddingRight: 10, fontSize: 17 }}>Confirm</Text>
+				</TouchableOpacity>
+			)
+		});
+	}
 
 	diets = [
 		{
@@ -236,55 +281,64 @@ class DietsView extends Component {
 		}
 	];
 
-	/* Update the state to what was selected */
-	setSelectedValue = (value) => {
-		value != null
-			? value.length > 0 ? this.setState({ selected: value }) : this.setState({ selected: '' })
-			: this.setState({ selected: '' });
-	};
-
-	/* Return the selected diet label to the parent class */
-	returnDietLabel = () => {
-		this.props.activeDietLabel(this.state.selected);
-	};
-
-	render() {
-		return (
-			<View>
-				{this.returnDietLabel()}
-				<View style={styles.pickerView} onPress={() => this.pickerRef.current.togglePicker()}>
-					<View style={{ borderBottomColor: '#000', borderBottomWidth: 1, width: '100%' }}>
-						<Text
-							ref={this.dietRef}
-							style={styles.dietSelector}
-							onPress={() => this.pickerRef.current.togglePicker()}
-						>
-							{this.state.selected.length > 0 ? this.state.selected : 'Select a diet...'}
-						</Text>
-					</View>
-				</View>
-				<RNPickerSelect
-					placeholder={'Select a Diet...'}
-					ref={this.pickerRef}
-					onValueChange={(value) => this.setSelectedValue(value)}
-					items={this.diets}
-				/>
-			</View>
-		);
-	}
-}
-
-export default class SearchByLabel extends Component {
-	/* Once the component is loaded, add the 'add' button to the action bar */
-	componentDidMount() {
-		this.props.navigation.setOptions({
-			headerRight: () => (
-				<TouchableOpacity style={{ marginRight: 10 }} onPress={() => alert('hello')}>
-					<Text style={{ color: '#fff', paddingRight: 10, fontSize: 17 }}>Confirm</Text>
-				</TouchableOpacity>
-			)
-		});
-	}
+	meals = [
+		{
+			label: 'Main Course',
+			value: 'main course'
+		},
+		{
+			label: 'Side Dish',
+			value: 'side dish'
+		},
+		{
+			label: 'Dessert',
+			value: 'dessert'
+		},
+		{
+			label: 'Appetizer',
+			value: 'appetizer'
+		},
+		{
+			label: 'Salad',
+			value: 'salad'
+		},
+		{
+			label: 'Bread',
+			value: 'bread'
+		},
+		{
+			label: 'Breakfast',
+			value: 'breakfast'
+		},
+		{
+			label: 'Soup',
+			value: 'soup'
+		},
+		{
+			label: 'Beverage',
+			value: 'beverage'
+		},
+		{
+			label: 'Sauce',
+			value: 'sauce'
+		},
+		{
+			label: 'Marinade',
+			value: 'marinade'
+		},
+		{
+			label: 'Fingerfood',
+			value: 'fingerfood'
+		},
+		{
+			label: 'Snack',
+			value: 'snack'
+		},
+		{
+			label: 'Drink',
+			value: 'drink'
+		}
+	];
 
 	/* Handle active cusine labels from CuisineView's state */
 	handleCuisineLabels = (labels) => {
@@ -302,7 +356,9 @@ export default class SearchByLabel extends Component {
 				<Heading title={'Cuisine Types'} />
 				<CuisineView activeLabels={this.handleCuisineLabels} />
 				<Heading title={'Diets'} />
-				<DietsView activeDietLabel={this.handleDietLabel} />
+				<PickerView activeLabel={this.handleDietLabel} items={this.diets} placeholder={'Select a diet...'} />
+				<Heading title={'Meal Types'} />
+				<PickerView activeLabel={this.handleDietLabel} items={this.meals} placeholder={'Select a meal...'} />
 			</View>
 		);
 	}
@@ -349,13 +405,6 @@ const styles = StyleSheet.create({
 		padding: 10
 	},
 
-	dietsView: {
-		width: '100%',
-		height: Dimensions.get('window').height / 3,
-		flexDirection: 'row',
-		padding: 10
-	},
-
 	pickerView: {
 		alignItems: 'flex-start',
 		justifyContent: 'center',
@@ -363,21 +412,11 @@ const styles = StyleSheet.create({
 		height: Dimensions.get('window').height / 7
 	},
 
-	dietSelector: {
+	pickerSelector: {
 		fontSize: 17,
 		color: '#000',
 		paddingBottom: 10,
 		width: '100%',
 		textTransform: 'capitalize'
-	},
-
-	dietText: {
-		paddingBottom: 10,
-		width: '100%'
-	},
-
-	picker: {
-		width: '100%',
-		height: 1
 	}
 });
