@@ -298,7 +298,7 @@ class CalorieView extends Component {
 					minimumValue={0}
 					maximumValue={3000}
 					step={100}
-					minimumTrackTintColor={'#'}
+					minimumTrackTintColor={this.changeColorGradient}
 					maximumTrackTintColor="#000000"
 					onSlidingComplete={(value) => this.setSliderState(value)}
 					onValueChange={(value) => this.setOnGoingValue(value)}
@@ -310,7 +310,7 @@ class CalorieView extends Component {
 }
 
 export default class SearchByLabel extends Component {
-	/* Once the component is loaded, add the 'add' button to the action bar */
+	/* Once the component is loaded, add the 'Confirm' button to the action bar */
 	componentDidMount() {
 		this.props.navigation.setOptions({
 			headerRight: () => (
