@@ -9,12 +9,13 @@ Required: 'API KEY' and <ingredients>
 */
 export default class API {
 	/* Demand an array of ingredient items at the moment of instantiation */
-	constructor(items) {
+	constructor(items, complex_items = 0) {
 		var _API = require('./token');
 		this.getAPIKey = () => {
 			return _API.key;
 		};
 		this.items = items;
+		this.complex_items = complex_items;
 	}
 
 	/* Send a HTTP request for a random recipe */
@@ -109,6 +110,42 @@ export default class API {
 		}
 	}
 
+	/* Send a HTTP request for a complex recipe search */
+	async requestComplexSearch(callback) {
+		try {
+			let requestString = this.returnComplexSearchURL() + this.returnAuth() + this.returnComplexSearchParams();
+			await fetch(requestString).then((payload) => payload.json()).then((payload) => {
+				let data = [];
+				for (let item of payload) {
+					data.push({
+						label: payload[item]['title'],
+						image: payload[item]['image'],
+						source: this.returnSourceName(payload[item]['sourceName']),
+						url: payload[item]['sourceUrl'],
+						dietLabels: payload[item]['diets'],
+						healthLabels: this.returnHealthLabels(payload[item]),
+						ingredientLines: this.returnIngredientsList(payload[item]['extendedIngredients']),
+						totalTime: payload[item]['readyInMinutes'],
+						summary: payload[item]['summary'],
+						instructions: this.returnInstructions(payload[item]['analyzedInstructions']),
+						ww: this.returnWeightWatchersRating(payload[item]),
+						prepTime: payload[item]['preparationMinutes'],
+						cookTime: payload[item]['cookingMinutes'],
+						likes: payload[item]['aggregateLikes'],
+						servings: payload[item]['servings'],
+						id: payload[item]['id']
+					});
+				}
+				if (typeof callback === 'function') {
+					callback(data);
+				}
+			});
+		} catch (error) {
+			console.log(error);
+			alert("Couldn't connect to the server. Try again or check your internet connection.");
+		}
+	}
+
 	/* Parse the ingredient list array and return its relevant data */
 	returnIngredientsList = (payload) => {
 		let data = [];
@@ -198,6 +235,27 @@ export default class API {
 		return 'limitLicense=true&tags=' + tag + '&number=1';
 	};
 
+	/* Return arguments for complex search API request */
+	returnComplexSearchParams = () => {
+		const cuisines = this.complex_items[0]['cuisines'];
+		const meal = this.complex_items[0]['meal'];
+		const diet = this.complex_items[0]['diet'];
+		const calories = this.complex_items[0]['calories'];
+		let data = '';
+		cuisines.length > 0 ? data.concat(`&cuisines=${cuisines.join()}`) : null;
+		meal.length > 0 ? data.concat(`&type=${meal}`) : null;
+		diet.length > 0 ? data.concat(`&diet=${diet}`) : null;
+		calories > 0 ? data.concat(`&maxCalories=${calories}`) : null;
+		if (data.length > 0) {
+			data.concat(
+				'&addRecipeInformation=true&instructionsRequired=true&fillIngredients=true&number=10&limitLicense=true'
+			);
+			return data;
+		} else {
+			throw new Error('PARAMS NOT FOUND');
+		}
+	};
+
 	/* Return the api key required to use the API */
 	returnAuth = () => {
 		return 'apiKey=' + this.getAPIKey();
@@ -216,5 +274,10 @@ export default class API {
 	/* Use the 'Find A Random Recipe' interface from Spoonacular's API */
 	returnRandomRecipeURL = () => {
 		return 'https://api.spoonacular.com/recipes/random?';
+	};
+
+	/* Use the 'Complex Recipe Search' interface from Spoonacular's API */
+	returnComplexSearchURL = () => {
+		return 'https://api.spoonacular.com/recipes/complexSearch?';
 	};
 }

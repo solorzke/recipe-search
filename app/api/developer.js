@@ -13,7 +13,7 @@ Required: 'API KEY' and <ingredients>
 
 export default class API {
 	/* Demand an array of ingredient items at the moment of instantiation */
-	constructor(items) {
+	constructor(items, complex = 0) {
 		var _API = require('./token');
 		this.getAPIKey = () => {
 			return _API.key;
@@ -65,39 +65,71 @@ export default class API {
 	async requestHTTP(callback) {
 		try {
 			let requestString = this.returnRecipeInfoURL() + this.returnIngredients() + '&' + this.returnAuth();
-			await fetch(requestString)
-				.then((response) => {
-					return response.json();
-				})
-				.then((payload) => {
-					let data = [];
-					for (let item of payload) {
-						data.push({
-							label: item['title'],
-							image: item['image'],
-							source: this.returnSourceName(item['sourceName']),
-							url: item['sourceUrl'],
-							dietLabels: item['diets'],
-							healthLabels: this.returnHealthLabels(item),
-							ingredientLines: this.returnIngredientsList(item['extendedIngredients']),
-							totalTime: item['readyInMinutes'],
-							summary: item['summary'],
-							instructions: this.returnInstructions(item['analyzedInstructions']),
-							ww: this.returnWeightWatchersRating(item),
-							prepTime: item['preparationMinutes'],
-							cookTime: item['cookingMinutes'],
-							likes: item['aggregateLikes'],
-							servings: item['servings'],
-							id: item['id']
-						});
-					}
-					if (typeof callback === 'function') {
-						callback(data);
-					}
-				});
+			await fetch(requestString).then((response) => response.json()).then((payload) => {
+				let data = [];
+				for (let item of payload) {
+					data.push({
+						label: item['title'],
+						image: item['image'],
+						source: this.returnSourceName(item['sourceName']),
+						url: item['sourceUrl'],
+						dietLabels: item['diets'],
+						healthLabels: this.returnHealthLabels(item),
+						ingredientLines: this.returnIngredientsList(item['extendedIngredients']),
+						totalTime: item['readyInMinutes'],
+						summary: item['summary'],
+						instructions: this.returnInstructions(item['analyzedInstructions']),
+						ww: this.returnWeightWatchersRating(item),
+						prepTime: item['preparationMinutes'],
+						cookTime: item['cookingMinutes'],
+						likes: item['aggregateLikes'],
+						servings: item['servings'],
+						id: item['id']
+					});
+				}
+				if (typeof callback === 'function') {
+					callback(data);
+				}
+			});
 		} catch (error) {
 			console.log(error);
 			alert('Request timed out. Try Again.');
+		}
+	}
+
+	/* For testing purposes, send a http request to the dev server for complex search mockup */
+	async requestComplexSearch(callback) {
+		try {
+			let requestString = this.returnComplexSearchURL() + this.returnAuthComplex();
+			await fetch(requestString).then((response) => response.json()).then((payload) => {
+				let data = [];
+				for (let item of payload['results']) {
+					data.push({
+						label: item['title'],
+						image: item['image'],
+						source: this.returnSourceName(item['sourceName']),
+						url: item['sourceUrl'],
+						dietLabels: item['diets'],
+						healthLabels: this.returnHealthLabels(item),
+						ingredientLines: this.returnIngredientsList(item['extendedIngredients']),
+						totalTime: item['readyInMinutes'],
+						summary: item['summary'],
+						instructions: this.returnInstructions(item['analyzedInstructions']),
+						ww: this.returnWeightWatchersRating(item),
+						prepTime: item['preparationMinutes'],
+						cookTime: item['cookingMinutes'],
+						likes: item['aggregateLikes'],
+						servings: item['servings'],
+						id: item['id']
+					});
+				}
+				if (typeof callback === 'function') {
+					callback(data);
+				}
+			});
+		} catch (error) {
+			console.log(error);
+			alert("Couldn't connect to the server. Try again or check your internet connection.");
 		}
 	}
 
@@ -131,6 +163,10 @@ export default class API {
 
 	returnAuthRandom = () => {
 		return 'apiKey=random';
+	};
+
+	returnAuthComplex = () => {
+		return 'apiKey=complex';
 	};
 
 	/* Parse the ingredient list array and return its relevant data */
@@ -205,6 +241,11 @@ export default class API {
 
 	/* Use the 'Find A Random Recipe' interface from Spoonacular's API */
 	returnRandomRecipeURL = () => {
+		return 'https://web.njit.edu/~kas58/json/index.php?';
+	};
+
+	/* Use the 'Complex Recipe Search' interface from Spoonacular's API */
+	returnComplexSearchURL = () => {
 		return 'https://web.njit.edu/~kas58/json/index.php?';
 	};
 }
