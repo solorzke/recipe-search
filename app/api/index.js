@@ -21,41 +21,37 @@ export default class API {
 	/* Send a HTTP request for a random recipe */
 	async requestRandomRecipe(callback) {
 		try {
-			let requestString =
-				this.returnRandomRecipeURL() + this.returnAuth() + '&' + this.returnRandomRecipeParams();
-			await fetch(requestString)
-				.then((payload) => {
-					return payload.json();
-				})
-				.then((payload) => {
-					let data = [];
-					for (let item of payload) {
-						data.push({
-							label: payload[item]['title'],
-							image: payload[item]['image'],
-							source: this.returnSourceName(payload[item]['sourceName']),
-							url: payload[item]['sourceUrl'],
-							dietLabels: payload[item]['diets'],
-							healthLabels: this.returnHealthLabels(payload[item]),
-							ingredientLines: this.returnIngredientsList(payload[item]['extendedIngredients']),
-							totalTime: payload[item]['readyInMinutes'],
-							summary: payload[item]['summary'],
-							instructions: this.returnInstructions(payload[item]['analyzedInstructions']),
-							ww: this.returnWeightWatchersRating(payload[item]),
-							prepTime: payload[item]['preparationMinutes'],
-							cookTime: payload[item]['cookingMinutes'],
-							likes: payload[item]['aggregateLikes'],
-							servings: payload[item]['servings'],
-							id: payload[item]['id']
-						});
-					}
-					if (typeof callback === 'function') {
-						callback(data);
-					}
-				});
+			let requestString = this.returnRandomRecipeURL() + this.returnAuth() + this.returnRandomRecipeParams();
+			await fetch(requestString).then((payload) => payload.json()).then((payload) => {
+				let data = [];
+				for (let item of payload['recipes']) {
+					data.push({
+						label: item['title'],
+						image: item['image'],
+						source: this.returnSourceName(item['sourceName']),
+						url: item['sourceUrl'],
+						dietLabels: item['diets'],
+						healthLabels: this.returnHealthLabels(item),
+						ingredientLines: this.returnIngredientsList(item['extendedIngredients']),
+						totalTime: item['readyInMinutes'],
+						summary: item['summary'],
+						instructions: this.returnInstructions(item['analyzedInstructions']),
+						ww: this.returnWeightWatchersRating(item),
+						prepTime: item['preparationMinutes'],
+						cookTime: item['cookingMinutes'],
+						likes: item['aggregateLikes'],
+						servings: item['servings'],
+						id: item['id']
+					});
+				}
+				if (typeof callback === 'function') {
+					callback(data);
+				}
+			});
 		} catch (error) {
 			console.log(error);
 			alert('Request timed out. Try Again.');
+			callback(false);
 		}
 	}
 
@@ -166,7 +162,7 @@ export default class API {
 			'salad'
 		];
 		const tag = diets[Math.floor(Math.random() * diets.length)];
-		return 'limitLicense=true&tags=' + tag + '&number=1';
+		return '&limitLicense=true&tags=' + tag + '&number=1';
 	};
 
 	/* Return arguments for complex search API request */

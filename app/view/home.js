@@ -6,14 +6,17 @@ import Card from '../components/card';
 import Animation1 from '../assets/animations/food-carousel.json';
 import Animation2 from '../assets/animations/random.json';
 import Animation3 from '../assets/animations/search-ask.json';
-import API from '../api/developer';
-const api = new API([ 99999 ]);
+import API from '../api/index';
 
 export default class Home extends Component {
-	state = {
-		payload: [ { label: 'Please Wait...', image: '../assets/images/photo.png' } ]
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			payload: [ { label: 'Please Wait...' } ]
+		};
+	}
 
+	/* Change the style for the card components */
 	returnStyle = (color) => {
 		return {
 			width: '100%',
@@ -27,12 +30,18 @@ export default class Home extends Component {
 	};
 
 	componentDidMount() {
+		const api = new API();
 		api.requestRandomRecipe((data) => {
-			this.setState({
-				payload: data
-			});
+			if (data) this.setRandomRecipeState(data);
 		});
 	}
+
+	/* Set the random recipe state  */
+	setRandomRecipeState = (data) => {
+		this.setState({
+			payload: data
+		});
+	};
 
 	render() {
 		return (
