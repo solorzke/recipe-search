@@ -42,13 +42,12 @@ export default class Search extends Component {
 	constructor(props) {
 		super(props);
 		this._input = React.createRef();
+		this.state = {
+			data: [],
+			input: '',
+			modal: false
+		};
 	}
-
-	state = {
-		data: [],
-		input: '',
-		modal: false
-	};
 
 	/* Once the component is loaded, add the 'add' button to the action bar */
 	componentDidMount() {

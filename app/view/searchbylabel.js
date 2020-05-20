@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity, Dimensions, Modal } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import Slider from '@react-native-community/slider';
+import API from '../api/developer';
+const labels = require('../assets/data/labels');
+import Loader from '../components/loader';
+import Footer from '../components/footer';
 
 /* Return a Cusine View */
 Cuisines = ({ items, onPress, style, column }) => {
@@ -23,38 +27,13 @@ Heading = ({ title }) => {
 
 /* Cusine Types View available for selection */
 class CuisineView extends Component {
-	state = {
-		active: []
-	};
-
-	types = [
-		'African',
-		'American',
-		'British',
-		'Cajun',
-		'Caribbean',
-		'Chinese',
-		'Eastern European',
-		'European',
-		'French',
-		'German',
-		'Greek',
-		'Indian',
-		'Irish',
-		'Italian',
-		'Japanese',
-		'Jewish',
-		'Korean',
-		'Latin American',
-		'Mediterranean',
-		'Mexican',
-		'Middle Eastern',
-		'Nordic',
-		'Southern',
-		'Spanish',
-		'Thai',
-		'Vietnamese'
-	];
+	constructor(props) {
+		super(props);
+		this.state = {
+			active: []
+		};
+		this.types = this.props.items;
+	}
 
 	/* Return the active cuisine labels to the parent class */
 	returnActiveLabels = () => {
@@ -110,6 +89,7 @@ class CuisineView extends Component {
 	toggleActive = (col, index) => {
 		const type = this.types[col * 4 - 4 + index];
 		this.updateActiveState(type);
+		this.returnActiveLabels();
 	};
 
 	render() {
@@ -120,7 +100,6 @@ class CuisineView extends Component {
 				horizontal={true}
 				showsHorizontalScrollIndicator={false}
 			>
-				{this.returnActiveLabels()}
 				<View style={styles.cuisineGrid}>
 					<Cuisines
 						items={this.types.slice(0, 4)}
@@ -186,18 +165,18 @@ class PickerView extends Component {
 	constructor(props) {
 		super(props);
 		this.pickerRef = React.createRef();
+		this.state = {
+			selected: '',
+			picker: false
+		};
 	}
-
-	state = {
-		selected: '',
-		picker: false
-	};
 
 	/* Update the state to what was selected */
 	setSelectedValue = (value) => {
 		value != null
 			? value.length > 0 ? this.setState({ selected: value }) : this.setState({ selected: '' })
 			: this.setState({ selected: '' });
+		this.returnLabel();
 	};
 
 	/* Return the selected diet label to the parent class */
@@ -208,7 +187,6 @@ class PickerView extends Component {
 	render() {
 		return (
 			<View>
-				{this.returnLabel()}
 				<View style={styles.pickerView} onPress={() => this.pickerRef.current.togglePicker()}>
 					<View style={{ borderBottomColor: '#000', borderBottomWidth: 1, width: '100%' }}>
 						<Text style={styles.pickerSelector} onPress={() => this.pickerRef.current.togglePicker()}>
@@ -228,16 +206,21 @@ class PickerView extends Component {
 }
 
 class CalorieView extends Component {
-	state = {
-		sliderValue: 0,
-		onChangeValue: 0
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			sliderValue: 0,
+			onChangeValue: 0,
+			tintColor: '#00FF00'
+		};
+	}
 
 	/* Update the current slider value after the user is done using it to the state */
 	setSliderState = (value) => {
 		this.setState({
 			sliderValue: value
 		});
+		this.returnSliderValue();
 	};
 
 	/* Update the current slider value as it slides to the state to reflect that value to the user */
@@ -257,37 +240,60 @@ class CalorieView extends Component {
 		/* Find a way to fade the color green gradient & red gradient with the slider */
 		let value = this.state.onChangeValue * 100 / 3000;
 		/* RG: 0, 255 */
-		if (value < 0) return '#00FF00';
-		else if (0 < value <= 10)
+		if (value < 0)
+			this.setState({
+				tintColor: '#00FF00'
+			});
+		else if (value <= 10)
 			/* RG: 26, 229 */
-			return '#1AE500';
-		else if (10 < value <= 20)
+			this.setState({
+				tintColor: '#1AE500'
+			});
+		else if (value <= 20)
 			/* RG: 52, 203 */
-			return '#34CB00';
-		else if (20 < value <= 30)
+			this.setState({
+				tintColor: '#34CB00'
+			});
+		else if (value <= 30)
 			/* RG: 78, 177 */
-			return '#4EB100';
-		else if (30 < value <= 40)
+			this.setState({
+				tintColor: '#4EB100'
+			});
+		else if (value <= 40)
 			/* RG: 104, 151 */
-			return '#689700';
-		else if (40 < value <= 50)
+			this.setState({
+				tintColor: '#689700'
+			});
+		else if (value <= 50)
 			/* RG: 130, 125 */
-			return '#827D00';
-		else if (50 < value <= 60)
+			this.setState({
+				tintColor: '#827D00'
+			});
+		else if (value <= 60)
 			/* RG: 156, 99 */
-			return '#9C6300';
-		else if (60 < value <= 70)
+			this.setState({
+				tintColor: '#9C6300'
+			});
+		else if (value <= 70)
 			/* RG: 182, 73 */
-			return '#B64900';
-		else if (70 < value <= 80)
+			this.setState({
+				tintColor: '#B64900'
+			});
+		else if (value <= 80)
 			/* RG: 208, 47 */
-			return '#D02F00';
-		else if (80 < value <= 90)
+			this.setState({
+				tintColor: '#D02F00'
+			});
+		else if (value <= 90)
 			/* RG: 234, 21 */
-			return '#EA1500';
+			this.setState({
+				tintColor: '#EA1500'
+			});
 		else if (90 < value)
 			/* RG: 255, 0 */
-			return '#FF0000';
+			this.setState({
+				tintColor: '#FF0000'
+			});
 	};
 
 	render() {
@@ -298,10 +304,12 @@ class CalorieView extends Component {
 					minimumValue={0}
 					maximumValue={3000}
 					step={100}
-					minimumTrackTintColor={this.changeColorGradient}
+					minimumTrackTintColor={this.state.tintColor}
 					maximumTrackTintColor="#000000"
 					onSlidingComplete={(value) => this.setSliderState(value)}
-					onValueChange={(value) => this.setOnGoingValue(value)}
+					onValueChange={(value) => {
+						this.setOnGoingValue(value), this.changeColorGradient();
+					}}
 				/>
 				<Text>Cal: {this.state.onChangeValue}</Text>
 			</View>
@@ -310,145 +318,120 @@ class CalorieView extends Component {
 }
 
 export default class SearchByLabel extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			cuisines: [],
+			diet: '',
+			meal: '',
+			calories: 0,
+			modal: false
+		};
+	}
+
 	/* Once the component is loaded, add the 'Confirm' button to the action bar */
 	componentDidMount() {
 		this.props.navigation.setOptions({
 			headerRight: () => (
-				<TouchableOpacity style={{ marginRight: 10 }} onPress={() => alert('hello')}>
+				<TouchableOpacity style={{ marginRight: 10 }} onPress={() => this.transmitRequest()}>
 					<Text style={{ color: '#fff', paddingRight: 10, fontSize: 17 }}>Confirm</Text>
 				</TouchableOpacity>
 			)
 		});
 	}
 
-	diets = [
-		{
-			label: 'Gluten Free',
-			value: 'gluten free'
-		},
-		{
-			label: 'Ketogenic',
-			value: 'ketogenic'
-		},
-		{
-			label: 'Vegetarian',
-			value: 'vegetarian'
-		},
-		{
-			label: 'Lacto-Vegetarian',
-			value: 'lacto-vegetarian'
-		},
-		{
-			label: 'Ovo-Vegetarian',
-			value: 'ovo-egetarian'
-		},
-		{
-			label: 'Vegan',
-			value: 'vegan'
-		},
-		{
-			label: 'Pescetarian',
-			value: 'pescetarian'
-		},
-		{
-			label: 'Paleo',
-			value: 'paleo'
-		},
-		{
-			label: 'Primal',
-			value: 'primal'
-		},
-		{
-			label: 'Whole30',
-			value: 'whole30'
-		}
-	];
+	/* Check if any of the fields were filled */
+	validate = () => {
+		const cuisineLength = this.state.cuisines.length;
+		const dietLength = this.state.diet.length;
+		const mealLength = this.state.meal.length;
+		console.warn(
+			`cLengh: ${cuisineLength} + dLength: ${dietLength} + mLength: ${mealLength} + cal: ${this.state.calories}`
+		);
+		return cuisineLength + dietLength + mealLength + this.state.calories > 0;
+	};
 
-	meals = [
-		{
-			label: 'Main Course',
-			value: 'main course'
-		},
-		{
-			label: 'Side Dish',
-			value: 'side dish'
-		},
-		{
-			label: 'Dessert',
-			value: 'dessert'
-		},
-		{
-			label: 'Appetizer',
-			value: 'appetizer'
-		},
-		{
-			label: 'Salad',
-			value: 'salad'
-		},
-		{
-			label: 'Bread',
-			value: 'bread'
-		},
-		{
-			label: 'Breakfast',
-			value: 'breakfast'
-		},
-		{
-			label: 'Soup',
-			value: 'soup'
-		},
-		{
-			label: 'Beverage',
-			value: 'beverage'
-		},
-		{
-			label: 'Sauce',
-			value: 'sauce'
-		},
-		{
-			label: 'Marinade',
-			value: 'marinade'
-		},
-		{
-			label: 'Fingerfood',
-			value: 'fingerfood'
-		},
-		{
-			label: 'Snack',
-			value: 'snack'
-		},
-		{
-			label: 'Drink',
-			value: 'drink'
+	/* Transmit a network request to Spoonacular's Web API to search for recipes based on the selected parameters */
+	transmitRequest = () => {
+		if (this.validate()) {
+			this.setModalState(true);
+			const cuisines = this.state.cuisines;
+			const diet = this.state.diet;
+			const meal = this.state.meal;
+			const calories = this.state.calories;
+			const complex_items = [ { cuisines: cuisines, diet: diet, meal: meal, calories: calories } ];
+			const api = new API([ 70502 ], complex_items);
+			api.requestComplexSearch((data) => {
+				this.setModalState(false);
+				this.props.navigation.navigate('Results', { data: data });
+			});
+		} else {
+			alert('Please fill in at least one of the fields to search.');
 		}
-	];
+	};
+
+	/* Set state for modal visibility */
+	setModalState = (bool) => {
+		this.setState({
+			modal: bool
+		});
+	};
 
 	/* Handle active cusine labels from CuisineView's state */
 	handleCuisineLabels = (labels) => {
-		console.log(labels);
+		this.setState({
+			cuisines: labels
+		});
 	};
 
 	/* Handle active Diet Label from DietView's state */
 	handleDietLabel = (label) => {
 		console.log(label);
+		this.setState({
+			diet: label
+		});
+	};
+
+	/* Handle active Meal labels from MealView's state */
+	handleMealLabel = (label) => {
+		console.log(label);
+		this.setState({
+			meal: label
+		});
 	};
 
 	/* Handle active Calorie value from Calorie Slider */
 	handleCalorieIntake = (value) => {
 		console.log(value);
+		this.setState({
+			calories: value
+		});
 	};
 
 	render() {
 		return (
 			<ScrollView style={styles.mainView}>
 				<Heading title={'Cuisine Types'} />
-				<CuisineView activeLabels={this.handleCuisineLabels} />
+				<CuisineView activeLabels={this.handleCuisineLabels} items={labels.cuisines} />
 				<Heading title={'Diets'} />
-				<PickerView activeLabel={this.handleDietLabel} items={this.diets} placeholder={'Select a diet...'} />
+				<PickerView activeLabel={this.handleDietLabel} items={labels.diets} placeholder={'Select a diet...'} />
 				<Heading title={'Meal Types'} />
-				<PickerView activeLabel={this.handleDietLabel} items={this.meals} placeholder={'Select a meal...'} />
+				<PickerView activeLabel={this.handleMealLabel} items={labels.meals} placeholder={'Select a meal...'} />
 				<Heading title={'Max Calories'} />
 				<CalorieView activeCalorieValue={this.handleCalorieIntake} />
+				<Modal
+					animationType={'slide'}
+					transparent={false}
+					visible={this.state.modal}
+					onRequestClose={() => {
+						console.log('Modal has been closed.');
+					}}
+				>
+					<View style={styles.modal}>
+						<Loader text={'Find the best recipes...'} />
+					</View>
+				</Modal>
+				<Footer />
 			</ScrollView>
 		);
 	}
@@ -456,7 +439,8 @@ export default class SearchByLabel extends Component {
 
 const styles = StyleSheet.create({
 	mainView: {
-		width: '100%'
+		width: '100%',
+		backgroundColor: '#fff'
 	},
 
 	cuisineBtn: {
@@ -515,5 +499,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		paddingHorizontal: 15,
 		height: Dimensions.get('window').height / 5
+	},
+
+	modal: {
+		flex: 1,
+		alignItems: 'center',
+		backgroundColor: '#211a23',
+		justifyContent: 'center'
 	}
 });
