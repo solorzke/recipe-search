@@ -14,7 +14,7 @@ import Loader from '../components/loader';
 import Footer from '../components/footer';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AddPhoto from '../assets/images/add.png';
-import API from '../api/developer';
+import API from '../api/index';
 
 /* Return item box view whenever a new ingredient is added */
 Ingredient = ({ item, remove }) => {
@@ -53,7 +53,7 @@ export default class Search extends Component {
 	componentDidMount() {
 		this.props.navigation.setOptions({
 			headerRight: () => (
-				<TouchableOpacity style={{ marginRight: 10 }} onPress={() => this.confirm()}>
+				<TouchableOpacity style={{ marginRight: 10 }} onPress={() => this.transmitRequest()}>
 					<Text style={{ color: '#fff', paddingRight: 10, fontSize: 17 }}>Confirm</Text>
 				</TouchableOpacity>
 			)
@@ -74,21 +74,23 @@ export default class Search extends Component {
 		return this.state.data.length > 0;
 	};
 
+	/* Set state for modal visibility */
+	setModalState = (bool) => {
+		this.setState({
+			modal: bool
+		});
+	};
+
 	/* Authenticate list before confirming and submitting list to search */
-	confirm = () => {
+	transmitRequest = () => {
 		const items = this.state.data;
 		if (items.length > 0) {
-			this.setState({
-				modal: true
+			this.setModalState(true);
+			const api = new API(items);
+			api.requestComplexSearch((payload) => {
+				this.setModalState(false);
+				if (payload) this.props.navigation.navigate('Results', { data: payload });
 			});
-			const http = new API(items);
-			http.requestHTTP((payload) => {
-				this.setState({
-					modal: false
-				});
-				this.props.navigation.navigate('Results', { data: payload });
-			});
-			// this.props.navigation.navigate('Results');
 		} else {
 			alert('Please fill in at least one ingredient');
 		}

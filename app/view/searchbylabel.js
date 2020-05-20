@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, ScrollView, TouchableOpacity, Dimensions, Modal } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import Slider from '@react-native-community/slider';
-import API from '../api/developer';
+import API from '../api/index';
 const Labels = require('../assets/data/labels');
 import Loader from '../components/loader';
 import Footer from '../components/footer';
@@ -349,15 +349,15 @@ export default class SearchByLabel extends Component {
 	transmitRequest = () => {
 		if (this.validate()) {
 			this.setModalState(true);
-			const cuisines = this.state.cuisines;
-			const diet = this.state.diet;
-			const meal = this.state.meal;
-			const calories = this.state.calories;
+			const cuisines = this.cuisineRef.current.returnActiveLabels();
+			const diet = this.dietRef.current.returnLabel();
+			const meal = this.mealRef.current.returnLabel();
+			const calories = this.calorieRef.current.returnSliderValue();
 			const complex_items = [ { cuisines: cuisines, diet: diet, meal: meal, calories: calories } ];
-			const api = new API([ 70502 ], complex_items);
+			const api = new API('NONE', complex_items);
 			api.requestComplexSearch((data) => {
 				this.setModalState(false);
-				this.props.navigation.navigate('Results', { data: data });
+				if (data) this.props.navigation.navigate('Results', { data: data });
 			});
 		} else {
 			alert('Please fill in at least one of the fields to search.');
