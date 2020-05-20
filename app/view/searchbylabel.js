@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, ScrollView, TouchableOpacity, Dimensions, Modal
 import RNPickerSelect from 'react-native-picker-select';
 import Slider from '@react-native-community/slider';
 import API from '../api/developer';
-const labels = require('../assets/data/labels');
+const Labels = require('../assets/data/labels');
 import Loader from '../components/loader';
 import Footer from '../components/footer';
 
@@ -175,7 +175,6 @@ class PickerView extends Component {
 		value != null
 			? value.length > 0 ? this.setState({ selected: value }) : this.setState({ selected: '' })
 			: this.setState({ selected: '' });
-		this.returnLabel();
 	};
 
 	/* Return the selected diet label to the parent class */
@@ -219,7 +218,6 @@ class CalorieView extends Component {
 		this.setState({
 			sliderValue: value
 		});
-		this.returnSliderValue();
 	};
 
 	/* Update the current slider value as it slides to the state to reflect that value to the user */
@@ -377,11 +375,11 @@ export default class SearchByLabel extends Component {
 		return (
 			<ScrollView style={styles.mainView}>
 				<Heading title={'Cuisine Types'} />
-				<CuisineView ref={this.cuisineRef} items={labels.cuisines} />
+				<CuisineView ref={this.cuisineRef} items={Labels.cuisines} />
 				<Heading title={'Diets'} />
-				<PickerView ref={this.dietRef} items={labels.diets} placeholder={'Select a diet...'} />
+				<PickerView ref={this.dietRef} items={Labels.diets} placeholder={'Select a diet...'} />
 				<Heading title={'Meal Types'} />
-				<PickerView ref={this.mealRef} items={labels.meals} placeholder={'Select a meal...'} />
+				<PickerView ref={this.mealRef} items={Labels.meals} placeholder={'Select a meal...'} />
 				<Heading title={'Max Calories'} />
 				<CalorieView ref={this.calorieRef} />
 				<Modal
