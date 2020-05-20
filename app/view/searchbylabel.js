@@ -37,7 +37,7 @@ class CuisineView extends Component {
 
 	/* Return the active cuisine labels to the parent class */
 	returnActiveLabels = () => {
-		this.props.activeLabels(this.state.active);
+		return this.state.active;
 	};
 
 	/* Return a style appropriate for when a button was toggled */
@@ -89,7 +89,6 @@ class CuisineView extends Component {
 	toggleActive = (col, index) => {
 		const type = this.types[col * 4 - 4 + index];
 		this.updateActiveState(type);
-		this.returnActiveLabels();
 	};
 
 	render() {
@@ -181,7 +180,7 @@ class PickerView extends Component {
 
 	/* Return the selected diet label to the parent class */
 	returnLabel = () => {
-		this.props.activeLabel(this.state.selected);
+		return this.state.selected;
 	};
 
 	render() {
@@ -232,7 +231,7 @@ class CalorieView extends Component {
 
 	/* Return the slider value back to the parent class */
 	returnSliderValue = () => {
-		this.props.activeCalorieValue(this.state.sliderValue);
+		return this.state.sliderValue;
 	};
 
 	/* Change the color of the slider as you slide from 0 to 100 (Green to Red)*/
@@ -320,11 +319,11 @@ class CalorieView extends Component {
 export default class SearchByLabel extends Component {
 	constructor(props) {
 		super(props);
+		this.cuisineRef = React.createRef();
+		this.dietRef = React.createRef();
+		this.mealRef = React.createRef();
+		this.calorieRef = React.createRef();
 		this.state = {
-			cuisines: [],
-			diet: '',
-			meal: '',
-			calories: 0,
 			modal: false
 		};
 	}
@@ -342,13 +341,10 @@ export default class SearchByLabel extends Component {
 
 	/* Check if any of the fields were filled */
 	validate = () => {
-		const cuisineLength = this.state.cuisines.length;
-		const dietLength = this.state.diet.length;
-		const mealLength = this.state.meal.length;
-		console.warn(
-			`cLengh: ${cuisineLength} + dLength: ${dietLength} + mLength: ${mealLength} + cal: ${this.state.calories}`
-		);
-		return cuisineLength + dietLength + mealLength + this.state.calories > 0;
+		const cuisineLength = this.cuisineRef.current.returnActiveLabels().length;
+		const dietLength = this.dietRef.current.returnLabel().length;
+		const mealLength = this.mealRef.current.returnLabel().length;
+		return cuisineLength + dietLength + mealLength + this.calorieRef.current.returnSliderValue() > 0;
 	};
 
 	/* Transmit a network request to Spoonacular's Web API to search for recipes based on the selected parameters */
@@ -377,48 +373,17 @@ export default class SearchByLabel extends Component {
 		});
 	};
 
-	/* Handle active cusine labels from CuisineView's state */
-	handleCuisineLabels = (labels) => {
-		this.setState({
-			cuisines: labels
-		});
-	};
-
-	/* Handle active Diet Label from DietView's state */
-	handleDietLabel = (label) => {
-		console.log(label);
-		this.setState({
-			diet: label
-		});
-	};
-
-	/* Handle active Meal labels from MealView's state */
-	handleMealLabel = (label) => {
-		console.log(label);
-		this.setState({
-			meal: label
-		});
-	};
-
-	/* Handle active Calorie value from Calorie Slider */
-	handleCalorieIntake = (value) => {
-		console.log(value);
-		this.setState({
-			calories: value
-		});
-	};
-
 	render() {
 		return (
 			<ScrollView style={styles.mainView}>
 				<Heading title={'Cuisine Types'} />
-				<CuisineView activeLabels={this.handleCuisineLabels} items={labels.cuisines} />
+				<CuisineView ref={this.cuisineRef} items={labels.cuisines} />
 				<Heading title={'Diets'} />
-				<PickerView activeLabel={this.handleDietLabel} items={labels.diets} placeholder={'Select a diet...'} />
+				<PickerView ref={this.dietRef} items={labels.diets} placeholder={'Select a diet...'} />
 				<Heading title={'Meal Types'} />
-				<PickerView activeLabel={this.handleMealLabel} items={labels.meals} placeholder={'Select a meal...'} />
+				<PickerView ref={this.mealRef} items={labels.meals} placeholder={'Select a meal...'} />
 				<Heading title={'Max Calories'} />
-				<CalorieView activeCalorieValue={this.handleCalorieIntake} />
+				<CalorieView ref={this.calorieRef} />
 				<Modal
 					animationType={'slide'}
 					transparent={false}
