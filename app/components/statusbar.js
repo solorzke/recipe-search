@@ -1,12 +1,13 @@
 import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
+const Scheme = require('../assets/schemes/scheme');
 
 const Status = (props) => {
 	return (
 		<SafeAreaView
 			//To set the background color in IOS Status Bar also
 			style={{
-				backgroundColor: '#1976d2',
+				backgroundColor: Scheme.actionBar,
 				height: Platform.OS === 'ios' ? 20 : 0
 			}}
 		>
@@ -15,7 +16,7 @@ const Status = (props) => {
 				// dark-content, light-content and default
 				hidden={false}
 				//To hide statusBar
-				backgroundColor={'#1976d2'}
+				backgroundColor={Scheme.actionBar}
 				//Background color of statusBar
 				translucent={false}
 				//allowing light, but not detailed shapes

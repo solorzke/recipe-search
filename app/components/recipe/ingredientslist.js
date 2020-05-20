@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, Dimensions, Linking, Modal, Animated, To
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import { PinchGestureHandler, State } from 'react-native-gesture-handler';
+const Scheme = require('../../assets/schemes/scheme');
 
 export default class List extends Component {
 	state = {
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
 	},
 
 	source: {
-		color: '#1976d2',
+		color: Scheme.anchorText,
 		fontStyle: 'italic',
 		alignSelf: 'flex-end',
 		marginHorizontal: Dimensions.get('window').width / 10,
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
 	heading: {
 		fontSize: 25,
 		fontWeight: 'bold',
-		color: '#E0115F',
+		color: Scheme.labelText,
 		paddingHorizontal: 10
 	},
 

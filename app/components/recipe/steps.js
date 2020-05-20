@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Linking } from 'react-native';
 import StepNumber from '../stepimg';
+const Scheme = require('../../assets/schemes/scheme');
 
 export default class Steps extends Component {
 	/* Return a new view that describes every step from the recipe */
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
 	heading: {
 		fontSize: 25,
 		fontWeight: 'bold',
-		color: '#E0115F',
+		color: Scheme.labelText,
 		paddingHorizontal: 10
 	},
 	stepsView: {

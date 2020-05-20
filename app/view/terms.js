@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Linking, ScrollView } from 'react-native';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class TermsAndConditions extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
 				<ScrollView style={styles.container}>
+					<Text style={styles.title}>Terms and Conditions</Text>
 					<Text style={styles.paragraph}>
 						By downloading or using the app, these terms will automatically apply to you – you should make
 						sure therefore that you read them carefully before using the app. You’re not allowed to copy, or
@@ -36,7 +38,7 @@ export default class TermsAndConditions extends Component {
 					<Text style={styles.paragraph}>
 						Link to Terms and Conditions of third party service providers used by the app{' '}
 						<Text
-							style={{ color: '#1976d2' }}
+							style={{ color: Scheme.anchorText }}
 							onPress={() => {
 								Linking.openURL('https://www.google.com/policies/privacy/');
 							}}
@@ -97,7 +99,7 @@ export default class TermsAndConditions extends Component {
 						If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me
 						at{' '}
 						<Text
-							style={{ color: '#1976d2' }}
+							style={{ color: Scheme.anchorText }}
 							onPress={() => Linking.openURL('solorzke.business@gmail.com')}
 						>
 							solorzke.business@gmail.com.
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
 	mainView: {
 		flex: 1,
 		width: '100%',
-		backgroundColor: '#fff'
+		backgroundColor: Scheme.subBackground
 	},
 	container: {
 		flex: 1

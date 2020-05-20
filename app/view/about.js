@@ -7,6 +7,7 @@ import HeadBar from '../components/head';
 import Status from '../components/statusbar';
 import SMIcon from 'react-native-vector-icons/FontAwesome5';
 import { Linking } from 'react-native';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class AboutScreen extends Component {
 	/* Open the social media applications (if any) available on the user's phone to our social media page */
@@ -57,7 +58,7 @@ export default class AboutScreen extends Component {
 					<View style={styles.headerView}>
 						<Image source={Heading} resizeMode={'repeat'} />
 					</View>
-					<View style={{ backgroundColor: '#11508e' }}>
+					<View style={{ backgroundColor: Scheme.title }}>
 						<TouchableOpacity
 							style={styles.contactBtn}
 							onPress={() => Linking.openURL('mailto:example@gmail.com?subject=example&body=example')}
@@ -166,7 +167,7 @@ const styles = StyleSheet.create({
 	},
 
 	footer: {
-		backgroundColor: '#fff',
+		backgroundColor: Scheme.subBackground,
 		flexDirection: 'column'
 	},
 
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
 	},
 
 	socialMediaView: {
-		marginTop: 10
+		backgroundColor: Scheme.subBackground
 	},
 
 	paragraph: {
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
 		fontSize: 25,
 		paddingBottom: 20,
 		// color: '#E0115F',
-		color: '#fff',
+		color: Scheme.textLight,
 		fontWeight: 'bold',
 		alignSelf: 'center'
 	},
@@ -209,7 +210,7 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		fontWeight: 'bold',
 		alignSelf: 'center',
-		color: '#000'
+		color: Scheme.textDark
 	},
 
 	contactBtn: {

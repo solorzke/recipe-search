@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Linking, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class PrivacyPolicy extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
 				<ScrollView style={styles.container}>
+					<Text style={styles.title}>Privacy Policy</Text>
 					<Text style={styles.paragraph}>
 						Recipe Search built the Recipe Search app as a Free app. This SERVICE is provided by Recipe
 						Search at no cost and is intended for use as is.
@@ -143,7 +145,7 @@ const styles = StyleSheet.create({
 	mainView: {
 		flex: 1,
 		width: '100%',
-		backgroundColor: '#fff'
+		backgroundColor: Scheme.subBackground
 	},
 	container: {
 		flex: 1

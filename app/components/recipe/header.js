@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+const Scheme = require('../../assets/schemes/scheme');
 
 const Header = (props) => {
 	return (
 		<View style={styles.mainView}>
 			<View style={styles.titleView}>
 				<Text style={styles.title}>{props.label}</Text>
-				<Text style={{ color: '#1976d2' }} onPress={() => Linking.openURL(props.url)}>
+				<Text style={{ color: Scheme.anchorText }} onPress={() => Linking.openURL(props.url)}>
 					By: {props.source}
 				</Text>
 			</View>
@@ -49,7 +50,8 @@ const styles = StyleSheet.create({
 
 	title: {
 		fontSize: 25,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		color: Scheme.actionBar
 	},
 
 	mediaText: {

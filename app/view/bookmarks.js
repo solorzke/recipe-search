@@ -6,16 +6,20 @@ import Icon from 'react-native-vector-icons/Foundation';
 import HeadBar from '../components/head';
 import Status from '../components/statusbar';
 import Loader from '../components/loader';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class Bookmarks extends Component {
-	state = {
-		focused: this.props.navigation.isFocused(),
-		loading: true,
-		load: true,
-		empty: true,
-		size: 0,
-		refresh: false
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			focused: this.props.navigation.isFocused(),
+			loading: true,
+			load: true,
+			empty: true,
+			size: 0,
+			refresh: false
+		};
+	}
 
 	componentDidMount() {
 		this.sub = this.props.navigation.addListener('focus', () => {
@@ -161,6 +165,7 @@ export default class Bookmarks extends Component {
 const styles = StyleSheet.create({
 	mainView: {
 		flex: 1,
-		width: '100%'
+		width: '100%',
+		backgroundColor: Scheme.subBackground
 	}
 });

@@ -15,6 +15,7 @@ import Footer from '../components/footer';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AddPhoto from '../assets/images/add.png';
 import API from '../api/index';
+const Scheme = require('../assets/schemes/scheme');
 
 /* Return item box view whenever a new ingredient is added */
 Ingredient = ({ item, remove }) => {
@@ -181,11 +182,12 @@ export default class Search extends Component {
 const styles = StyleSheet.create({
 	mainView: {
 		width: '100%',
-		flex: 1
+		flex: 1,
+		backgroundColor: Scheme.subBackground
 	},
 
 	header: {
-		backgroundColor: '#11508e',
+		backgroundColor: Scheme.background,
 		borderBottomColor: '#000',
 		paddingVertical: '10%',
 		borderBottomWidth: 2

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
 import DefaultPhoto from '../assets/images/photo.png';
+const Scheme = require('../assets/schemes/scheme');
 
 const Card = (props) => {
 	return (
@@ -51,8 +52,8 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		borderWidth: 1,
 		borderRadius: 10,
-		borderColor: '#E8E8E8',
-		backgroundColor: '#E8E8E8',
+		borderColor: '#BFC0C0',
+		backgroundColor: Scheme.subBackground,
 		marginHorizontal: 5,
 		marginVertical: 10,
 		shadowColor: '#000',
@@ -69,14 +70,14 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		color: '#1976d2',
+		color: Scheme.actionBar,
 		marginVertical: 10,
 		marginHorizontal: 10
 	},
 
 	subtitle: {
 		fontSize: 15,
-		color: '#f58426',
+		color: Scheme.background,
 		marginVertical: 10,
 		marginHorizontal: 10
 	}

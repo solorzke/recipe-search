@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FontListoIcon from 'react-native-vector-icons/Fontisto';
 import MaterialDesignIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+const Scheme = require('../../assets/schemes/scheme');
 
 export default class Details extends Component {
 	/* Check if there are cooking times available */
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
 	heading: {
 		fontSize: 25,
 		fontWeight: 'bold',
-		color: '#E0115F',
+		color: Scheme.labelText,
 		paddingTop: 10
 	},
 

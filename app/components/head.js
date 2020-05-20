@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+const Scheme = require('../assets/schemes/scheme');
 
 const HeadBar = (props) => {
 	return (
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		flexDirection: 'row',
 		paddingLeft: 15,
-		backgroundColor: '#1976d2'
+		backgroundColor: Scheme.actionBar
 	},
 	title: {
 		color: '#fff',

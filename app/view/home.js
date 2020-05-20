@@ -7,6 +7,7 @@ import Animation1 from '../assets/animations/food-carousel.json';
 import Animation2 from '../assets/animations/random.json';
 import Animation3 from '../assets/animations/search-ask.json';
 import API from '../api/index';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class Home extends Component {
 	constructor(props) {
@@ -82,7 +83,8 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
 	mainView: {
 		flex: 1,
-		width: '100%'
+		width: '100%',
+		backgroundColor: Scheme.subBackground
 	},
 
 	buttonView: {

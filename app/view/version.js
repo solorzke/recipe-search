@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class Version extends Component {
 	render() {
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
 	mainView: {
 		flex: 1,
 		width: '100%',
-		backgroundColor: '#fff'
+		backgroundColor: Scheme.subBackground
 	},
 	container: {
 		flex: 1,

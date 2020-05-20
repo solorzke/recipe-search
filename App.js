@@ -17,6 +17,7 @@ import VersionScreen from './app/view/version';
 import FAQScreen from './app/view/faq';
 import SpoonacularWebViewScreen from './app/view/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
+const Scheme = require('./app/assets/schemes/scheme');
 
 const Drawer = createDrawerNavigator();
 
@@ -28,7 +29,7 @@ const HomeStack = () => {
 			<Stack.Screen
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 				name="Search By"
@@ -37,7 +38,7 @@ const HomeStack = () => {
 			<Stack.Screen
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 				name="Search"
@@ -46,7 +47,7 @@ const HomeStack = () => {
 			<Stack.Screen
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 				name="Labels"
@@ -55,7 +56,7 @@ const HomeStack = () => {
 			<Stack.Screen
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 				name="Results"
@@ -64,7 +65,7 @@ const HomeStack = () => {
 			<Stack.Screen
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 				name="Recipe"
@@ -73,7 +74,7 @@ const HomeStack = () => {
 			<Stack.Screen
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 				name="FAQ"
@@ -93,7 +94,7 @@ const SettingStack = () => {
 				component={PrivacyPolicyScreen}
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 			/>
@@ -102,7 +103,7 @@ const SettingStack = () => {
 				component={TermsScreen}
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 			/>
@@ -111,7 +112,7 @@ const SettingStack = () => {
 				component={VersionScreen}
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 			/>
@@ -120,7 +121,7 @@ const SettingStack = () => {
 				component={SpoonacularWebViewScreen}
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 			/>
@@ -136,7 +137,7 @@ const BookmarkStack = () => {
 			<Stack.Screen
 				options={({ navigation, route }) => ({
 					headerShown: true,
-					headerStyle: { backgroundColor: '#1976d2' },
+					headerStyle: { backgroundColor: Scheme.actionBar },
 					headerTintColor: '#fff'
 				})}
 				name="Recipe"
@@ -152,8 +153,8 @@ const App = () => {
 			<Drawer.Navigator
 				initialRouteName="Home"
 				drawerType="slide"
-				drawerContentOptions={{ activeTintColor: 'cyan', labelStyle: { color: '#fff' } }}
-				drawerStyle={{ backgroundColor: '#1976d2' }}
+				drawerContentOptions={{ activeTintColor: '#BFC0C0', labelStyle: { color: '#fff' } }}
+				drawerStyle={{ backgroundColor: Scheme.actionBar }}
 			>
 				<Drawer.Screen
 					name="Home"

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import WeightWatchersLogo from '../assets/images/ww.png';
+const Scheme = require('../assets/schemes/scheme');
 
 const ListItem = (props) => {
 	return (
@@ -44,19 +45,19 @@ const styles = StyleSheet.create({
 		height: 100,
 		borderRadius: 200,
 		borderWidth: 0.8,
-		borderColor: '#000'
+		borderColor: Scheme.actionBar
 	},
 
 	title: {
 		fontSize: 20,
-		color: '#1976d2',
+		color: Scheme.labelText,
 		paddingBottom: 10,
 		textTransform: 'capitalize'
 	},
 
 	subtitle: {
 		fontSize: 11,
-		color: '#E63462',
+		color: Scheme.background,
 		paddingBottom: 5,
 		textTransform: 'capitalize'
 	},

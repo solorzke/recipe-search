@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class QuestionCard extends Component {
 	returnView = (bool, text) => {
@@ -15,7 +16,7 @@ export default class QuestionCard extends Component {
 		} else {
 			return (
 				<View style={styles.answerView}>
-					<Text style={{ fontSize: 30, color: '#11508e' }}>A</Text>
+					<Text style={{ fontSize: 30, color: Scheme.anchorText }}>A</Text>
 					<View style={styles.a_box}>
 						<Text style={styles.answerText}>{text}</Text>
 						<View style={styles.triangle} />
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
 	},
 
 	a_box: {
-		backgroundColor: '#11508e',
+		backgroundColor: Scheme.anchorText,
 		justifyContent: 'center',
 		marginHorizontal: 15,
 		borderRadius: 5
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
 		transform: [ { rotateZ: '45deg' } ],
 		width: 8,
 		height: 8,
-		backgroundColor: '#11508e',
+		backgroundColor: Scheme.anchorText,
 		marginTop: -4,
 		position: 'absolute',
 		alignSelf: 'flex-end',

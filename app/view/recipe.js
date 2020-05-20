@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
 import Share from 'react-native-share';
 import Footer from '../components/footer';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class Recipe extends Component {
 	state = {
@@ -187,18 +188,18 @@ export default class Recipe extends Component {
 				tabBarOptions={{
 					showIcon: true,
 					indicatorStyle: {
-						backgroundColor: '#E0115F'
+						backgroundColor: Scheme.labelText
 					}
 				}}
 			>
 				<Tab.Screen
 					options={{
 						tabBarLabel: ({ focused, color }) => {
-							const textcolor = focused ? '#E0115F' : color;
+							const textcolor = focused ? Scheme.labelText : color;
 							return <Text style={{ color: textcolor }}>STEPS</Text>;
 						},
 						tabBarIcon: ({ focused, color }) => {
-							const colors = focused ? '#E0115F' : color;
+							const colors = focused ? Scheme.labelText : color;
 							return <Icon name="ios-restaurant" color={colors} size={25} />;
 						},
 						tabBarAccessibilityLabel: 'Instructions'
@@ -211,11 +212,11 @@ export default class Recipe extends Component {
 					component={SummaryInfo}
 					options={{
 						tabBarLabel: ({ focused, color }) => {
-							const textcolor = focused ? '#E0115F' : color;
+							const textcolor = focused ? Scheme.labelText : color;
 							return <Text style={{ color: textcolor }}>SUMMARY</Text>;
 						},
 						tabBarIcon: ({ focused, color }) => {
-							const colors = focused ? '#E0115F' : color;
+							const colors = focused ? Scheme.labelText : color;
 							return <Icon name="md-list-box" color={colors} size={25} />;
 						},
 						tabBarAccessibilityLabel: 'Summary'
@@ -229,6 +230,7 @@ export default class Recipe extends Component {
 const styles = StyleSheet.create({
 	mainView: {
 		flex: 1,
-		width: '100%'
+		width: '100%',
+		backgroundColor: Scheme.subBackground
 	}
 });

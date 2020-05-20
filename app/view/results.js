@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import ListItem from '../components/listitem';
 import Footer from '../components/footer';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class Results extends Component {
 	/* Shorten the title of the recipe by adding 3 dots  */
@@ -48,7 +49,8 @@ export default class Results extends Component {
 const styles = StyleSheet.create({
 	mainView: {
 		flex: 1,
-		width: '100%'
+		width: '100%',
+		backgroundColor: Scheme.subBackground
 	},
 
 	searchResults: {

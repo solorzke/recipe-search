@@ -3,13 +3,14 @@ import { View, Text, StyleSheet, ScrollView, Dimensions, ImageBackground } from 
 import Heading from '../assets/images/5351.jpg';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Card from '../components/faqcard';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class FAQ extends Component {
 	render() {
 		return (
 			<View style={styles.mainView}>
 				<ScrollView>
-					<View style={{ borderBottomColor: '#11508e', borderBottomWidth: 5 }}>
+					<View style={{ borderBottomColor: Scheme.anchorText, borderBottomWidth: 5 }}>
 						<ImageBackground source={Heading} style={styles.headerView}>
 							<Text style={styles.heading}>Frequently Asked Questions</Text>
 						</ImageBackground>
@@ -67,7 +68,8 @@ export default class FAQ extends Component {
 
 const styles = StyleSheet.create({
 	mainView: {
-		width: '100%'
+		width: '100%',
+		backgroundColor: Scheme.subBackground
 	},
 
 	headerView: {
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		alignSelf: 'center',
 		bottom: -35,
-		backgroundColor: '#11508e',
+		backgroundColor: Scheme.anchorText,
 		padding: 10,
 		borderRadius: 40
 	},

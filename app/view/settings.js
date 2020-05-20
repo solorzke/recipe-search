@@ -4,6 +4,7 @@ import HeadBar from '../components/head';
 import Status from '../components/statusbar';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+const Scheme = require('../assets/schemes/scheme');
 
 export default class Settings extends Component {
 	render() {
@@ -13,7 +14,7 @@ export default class Settings extends Component {
 				<HeadBar name={'Settings'} onPress={() => this.props.navigation.toggleDrawer()} />
 				<ScrollView style={styles.container}>
 					<TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Privacy')}>
-						<Entypo name={'lock'} size={25} color={'#1976d2'} style={{ paddingRight: 10 }} />
+						<Entypo name={'lock'} size={25} color={Scheme.actionBar} style={{ paddingRight: 10 }} />
 						<View>
 							<Text style={styles.title}>Privacy Policy</Text>
 							<Text style={styles.subtitle}>Review our policy concerning your security</Text>
@@ -23,7 +24,7 @@ export default class Settings extends Component {
 						<Ionicons
 							name={Platform.OS === 'ios' ? 'ios-apps' : 'md-appstore'}
 							size={25}
-							color={'#1976d2'}
+							color={Scheme.actionBar}
 							style={{ paddingRight: 10 }}
 						/>
 						<View>
@@ -35,7 +36,7 @@ export default class Settings extends Component {
 						<Ionicons
 							name={Platform.OS === 'ios' ? 'ios-cloud' : 'md-cloud'}
 							size={25}
-							color={'#1976d2'}
+							color={Scheme.actionBar}
 							style={{ paddingRight: 10 }}
 						/>
 						<View>
@@ -47,7 +48,7 @@ export default class Settings extends Component {
 						<Ionicons
 							name={Platform.OS === 'ios' ? 'ios-document' : 'md-document'}
 							size={25}
-							color={'#1976d2'}
+							color={Scheme.actionBar}
 							style={{ paddingRight: 12.5 }}
 						/>
 						<View>
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
 	mainView: {
 		flex: 1,
 		width: '100%',
-		backgroundColor: '#fff'
+		backgroundColor: Scheme.subBackground
 	},
 
 	container: {
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
 	},
 
 	title: {
-		color: '#1976d2',
+		color: Scheme.actionBar,
 		fontSize: 20
 	},
 

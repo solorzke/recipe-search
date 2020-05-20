@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
 import Heart from '../../assets/animations/heart.json';
+const Scheme = require('../../assets/schemes/scheme');
 
 export default class Labels extends Component {
 	/* Render Labels */
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
 	heading: {
 		fontSize: 25,
 		fontWeight: 'bold',
-		color: '#E0115F',
+		color: Scheme.labelText,
 		paddingHorizontal: 10,
 		paddingTop: 10
 	},

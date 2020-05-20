@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image, Animated, Easing } from 'react-native';
 import WeightWatchersLogo from '../../assets/images/ww.png';
 import LottieView from 'lottie-react-native';
 import Reward from '../../assets/animations/reward.json';
+const Scheme = require('../../assets/schemes/scheme');
 
 export default class WeightWatchersSection extends Component {
 	render() {
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
 	heading: {
 		fontSize: 25,
 		fontWeight: 'bold',
-		color: '#E0115F',
+		color: Scheme.labelText,
 		padding: 10
 	},
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Dimensions } from 'react-native';
 import HTML from 'react-native-render-html';
+const Scheme = require('../../assets/schemes/scheme');
 
 const tagStyles = {
 	tagsStyles: {
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
 	heading: {
 		fontSize: 25,
 		fontWeight: 'bold',
-		color: '#E0115F',
+		color: Scheme.labelText,
 		paddingHorizontal: 10,
 		paddingVertical: 10
 	},
