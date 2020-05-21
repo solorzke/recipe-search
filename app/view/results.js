@@ -2,22 +2,13 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
 import ListItem from '../components/listitem';
 import Footer from '../components/footer';
+import Empty from '../components/empty';
 const Scheme = require('../assets/schemes/scheme');
 
 Header = ({ resultsNumber }) => {
 	return (
 		<View style={{ borderBottomColor: 'gray', borderBottomWidth: 1 }}>
 			<Text style={styles.searchResults}>{resultsNumber} search results found.</Text>
-		</View>
-	);
-};
-
-/* Return a view that notifies the list is empty whenever no ingredients have been added */
-Empty = () => {
-	return (
-		<View style={{ padding: 20, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center' }}>
-			<MaterialIcons name={'shopping-basket'} size={40} color={'grey'} />
-			<Text style={{ color: 'grey', fontSize: 16, paddingVertical: 15 }}>List Is Empty</Text>
 		</View>
 	);
 };

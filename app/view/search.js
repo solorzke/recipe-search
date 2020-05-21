@@ -10,11 +10,12 @@ import {
 	Image,
 	Modal
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Loader from '../components/loader';
 import Footer from '../components/footer';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AddPhoto from '../assets/images/add.png';
 import API from '../api/index';
+import Empty from '../components/empty';
 const Scheme = require('../assets/schemes/scheme');
 
 /* Return item box view whenever a new ingredient is added */
@@ -22,19 +23,9 @@ Ingredient = ({ item, remove }) => {
 	return (
 		<View style={{ padding: 10, flexDirection: 'row' }}>
 			<TouchableOpacity onPress={remove} style={styles.deleteBtn}>
-				<MaterialIcons name={'cancel'} size={30} color={'red'} />
+				<Icon name={'cancel'} size={30} color={'red'} />
 			</TouchableOpacity>
 			<Text style={styles.ingredientText}>{item}</Text>
-		</View>
-	);
-};
-
-/* Return a view that notifies the list is empty whenever no ingredients have been added */
-Empty = () => {
-	return (
-		<View style={{ padding: 20, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center' }}>
-			<MaterialIcons name={'shopping-basket'} size={40} color={'grey'} />
-			<Text style={{ color: 'grey', fontSize: 16, paddingVertical: 15 }}>List Is Empty</Text>
 		</View>
 	);
 };
@@ -82,6 +73,14 @@ export default class Search extends Component {
 		});
 	};
 
+	/* Clear the input state only after the api request was sent */
+	clearInputState = () => {
+		this.setState({
+			data: [],
+			input: ''
+		});
+	};
+
 	/* Authenticate list before confirming and submitting list to search */
 	transmitRequest = () => {
 		const items = this.state.data;
@@ -90,7 +89,10 @@ export default class Search extends Component {
 			const api = new API(items);
 			api.requestComplexSearch((payload) => {
 				this.setModalState(false);
-				if (payload) this.props.navigation.navigate('Results', { data: payload });
+				if (payload) {
+					this.clearInputState();
+					this.props.navigation.navigate('Results', { data: payload });
+				}
 			});
 		} else {
 			alert('Please fill in at least one ingredient');
