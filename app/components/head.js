@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 	bar: {
 		width: '100%',
 		height: Dimensions.get('window').height / 12,
-		borderBottomColor: '#11508e',
+		borderBottomColor: Scheme.background,
 		borderBottomWidth: 0.5,
 		shadowColor: '#000000',
 		shadowOffset: {

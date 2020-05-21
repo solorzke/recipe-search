@@ -97,12 +97,13 @@ const styles = StyleSheet.create({
 
 	instructionBlock: {
 		flexDirection: 'row',
-		alignItems: 'center',
+		alignItems: 'flex-start',
 		paddingVertical: 10
 	},
 
 	instructionText: {
-		paddingHorizontal: 20
+		paddingHorizontal: 20,
+		width: '95%'
 	},
 
 	instructionTitle: {
