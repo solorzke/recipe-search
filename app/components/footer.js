@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Linking } from 'react-native';
 
 /* Return Footer View for FlatList */
 Footer = () => {
 	return (
 		<View style={styles.footer}>
-			<Text style={{ color: 'grey' }}>Powered By Spoonacular.com</Text>
+			<Text style={{ color: 'grey' }} onPress={() => Linking.openURL('https://www.spoonacular.com')}>
+				Powered By Spoonacular.com
+			</Text>
 		</View>
 	);
 };
