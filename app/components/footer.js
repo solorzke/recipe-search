@@ -13,7 +13,8 @@ Footer = () => {
 const styles = StyleSheet.create({
 	footer: {
 		alignItems: 'center',
-		width: '100%'
+		width: '100%',
+		paddingBottom: 10
 	}
 });
 
