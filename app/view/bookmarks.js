@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, Text, FlatList } from 'react-native';
 import ListItem from '../components/listitem';
 import AsyncStorage from '@react-native-community/async-storage';
-import Icon from 'react-native-vector-icons/Foundation';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HeadBar from '../components/head';
 import Status from '../components/statusbar';
 import Loader from '../components/loader';
+import Footer from '../components/footer';
 const Scheme = require('../assets/schemes/scheme');
+
+Header = ({ resultsNumber }) => {
+	return (
+		<View style={{ borderBottomColor: 'gray', borderBottomWidth: 1 }}>
+			<Text style={styles.bookmarkResults}>{resultsNumber} saved recipes.</Text>
+		</View>
+	);
+};
+
+/* Return a view that notifies the list is empty whenever no ingredients have been added */
+Empty = () => {
+	return (
+		<View style={{ padding: 20, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center' }}>
+			<MaterialIcons name={'shopping-basket'} size={40} color={'grey'} />
+			<Text style={{ color: 'grey', fontSize: 16, paddingVertical: 15 }}>List Is Empty</Text>
+		</View>
+	);
+};
 
 export default class Bookmarks extends Component {
 	constructor(props) {
@@ -17,7 +36,8 @@ export default class Bookmarks extends Component {
 			load: true,
 			empty: true,
 			size: 0,
-			refresh: false
+			refresh: false,
+			data: []
 		};
 	}
 
@@ -25,53 +45,42 @@ export default class Bookmarks extends Component {
 		this.sub = this.props.navigation.addListener('focus', () => {
 			console.log('Bookmark Screen is focused...');
 			this.checkCache((bool, length) => {
-				this.setState({ loading: false, refresh: true });
-				if (bool) {
-					this.parseJson((payload) => {
-						this.setState({
-							empty: false,
-							load: false,
-							data: payload,
-							size: length,
-							loading: false
-						});
-					});
-				}
+				this.setRefreshState(true, false);
+				if (!bool) return;
+				this.parseJson((payload) => {
+					this.setCacheCheckState(false, false, payload, length, false);
+				});
 			});
 		});
 
 		this.unsub = this.props.navigation.addListener('blur', () => {
 			console.log('Bookmark is not focused...');
-			this.setState({
-				refresh: true,
-				loading: false
-			});
+			this.setRefreshState(true, false);
 		});
 	}
 
-	// componentDidUpdate() {
-	// 	this.checkCache((bool, length) => {
-	// 		if (length !== this.state.size) {
-	// 			console.warn('loop');
-	// 			this.parseJson((payload) => {
-	// 				this.setState({
-	// 					empty: false,
-	// 					load: false,
-	// 					data: payload,
-	// 					size: length
-	// 				});
-	// 			});
-	// 		}
-	// 	});
-	// }
+	/* Set the state for the loading screen */
+	setRefreshState = (refreshBool, loadingBool) => {
+		this.setState({
+			refresh: refreshBool,
+			loading: loadingBool
+		});
+	};
+
+	/* Set whether to check the cache for saved recipes or not */
+	setCacheCheckState = (isEmpty, isLoad, payload, isLength, isLoading) => {
+		this.setState({
+			empty: isEmpty,
+			load: isLoad,
+			data: payload,
+			size: isLength,
+			loading: isLoading
+		});
+	};
 
 	/* Shorten the title of the recipe by adding 3 dots  */
 	sliceString = (str, limit) => {
-		if (str.length > limit) {
-			return str.slice(0, limit - 1) + '...';
-		} else {
-			return str;
-		}
+		return str.length > limit ? str.slice(0, limit - 1) + '...' : str;
 	};
 
 	/* Check if there are any cache recipes available */
@@ -81,7 +90,6 @@ export default class Bookmarks extends Component {
 			callback(keys.length > 0, keys.length);
 		} catch (error) {
 			console.log('An error occurred reading the cache repository');
-			throw new ErrorEvent(error);
 		}
 	};
 
@@ -95,68 +103,43 @@ export default class Bookmarks extends Component {
 				const payload = JSON.parse(value);
 				data.push(payload);
 			}
-			if (typeof callback === 'function') {
-				callback(data);
-			}
+			typeof callback === 'function' ? callback(data) : null;
 		} catch (error) {
 			console.log('An error occurred: ' + error);
-			throw new ErrorEvent(error);
 		}
 	};
 
-	/* Return appropriate view givent the context of the cache repo */
-	returnView = (bool) => {
-		if (bool === false) {
-			const results = this.state.data.map((recipe, index) => {
-				const labels =
-					recipe['healthLabels'].length !== 0 ? recipe['healthLabels'].join(', ') : 'Delicious & Nutritional';
-				return (
-					<ListItem
-						id={'key' + index}
-						title={this.sliceString(recipe['label'], 50)}
-						subtitle={this.sliceString(labels, 60)}
-						img={recipe['image']}
-						rating={recipe['ww']}
-						onPress={() => this.props.navigation.navigate('Recipe', { food: recipe })}
-					/>
-				);
-			});
-
-			return results.length > 0 ? (
-				<View style={styles.mainView}>
-					<Status barStyle={'light-content'} />
-					<HeadBar name={'Bookmarks'} onPress={() => this.props.navigation.toggleDrawer()} />
-					<ScrollView>{results}</ScrollView>
-				</View>
-			) : (
-				<View style={styles.mainView}>
-					<Status barStyle={'light-content'} />
-					<HeadBar name={'Bookmarks'} onPress={() => this.props.navigation.toggleDrawer()} />
-					<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'column', flex: 1 }}>
-						<Icon name={'book-bookmark'} size={50} color={'grey'} />
-						<Text>No Bookmarks Available, yet.</Text>
-					</View>
-				</View>
-			);
-		} else {
-			return (
-				<View style={styles.mainView}>
-					<Status barStyle={'light-content'} />
-					<HeadBar name={'Bookmarks'} onPress={() => this.props.navigation.toggleDrawer()} />
-					<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'column', flex: 1 }}>
-						<Icon name={'book-bookmark'} size={50} color={'grey'} />
-						<Text>No Bookmarks Available, yet.</Text>
-					</View>
-				</View>
-			);
-		}
+	/* Set a placeholder for subtitle in case the source is non-existent */
+	setSource = (source) => {
+		return source.length !== 0 ? `Source: ${source}` : 'Source: Spoonacular.com';
 	};
 
 	render() {
 		return (
 			<View style={styles.mainView}>
-				{this.state.refresh && this.returnView(this.state.load)}
-				{this.state.loading && <Loader text={'Checking for Bookmarks'} />}
+				<Status barStyle={'light-content'} />
+				<HeadBar name={'Bookmarks'} onPress={() => this.props.navigation.toggleDrawer()} />
+				<FlatList
+					ListHeaderComponent={<Header resultsNumber={this.state.size} />}
+					ListEmptyComponent={<Empty />}
+					ListFooterComponent={<Footer />}
+					data={this.state.data}
+					contentContainerStyle={{ flexGrow: 1 }}
+					keyExtractor={(y, z) => z.toString()}
+					ListFooterComponentStyle={{ flex: 1, justifyContent: 'flex-end' }}
+					renderItem={(recipe) => {
+						return (
+							<ListItem
+								title={this.sliceString(recipe['item']['label'], 50)}
+								subtitle={this.sliceString(this.setSource(recipe['item']['source']), 60)}
+								img={recipe['item']['image']}
+								rating={recipe['item']['ww']}
+								onPress={() => this.props.navigation.navigate('Recipe', { food: recipe['item'] })}
+							/>
+						);
+					}}
+				/>
+				{/* {this.state.loading && <Loader text={'Checking for Bookmarks'} />} */}
 			</View>
 		);
 	}
@@ -167,5 +150,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: '100%',
 		backgroundColor: Scheme.subBackground
+	},
+
+	bookmarkResults: {
+		color: 'gray',
+		fontSize: 13,
+		textAlign: 'left',
+		padding: 10
 	}
 });

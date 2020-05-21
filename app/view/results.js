@@ -1,46 +1,67 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, Text, FlatList } from 'react-native';
 import ListItem from '../components/listitem';
 import Footer from '../components/footer';
 const Scheme = require('../assets/schemes/scheme');
 
+Header = ({ resultsNumber }) => {
+	return (
+		<View style={{ borderBottomColor: 'gray', borderBottomWidth: 1 }}>
+			<Text style={styles.searchResults}>{resultsNumber} search results found.</Text>
+		</View>
+	);
+};
+
+/* Return a view that notifies the list is empty whenever no ingredients have been added */
+Empty = () => {
+	return (
+		<View style={{ padding: 20, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center' }}>
+			<MaterialIcons name={'shopping-basket'} size={40} color={'grey'} />
+			<Text style={{ color: 'grey', fontSize: 16, paddingVertical: 15 }}>List Is Empty</Text>
+		</View>
+	);
+};
+
 export default class Results extends Component {
+	constructor(props) {
+		super(props);
+		const { data } = this.props.route.params;
+		this.results = data;
+	}
+
 	/* Shorten the title of the recipe by adding 3 dots  */
 	sliceString = (str, limit) => {
-		if (str.length > limit) {
-			return str.slice(0, limit - 1) + '...';
-		} else {
-			return str;
-		}
+		return str.length > limit ? str.slice(0, limit - 1) + '...' : str;
+	};
+
+	/* Set a placeholder for subtitle in case the source is non-existent */
+	setSource = (source) => {
+		return source.length !== 0 ? `Source: ${source}` : 'Source: Spoonacular.com';
 	};
 
 	render() {
-		const { data } = this.props.route.params;
-		const results = data.map((recipe, index) => {
-			const source = recipe['source'].length !== 0 ? 'Source: ' + recipe['source'] : 'Source: Spoonacular.com';
-			return (
-				<ListItem
-					id={'key' + index}
-					title={this.sliceString(recipe['label'], 50)}
-					subtitle={this.sliceString(source, 60)}
-					img={recipe['image']}
-					rating={recipe['ww']}
-					onPress={() => this.props.navigation.navigate('Recipe', { food: recipe })}
-				/>
-			);
-		});
-
 		return (
 			<View style={styles.mainView}>
-				<ScrollView>
-					<View style={{ borderBottomColor: 'gray', borderBottomWidth: 1 }}>
-						<Text style={styles.searchResults}>{results.length} search results found.</Text>
-					</View>
-					{results}
-					<View style={{ paddingVertical: 20 }}>
-						<Footer />
-					</View>
-				</ScrollView>
+				<FlatList
+					ListHeaderComponent={<Header resultsNumber={this.results.length} />}
+					ListEmptyComponent={<Empty />}
+					ListFooterComponent={<Footer />}
+					contentContainerStyle={{ flexGrow: 1 }}
+					keyExtractor={(y, z) => z.toString()}
+					ListFooterComponentStyle={{ flex: 1, justifyContent: 'flex-end' }}
+					data={this.results}
+					renderItem={(recipe) => {
+						return (
+							<ListItem
+								title={this.sliceString(recipe['item']['label'], 50)}
+								subtitle={this.sliceString(this.setSource(recipe['item']['source']), 60)}
+								img={recipe['item']['image']}
+								rating={recipe['item']['ww']}
+								onPress={() => this.props.navigation.navigate('Recipe', { food: recipe['item'] })}
+							/>
+						);
+					}}
+				/>
 			</View>
 		);
 	}
