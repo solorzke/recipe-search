@@ -6,5 +6,5 @@ module.exports = {
 	textDark: '#000',
 	textLight: '#fff',
 	labelText: '#8B2635',
-	anchorText: '#4F7CAC'
+	anchorText: 'blue' //4F7CAC
 };
