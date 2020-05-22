@@ -15,12 +15,13 @@ export default class AboutScreen extends Component {
 		const shareOptions = {
 			title: 'Check out this app!',
 			message: 'The app is called Recipe Search',
-			email: 'mailto:email@example.com',
-			failOnCancel: false,
+			email: 'mailto:solorzke.business@gmail.com',
+			failOnCancel: true,
 			url: 'http://onelink.to/rtkhtd', //<--- change later when app is ready for distro in app/play stores
 			social: this.openSocialApp(social_app)
 		};
-		return !bool ? Share.open(shareOptions) : Share.shareSingle(shareOptions);
+		if (!bool) return Share.open(shareOptions).catch((err) => console.log(err));
+		else return Share.shareSingle(shareOptions).catch((err) => console.log(err));
 	};
 
 	/* Open the maps application when clicking 'Location address' */
@@ -129,7 +130,7 @@ export default class AboutScreen extends Component {
 										style={styles.detail}
 										onPress={() => Linking.openURL('mailto:example@gmail.com')}
 									>
-										email@example.com
+										solorzke.business@gmail.com
 									</Text>
 								</Text>
 								<Text style={{ padding: 5 }}>
