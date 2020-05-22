@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, Linking, Modal, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
-import { PinchGestureHandler, State } from 'react-native-gesture-handler';
 const Scheme = require('../../assets/schemes/scheme');
 
 export default class List extends Component {
@@ -11,10 +10,10 @@ export default class List extends Component {
 	};
 
 	/* Dynamically create Views for each Ingredient Item */
-	produceItems = (items) => {
+	produceItems = (items, index) => {
 		return items.map((item) => {
 			<View
-				id={item.id}
+				key={index.toString()}
 				style={{
 					flexDirection: 'row',
 					justifyContent: 'center',
@@ -29,22 +28,17 @@ export default class List extends Component {
 
 	/* Toggle Modal View when Food Image is clicked */
 	toggleModal = () => {
-		if (this.state.modal) {
-			this.setState({
-				modal: false
-			});
-		} else {
-			this.setState({
-				modal: true
-			});
-		}
+		const modalState = this.state.modal;
+		this.setState({
+			modal: !modalState
+		});
 	};
 
 	render() {
 		/* Dynamically create Views for each Ingredient Item */
 		let items = this.props.ingredients.map((item, index) => {
 			return (
-				<View style={{ flexDirection: 'row', paddingVertical: 5 }} id={item.id}>
+				<View style={{ flexDirection: 'row', paddingVertical: 5 }} key={index}>
 					<FontAwesomeIcon
 						name="cookie"
 						size={10}

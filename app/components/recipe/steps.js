@@ -22,7 +22,7 @@ EmptyInstruction = ({ source }) => {
 
 Instruction = ({ index, item }) => {
 	return (
-		<View style={styles.instructionBlock} key={item.id}>
+		<View style={styles.instructionBlock} key={index.toString()}>
 			<StepNumber number={index + 1} />
 			<Text style={styles.instructionText}>{item}</Text>
 		</View>
