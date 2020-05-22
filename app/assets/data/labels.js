@@ -1,54 +1,66 @@
+const Scheme = require('../schemes/scheme');
+
 module.exports = {
 	diets: [
 		{
 			label: 'Gluten Free',
 			value: 'gluten free',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Ketogenic',
 			value: 'ketogenic',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Vegetarian',
 			value: 'vegetarian',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Lacto-Vegetarian',
 			value: 'lacto-vegetarian',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Ovo-Vegetarian',
 			value: 'ovo-egetarian',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Vegan',
 			value: 'vegan',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Pescetarian',
 			value: 'pescetarian',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Paleo',
 			value: 'paleo',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Primal',
 			value: 'primal',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Whole30',
 			value: 'whole30',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		}
 	],
 
@@ -56,72 +68,86 @@ module.exports = {
 		{
 			label: 'Main Course',
 			value: 'main course',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Side Dish',
 			value: 'side dish',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Dessert',
 			value: 'dessert',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Appetizer',
 			value: 'appetizer',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Salad',
 			value: 'salad',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Bread',
 			value: 'bread',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Breakfast',
 			value: 'breakfast',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Soup',
 			value: 'soup',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Beverage',
 			value: 'beverage',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Sauce',
 			value: 'sauce',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Marinade',
 			value: 'marinade',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Fingerfood',
 			value: 'fingerfood',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Snack',
 			value: 'snack',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		},
 		{
 			label: 'Drink',
 			value: 'drink',
-			color: '#fff'
+			color: Scheme.background,
+			displayValue: false
 		}
 	],
 

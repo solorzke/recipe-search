@@ -3,9 +3,10 @@ import { View, StyleSheet, Text, ScrollView, TouchableOpacity, Dimensions, Modal
 import RNPickerSelect from 'react-native-picker-select';
 import Slider from '@react-native-community/slider';
 import API from '../api/index';
-const Labels = require('../assets/data/labels');
 import Loader from '../components/loader';
 import Footer from '../components/footer';
+const Labels = require('../assets/data/labels');
+const Scheme = require('../assets/schemes/scheme');
 
 /* Return a Cusine View */
 Cuisines = ({ items, onPress, style, column }) => {
@@ -170,6 +171,15 @@ class PickerView extends Component {
 		};
 	}
 
+	pickerSelectStyles = StyleSheet.create({
+		inputIOS: {
+			color: Scheme.subBackground
+		},
+		inputAndroid: {
+			color: Scheme.subBackground
+		}
+	});
+
 	/* Update the state to what was selected */
 	setSelectedValue = (value) => {
 		value != null
@@ -197,6 +207,7 @@ class PickerView extends Component {
 					ref={this.pickerRef}
 					onValueChange={(value) => this.setSelectedValue(value)}
 					items={this.props.items}
+					style={this.pickerSelectStyles}
 				/>
 			</View>
 		);
@@ -403,7 +414,7 @@ export default class SearchByLabel extends Component {
 const styles = StyleSheet.create({
 	mainView: {
 		width: '100%',
-		backgroundColor: '#fff'
+		backgroundColor: Scheme.subBackground
 	},
 
 	cuisineBtn: {
@@ -426,7 +437,7 @@ const styles = StyleSheet.create({
 	headingTitle: {
 		fontSize: 25,
 		fontWeight: 'bold',
-		color: '#E0115F',
+		color: Scheme.labelText,
 		paddingHorizontal: 10
 	},
 
