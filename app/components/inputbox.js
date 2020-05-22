@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
 		borderLeftWidth: 5,
 		borderRightWidth: 5,
 		borderTopWidth: 1
-		// alignItems: 'center'
 	},
 
 	cancelBtn: {
