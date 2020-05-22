@@ -61,6 +61,11 @@ export default class Home extends Component {
 		});
 	};
 
+	setSubtitle = () => {
+		const label = this.state.payload[0]['label'];
+		return label === undefined ? 'Please Wait...' : label;
+	};
+
 	/* Gate-Keep the user from entering the random recipe page if the recipe data wasn't yet received. */
 	didRecipeDataArrive = () => {
 		const payload = this.state.payload;
@@ -90,7 +95,7 @@ export default class Home extends Component {
 					<Card
 						onPress={() => this.didRecipeDataArrive()}
 						title={'Recipe Of The Day'}
-						subtitle={this.state.payload[0]['label']}
+						subtitle={this.setSubtitle()}
 						background={this.returnStyle('#4ec9ff')}
 						animate={true}
 						animation={Animation2}
