@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import HeadBar from '../components/head';
 import Status from '../components/statusbar';
 import Card from '../components/card';
@@ -13,7 +13,8 @@ export default class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			payload: [ { label: 'Please Wait...' } ]
+			payload: [ { label: 'Please Wait...' } ],
+			refreshing: false
 		};
 	}
 
@@ -31,11 +32,27 @@ export default class Home extends Component {
 	};
 
 	componentDidMount() {
+		this.transmitRequest();
+	}
+
+	/* Request a random recipe from Spoonacular */
+	transmitRequest = () => {
+		this.setRefreshState();
 		const api = new API();
 		api.requestRandomRecipe((data) => {
 			if (data) this.setRandomRecipeState(data);
+			else alert("Couldn't retrieve your random recipe. Refresh the page or check your internet settings.");
+			this.setRefreshState();
 		});
-	}
+	};
+
+	/* Toggle the refresh state for when you refresh the page with RefreshControl */
+	setRefreshState = () => {
+		const refreshState = this.state.refreshing;
+		this.setState({
+			refreshing: !refreshState
+		});
+	};
 
 	/* Set the random recipe state  */
 	setRandomRecipeState = (data) => {
@@ -56,7 +73,12 @@ export default class Home extends Component {
 			<View style={styles.mainView}>
 				<Status barStyle={'light-content'} />
 				<HeadBar name={'Home'} onPress={() => this.props.navigation.toggleDrawer()} />
-				<ScrollView style={styles.buttonView}>
+				<ScrollView
+					style={styles.buttonView}
+					refreshControl={
+						<RefreshControl refreshing={this.state.refreshing} onRefresh={() => this.transmitRequest()} />
+					}
+				>
 					<Card
 						onPress={() => this.props.navigation.navigate('Search By')}
 						title={'Start Finding Recipes'}
