@@ -88,7 +88,7 @@ export default class Home extends Component {
 						onPress={() => this.props.navigation.navigate('Search By')}
 						title={'Start Finding Recipes'}
 						subtitle={'Fill in available ingredients to generate recipes'}
-						background={this.returnStyle('#ff9a72')}
+						background={this.returnStyle(Scheme.labelText)}
 						animation={Animation1}
 						animate={true}
 					/>
@@ -96,7 +96,7 @@ export default class Home extends Component {
 						onPress={() => this.didRecipeDataArrive()}
 						title={'Recipe Of The Day'}
 						subtitle={this.setSubtitle()}
-						background={this.returnStyle('#4ec9ff')}
+						background={this.returnStyle(Scheme.anchorText)}
 						animate={true}
 						animation={Animation2}
 					/>
@@ -104,7 +104,7 @@ export default class Home extends Component {
 						onPress={() => this.props.navigation.navigate('FAQ')}
 						title={'Frequently Asked Questions'}
 						subtitle={'Have questions? Check out our FAQ section'}
-						background={this.returnStyle('#ffc74c')}
+						background={this.returnStyle('#F1BF98')}
 						animation={Animation3}
 						animate={true}
 					/>
