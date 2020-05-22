@@ -44,6 +44,13 @@ export default class Home extends Component {
 		});
 	};
 
+	/* Gate-Keep the user from entering the random recipe page if the recipe data wasn't yet received. */
+	didRecipeDataArrive = () => {
+		const payload = this.state.payload;
+		if (payload[0]['label'] === 'Please Wait...') return alert('Please wait while we retrieve the recipe.');
+		return this.props.navigation.navigate('Recipe', { food: payload[0] });
+	};
+
 	render() {
 		return (
 			<View style={styles.mainView}>
@@ -59,7 +66,7 @@ export default class Home extends Component {
 						animate={true}
 					/>
 					<Card
-						onPress={() => this.props.navigation.navigate('Recipe', { food: this.state.payload[0] })}
+						onPress={() => this.didRecipeDataArrive()}
 						title={'Recipe Of The Day'}
 						subtitle={this.state.payload[0]['label']}
 						background={this.returnStyle('#4ec9ff')}
