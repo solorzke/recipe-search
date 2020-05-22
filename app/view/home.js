@@ -62,8 +62,8 @@ export default class Home extends Component {
 	};
 
 	setSubtitle = () => {
-		const label = this.state.payload[0]['label'];
-		return label === undefined ? 'Please Wait...' : label;
+		const payload = this.state.payload[0];
+		return !payload.hasOwnProperty('label') ? 'Please Wait...' : payload['label'];
 	};
 
 	/* Gate-Keep the user from entering the random recipe page if the recipe data wasn't yet received. */
