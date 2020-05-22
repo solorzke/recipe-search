@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, Linking, Modal, Animated, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, Linking, Modal, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import { PinchGestureHandler, State } from 'react-native-gesture-handler';
@@ -12,8 +12,9 @@ export default class List extends Component {
 
 	/* Dynamically create Views for each Ingredient Item */
 	produceItems = (items) => {
-		return items.map((item, index) => {
+		return items.map((item) => {
 			<View
+				id={item.id}
 				style={{
 					flexDirection: 'row',
 					justifyContent: 'center',
@@ -39,23 +40,11 @@ export default class List extends Component {
 		}
 	};
 
-	/* Handles the state change when the gesture is over. */
-	onZoomStateChange = (event) => {
-		/* ACTIVE is used to check whether the event is still active or not */
-		if (event.nativeEvent.oldState === State.ACTIVE) {
-			/* Set the initial scale value when the animation is done. */
-			Animated.spring(this.scale, {
-				toValue: 1,
-				useNativeDriver: true
-			}).start();
-		}
-	};
-
 	render() {
 		/* Dynamically create Views for each Ingredient Item */
 		let items = this.props.ingredients.map((item, index) => {
 			return (
-				<View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+				<View style={{ flexDirection: 'row', paddingVertical: 5 }} id={item.id}>
 					<FontAwesomeIcon
 						name="cookie"
 						size={10}
@@ -66,19 +55,6 @@ export default class List extends Component {
 				</View>
 			);
 		});
-
-		/* Animate the scaling and handle the onZoomEvent for the PinchGesture on Modal */
-		scale = new Animated.Value(1);
-		onZoomEvent = Animated.event(
-			[
-				{
-					nativeEvent: { scale: this.scale }
-				}
-			],
-			{
-				useNativeDriver: true
-			}
-		);
 
 		return (
 			<View style={styles.mainView}>
@@ -102,12 +78,7 @@ export default class List extends Component {
 						}}
 					>
 						<View style={styles.modal}>
-							<PinchGestureHandler
-								onGestureEvent={this.onZoomEvent}
-								onHandlerStateChange={this.onZoomStateChange}
-							>
-								<Animated.Image source={{ uri: this.props.img }} style={styles.modalImg} />
-							</PinchGestureHandler>
+							<Image source={{ uri: this.props.img }} style={styles.modalImg} />
 							<Text style={{ color: '#fff', fontSize: 20 }}>{this.props.label}</Text>
 							<TouchableOpacity onPress={() => this.toggleModal()} style={styles.modalClose}>
 								<Icon name={'close-circle'} size={60} color={'#E0115F'} />
