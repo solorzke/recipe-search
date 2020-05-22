@@ -6,7 +6,7 @@ Footer = () => {
 	return (
 		<View style={styles.footer}>
 			<Text style={{ color: 'grey' }} onPress={() => Linking.openURL('https://www.spoonacular.com')}>
-				Powered By Spoonacular.com
+				Powered By Spoonacular
 			</Text>
 		</View>
 	);

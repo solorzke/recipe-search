@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Linking } from 'react-native';
 import StepNumber from '../stepimg';
 const Scheme = require('../../assets/schemes/scheme');
 
-EmptyInstruction = ({ source }) => {
+EmptyInstruction = ({ source, url }) => {
 	return (
 		<View>
 			<Text style={styles.instructionTitle}>Instruction:</Text>
@@ -11,7 +11,7 @@ EmptyInstruction = ({ source }) => {
 				<StepNumber number={1} />
 				<Text style={styles.instructionText}>
 					For more information, check out{' '}
-					<Text style={{ color: '#1976d2' }} onPress={() => Linking.openURL(this.props.url)}>
+					<Text style={{ color: Scheme.anchorText }} onPress={() => Linking.openURL(url)}>
 						{source}
 					</Text>'s recipe page.
 				</Text>
@@ -33,7 +33,7 @@ export default class Steps extends Component {
 	/* Return a new view that describes every step from the recipe */
 	renderSteps = (steps) => {
 		let data = [];
-		if (steps[0] == false) return <EmptyInstruction source={this.props.source} />;
+		if (steps[0] == false) return <EmptyInstruction source={this.props.source} url={this.props.url} />;
 		for (let step of steps) {
 			const name = this.retrieveInstructionName(step);
 			const instructions = this.retrieveInstructions(step);
