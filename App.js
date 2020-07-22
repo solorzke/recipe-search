@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
+import SplashScreen from 'react-native-splash-screen';
 import Home from './app/view/home';
 import SearchScreen from './app/view/search';
 import SearchByScreen from './app/view/searchby';
@@ -148,6 +149,9 @@ const BookmarkStack = () => {
 };
 
 const App = () => {
+	useEffect(() => {
+		SplashScreen.hide();
+	}, []);
 	return (
 		<NavigationContainer>
 			<Drawer.Navigator
