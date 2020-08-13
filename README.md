@@ -2,6 +2,8 @@
 A mobile application built on the React Native framework that aims to deliver a list of relevant recipe choices based on the list of options provided by the user. The application uses Spoonacular’s API service to provide the recipe data.
 Working on Android and iOS.
 
+Expo: https://expo.io/@solorzke/recipe-search
+
 ## Deployment
 ### Features
 The application can request recipes via two different types of searches:
