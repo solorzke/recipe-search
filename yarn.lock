@@ -1065,6 +1065,16 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.7.tgz#a65ce0702f55cb67fd777995de6fc7b3e5781903"
   integrity sha512-9KbP7LTLFz9dx1heURJbO6nuVMdSjDez8znlrUzaB1nUwKVsTTwlKRuHxGUYIIkReLWrJQeCv9tidy+84z2eCw==
 
+"@react-native-community/picker@^1.5.0":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/picker/-/picker-1.8.1.tgz#94f14f0aad98fa7592967b941be97deec95c3805"
+  integrity sha512-Sj9DzX1CSnmYiuEQ5fQhExoo4XjSKoZkqLPAAybycq6RHtCuWppf+eJXRMCOJki25BlKSSt+qVqg0fIe//ujNQ==
+
+"@react-native-community/slider@^2.0.9":
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-2.0.9.tgz#bf74045c96f1fb22e3ec961e321300c230c63990"
+  integrity sha512-6GHUKXxiDSs75VZQRa6B+nxo8rqpIEcegZ1iCSQG4aW2oSVepceqDol+0y3/KaBt5WMpD4KybLw8ZZqkT6olaQ==
+
 "@react-navigation/core@^5.3.1":
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.3.1.tgz#8940c3d2aa953952dba6515a48e3adbc0bf73f01"
@@ -4701,6 +4711,11 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
+
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
@@ -5983,9 +5998,9 @@ punycode@^2.1.0, punycode@^2.1.1:
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
 qs@~6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
-  integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.3.tgz#3aeeffc91967ef6e35c0e488ef46fb296ab76aad"
+  integrity sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==
 
 query-string@^6.11.1:
   version "6.11.1"
@@ -6034,6 +6049,13 @@ react-native-iphone-x-helper@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
+react-native-picker-select@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-picker-select/-/react-native-picker-select-7.0.0.tgz#4808a1177f997e234bb8505849dfffe1a01fedac"
+  integrity sha512-SO7b7wHfeM07oVTsLhBlT/VDvMXg2aP0Xy5CA+kL7+oV2Bq6nfKTVjpB2+HLVhFik9i/tlq5ROuGdUrfPhl3rg==
+  dependencies:
+    lodash.isequal "^4.5.0"
+
 react-native-really-awesome-button@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/react-native-really-awesome-button/-/react-native-really-awesome-button-1.6.0.tgz#71700f960aa6d419058beff177c7b6cf18694ef7"
@@ -6075,12 +6097,22 @@ react-native-screens@^2.0.0-beta.2:
   dependencies:
     debounce "^1.2.0"
 
+react-native-share@^3.1.2:
+  version "3.8.5"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-3.8.5.tgz#e74ed39401b9fceef700435cef7c28bc37c7e267"
+  integrity sha512-GjMI2NwUvi8zC7JHWk6NIcg/gFJmK/+cAQ8VStvfy4/kOiXYE5YnpPjvKs/K1Aun0HqYi2vjvZruL5ouDEWxmg==
+
 react-native-spinkit@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/react-native-spinkit/-/react-native-spinkit-1.5.0.tgz#598b4b138b1e95cc232dfb2fc7e64dcdd45de574"
   integrity sha512-HHOIH3Lq+oFsmhPBO9Y2hcxkKNm955gmNBaFgNUrshhGU4Dqp8qWj3bbVrwjBJOC5W+cvHSqyTsfgmpMPoUoTA==
   dependencies:
     prop-types "^15.5.8"
+
+react-native-splash-screen@^3.2.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-3.3.0.tgz#3af71ed17afe50fee69590a45aec399d071ead02"
+  integrity sha512-rGjt6HkoSXxMqH4SQUJ1gnPQlPJV8+J47+4yhgTIan4bVvAwJhEeJH7wWt9hXSdH4+VfwTS0GTaflj1Tw83IhA==
 
 react-native-svg@^12.0.3:
   version "12.0.3"
